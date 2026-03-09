@@ -1,0 +1,329 @@
+{
+  "description": "RFC 8785 JCS Compliance Test Vectors — 49 cases",
+  "version": "1.0.0",
+  "reference": "https://www.rfc-editor.org/rfc/rfc8785",
+  "official_implementation_hash": "3a5a3a9d1b13367621b5b34cc25a0d886a7da39ef91015a3f757ae37908602b8",
+  "instructions": "Run verify_integrity.py against this file. All 49 cases must PASS before an environment is certified for crystallization.",
+  "vectors": [
+    {
+      "id": "01",
+      "description": "Empty object",
+      "input": {},
+      "expected": "{}"
+    },
+    {
+      "id": "02",
+      "description": "Simple string value",
+      "input": { "key": "value" },
+      "expected": "{\"key\":\"value\"}"
+    },
+    {
+      "id": "03",
+      "description": "Integer value",
+      "input": { "key": 1 },
+      "expected": "{\"key\":1}"
+    },
+    {
+      "id": "04",
+      "description": "Float value — basic",
+      "input": { "key": 1.5 },
+      "expected": "{\"key\":1.5}"
+    },
+    {
+      "id": "05",
+      "description": "Negative integer",
+      "input": { "key": -1 },
+      "expected": "{\"key\":-1}"
+    },
+    {
+      "id": "06",
+      "description": "Boolean true",
+      "input": { "key": true },
+      "expected": "{\"key\":true}"
+    },
+    {
+      "id": "07",
+      "description": "Boolean false",
+      "input": { "key": false },
+      "expected": "{\"key\":false}"
+    },
+    {
+      "id": "08",
+      "description": "Null value",
+      "input": { "key": null },
+      "expected": "{\"key\":null}"
+    },
+    {
+      "id": "09",
+      "description": "Array value",
+      "input": { "key": [1, 2, 3] },
+      "expected": "{\"key\":[1,2,3]}"
+    },
+    {
+      "id": "10",
+      "description": "Key sorting — UTF-16 order",
+      "input": { "b": 2, "a": 1 },
+      "expected": "{\"a\":1,\"b\":2}"
+    },
+    {
+      "id": "11",
+      "description": "Nested object — keys sorted at each level",
+      "input": { "z": { "b": 2, "a": 1 }, "a": 0 },
+      "expected": "{\"a\":0,\"z\":{\"a\":1,\"b\":2}}"
+    },
+    {
+      "id": "12",
+      "description": "Unicode string — basic",
+      "input": { "key": "hello" },
+      "expected": "{\"key\":\"hello\"}"
+    },
+    {
+      "id": "13",
+      "description": "Unicode escape — control character",
+      "input": { "key": "\u0000" },
+      "expected": "{\"key\":\"\\u0000\"}"
+    },
+    {
+      "id": "14",
+      "description": "Unicode escape — tab",
+      "input": { "key": "\t" },
+      "expected": "{\"key\":\"\\t\"}"
+    },
+    {
+      "id": "15",
+      "description": "Unicode escape — newline",
+      "input": { "key": "\n" },
+      "expected": "{\"key\":\"\\n\"}"
+    },
+    {
+      "id": "16",
+      "description": "Unicode escape — carriage return",
+      "input": { "key": "\r" },
+      "expected": "{\"key\":\"\\r\"}"
+    },
+    {
+      "id": "17",
+      "description": "Backslash escape",
+      "input": { "key": "\\" },
+      "expected": "{\"key\":\"\\\\\"}"
+    },
+    {
+      "id": "18",
+      "description": "Double quote escape",
+      "input": { "key": "\"" },
+      "expected": "{\"key\":\"\\\"\"}"
+    },
+    {
+      "id": "19",
+      "description": "Number — zero",
+      "input": { "key": 0 },
+      "expected": "{\"key\":0}"
+    },
+    {
+      "id": "20",
+      "description": "Number — negative zero normalized to positive zero",
+      "input_note": "Input is -0.0 in IEEE 754",
+      "input": { "key": 0.0 },
+      "expected": "{\"key\":0}"
+    },
+    {
+      "id": "21",
+      "description": "Number — large integer within safe range",
+      "input": { "key": 9007199254740991 },
+      "expected": "{\"key\":9007199254740991}"
+    },
+    {
+      "id": "22",
+      "description": "Number — exponential notation threshold (>= 1e21)",
+      "input": { "key": 1e21 },
+      "expected": "{\"key\":1e+21}"
+    },
+    {
+      "id": "23",
+      "description": "Number — exponential notation threshold (< 1e-6)",
+      "input": { "key": 1e-7 },
+      "expected": "{\"key\":1e-7}"
+    },
+    {
+      "id": "24",
+      "description": "Number — decimal just above exponential threshold",
+      "input": { "key": 1e-6 },
+      "expected": "{\"key\":0.000001}"
+    },
+    {
+      "id": "25",
+      "description": "Number — decimal just below upper exponential threshold",
+      "input": { "key": 1e20 },
+      "expected": "{\"key\":100000000000000000000}"
+    },
+    {
+      "id": "26",
+      "description": "Number — floating point precision",
+      "input": { "key": 1.0 },
+      "expected": "{\"key\":1}"
+    },
+    {
+      "id": "27",
+      "description": "Number — negative float",
+      "input": { "key": -1.5 },
+      "expected": "{\"key\":-1.5}"
+    },
+    {
+      "id": "28",
+      "description": "Empty array",
+      "input": { "key": [] },
+      "expected": "{\"key\":[]}"
+    },
+    {
+      "id": "29",
+      "description": "Array of strings",
+      "input": { "key": ["a", "b", "c"] },
+      "expected": "{\"key\":[\"a\",\"b\",\"c\"]}"
+    },
+    {
+      "id": "30",
+      "description": "Array of objects — object keys sorted",
+      "input": { "key": [{ "b": 2, "a": 1 }] },
+      "expected": "{\"key\":[{\"a\":1,\"b\":2}]}"
+    },
+    {
+      "id": "31",
+      "description": "Deeply nested object",
+      "input": { "a": { "b": { "c": 1 } } },
+      "expected": "{\"a\":{\"b\":{\"c\":1}}}"
+    },
+    {
+      "id": "32",
+      "description": "Multiple keys — sorted",
+      "input": { "z": 3, "m": 2, "a": 1 },
+      "expected": "{\"a\":1,\"m\":2,\"z\":3}"
+    },
+    {
+      "id": "33",
+      "description": "Key with space",
+      "input": { "hello world": 1 },
+      "expected": "{\"hello world\":1}"
+    },
+    {
+      "id": "34",
+      "description": "Key with unicode — UTF-16 sort order",
+      "input": { "\u00e9": 2, "e": 1 },
+      "expected": "{\"e\":1,\"\u00e9\":2}"
+    },
+    {
+      "id": "35",
+      "description": "String with forward slash — not escaped",
+      "input": { "key": "a/b" },
+      "expected": "{\"key\":\"a/b\"}"
+    },
+    {
+      "id": "36",
+      "description": "Mixed types in array",
+      "input": { "key": [1, "two", true, null] },
+      "expected": "{\"key\":[1,\"two\",true,null]}"
+    },
+    {
+      "id": "37",
+      "description": "Number — ECMA-262 representation of 0.1",
+      "input": { "key": 0.1 },
+      "expected": "{\"key\":0.1}"
+    },
+    {
+      "id": "38",
+      "description": "Number — ECMA-262 representation of 0.2",
+      "input": { "key": 0.2 },
+      "expected": "{\"key\":0.2}"
+    },
+    {
+      "id": "39",
+      "description": "Number — ECMA-262 representation of 0.3 (floating point artifact)",
+      "input": { "key": 0.3 },
+      "expected": "{\"key\":0.3}"
+    },
+    {
+      "id": "40",
+      "description": "String with unicode supplementary character",
+      "input": { "key": "\uD83D\uDE00" },
+      "expected": "{\"key\":\"\uD83D\uDE00\"}"
+    },
+    {
+      "id": "41",
+      "description": "Array ordering preserved",
+      "input": { "key": [3, 1, 2] },
+      "expected": "{\"key\":[3,1,2]}"
+    },
+    {
+      "id": "42",
+      "description": "Strategic interest vector — all zeros",
+      "input": {
+        "strategic_interest_vector": {
+          "security": 0.0,
+          "economy": 0.0,
+          "tech": 0.0,
+          "resource": 0.0,
+          "ideology": 0.0,
+          "environment": 0.0
+        }
+      },
+      "expected": "{\"strategic_interest_vector\":{\"economy\":0,\"environment\":0,\"ideology\":0,\"resource\":0,\"security\":0,\"tech\":0}}"
+    },
+    {
+      "id": "43",
+      "description": "Strategic interest vector — mixed values",
+      "input": {
+        "strategic_interest_vector": {
+          "security": 0.8,
+          "economy": -0.5,
+          "tech": 0.3,
+          "resource": 0.0,
+          "ideology": -1.0,
+          "environment": 0.1
+        }
+      },
+      "expected": "{\"strategic_interest_vector\":{\"economy\":-0.5,\"environment\":0.1,\"ideology\":-1,\"resource\":0,\"security\":0.8,\"tech\":0.3}}"
+    },
+    {
+      "id": "44",
+      "description": "ISO 8601 timestamp string — preserved as-is",
+      "input": { "time_frame": "2026-03-07T12:00:00Z" },
+      "expected": "{\"time_frame\":\"2026-03-07T12:00:00Z\"}"
+    },
+    {
+      "id": "45",
+      "description": "Permanent ID string",
+      "input": { "permanent_id": "gmn://20260307/a1b2c3d4" },
+      "expected": "{\"permanent_id\":\"gmn://20260307/a1b2c3d4\"}"
+    },
+    {
+      "id": "46",
+      "description": "State hash pattern — 64 hex chars",
+      "input": { "state_hash": "3a5a3a9d1b13367621b5b34cc25a0d886a7da39ef91015a3f757ae37908602b8" },
+      "expected": "{\"state_hash\":\"3a5a3a9d1b13367621b5b34cc25a0d886a7da39ef91015a3f757ae37908602b8\"}"
+    },
+    {
+      "id": "47",
+      "description": "Audit aura enum value",
+      "input": { "audit_aura": "SkyBlue" },
+      "expected": "{\"audit_aura\":\"SkyBlue\"}"
+    },
+    {
+      "id": "48",
+      "description": "Schema version string",
+      "input": { "schema_version": "4.1.0" },
+      "expected": "{\"schema_version\":\"4.1.0\"}"
+    },
+    {
+      "id": "49",
+      "description": "Full minimal 24TAG object — key sort verification",
+      "input": {
+        "subject_origin": "jp",
+        "permanent_id": "gmn://20260307/a1b2c3d4",
+        "epistemic_confidence": 0.9,
+        "schema_version": "4.1.0",
+        "actor_role": "state",
+        "causality_direction": "upstream"
+      },
+      "expected": "{\"actor_role\":\"state\",\"causality_direction\":\"upstream\",\"epistemic_confidence\":0.9,\"permanent_id\":\"gmn://20260307/a1b2c3d4\",\"schema_version\":\"4.1.0\",\"subject_origin\":\"jp\"}"
+    }
+  ]
+}

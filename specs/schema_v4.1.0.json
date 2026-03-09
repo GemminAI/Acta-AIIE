@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AIIE 24TAG + 1 Narrative Crystal",
+  "description": "Standard schema for the Gemmina Intelligence LLC. Acta AIIE Protocol v4.1.0",
+  "version": "4.1.0",
+  "type": "object",
+  "required": [
+    "permanent_id", "subject_origin", "predicate_type", "object_entity",
+    "location", "time_frame", "actor_role", "causality_direction",
+    "strategic_interest_vector", "epistemic_confidence", "bias_component",
+    "model_differential", "global_synthesis", "n_o_variants",
+    "source_credibility", "economic_transmission_path", "silence_reasons",
+    "precedent_audit", "conflict_factuality_index", "backbone_history",
+    "deep_dive", "audit_aura", "provenance_hash", "schema_version",
+    "state_hash"
+  ],
+  "properties": {
+    "permanent_id": {
+      "type": "string",
+      "pattern": "^gmn://[0-9]{8}/[a-f0-9]{8}$",
+      "description": "TAG 01: Persistent Identifier (gmn://YYYYMMDD/hash8)"
+    },
+    "subject_origin": {
+      "type": "string",
+      "enum": ["jp", "cn", "us", "uk", "qa", "eu"],
+      "description": "TAG 02: Narrative origin (subject country)"
+    },
+    "predicate_type": {
+      "type": "string",
+      "enum": ["declare", "sanction", "invest", "conflict", "negotiate", "accuse", "support", "withdraw", "deploy", "restrict"],
+      "description": "TAG 03: Predicate verb classification"
+    },
+    "object_entity": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "TAG 04: Target entities (e.g. [\"NVIDIA\", \"Taiwan\"])"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "country": { "type": "string" },
+        "city":    { "type": "string" },
+        "coord":   {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "[latitude, longitude]"
+        }
+      },
+      "required": ["country"],
+      "description": "TAG 05: Geographic context"
+    },
+    "time_frame": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "TAG 06: ISO 8601 (UTC/Z) timestamp — seconds precision"
+    },
+    "actor_role": {
+      "type": "string",
+      "enum": ["state", "corporation", "individual", "algo", "ngo", "multilateral"],
+      "description": "TAG 07: Actor classification"
+    },
+    "causality_direction": {
+      "type": "string",
+      "enum": ["upstream", "midstream", "downstream"],
+      "description": "TAG 08: Position on causal timeline"
+    },
+    "strategic_interest_vector": {
+      "type": "object",
+      "properties": {
+        "security":    { "type": "number", "minimum": -1, "maximum": 1 },
+        "economy":     { "type": "number", "minimum": -1, "maximum": 1 },
+        "tech":        { "type": "number", "minimum": -1, "maximum": 1 },
+        "resource":    { "type": "number", "minimum": -1, "maximum": 1 },
+        "ideology":    { "type": "number", "minimum": -1, "maximum": 1 },
+        "environment": { "type": "number", "minimum": -1, "maximum": 1 }
+      },
+      "required": ["security", "economy", "tech", "resource", "ideology", "environment"],
+      "description": "TAG 09: 6-dimensional strategic interest vector [-1.0, 1.0]"
+    },
+    "epistemic_confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "TAG 10: AI self-assessed certainty [0.0, 1.0]"
+    },
+    "bias_component": {
+      "type": "object",
+      "properties": {
+        "emotional_load":     { "type": "number", "minimum": 0, "maximum": 1 },
+        "perspective_center": { "type": "string" },
+        "missing_viewpoints": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["emotional_load", "perspective_center", "missing_viewpoints"],
+      "description": "TAG 11: Bias composition analysis"
+    },
+    "model_differential": {
+      "type": "object",
+      "properties": {
+        "consensus": { "type": "array", "items": { "type": "string" } },
+        "conflict":  { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["consensus", "conflict"],
+      "description": "TAG 12: Three-body AI differential (Gem / Kuro / Chap)"
+    },
+    "global_synthesis": {
+      "type": "string",
+      "maxLength": 400,
+      "description": "TAG 13: Global synthesis — max 400 characters"
+    },
+    "n_o_variants": {
+      "type": "object",
+      "properties": {
+        "jp": { "type": "string", "maxLength": 1400 },
+        "cn": { "type": "string", "maxLength": 1400 },
+        "us": { "type": "string", "maxLength": 1400 },
+        "uk": { "type": "string", "maxLength": 1400 },
+        "qa": { "type": "string", "maxLength": 1400 },
+        "eu": { "type": "string", "maxLength": 1400 }
+      },
+      "description": "TAG 14: Narrative origin variants — 6 perspectives, ~1400 chars each"
+    },
+    "source_credibility": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "TAG 15: Historical source credibility score [0.0, 1.0]"
+    },
+    "economic_transmission_path": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "TAG 16: Affected economic sectors (e.g. [\"energy\", \"semiconductor\"])"
+    },
+    "silence_reasons": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "TAG 17: Strategic silence analysis — list of omission descriptions"
+    },
+    "precedent_audit": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "TAG 18: Referenced international law / historical precedents"
+    },
+    "conflict_factuality_index": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "TAG 19: CFI Score — 1.0 minus physical contradiction penalties"
+    },
+    "backbone_history": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "TAG 20: Historical background — max 1000 characters"
+    },
+    "deep_dive": {
+      "type": "string",
+      "maxLength": 1400,
+      "description": "TAG 21: In-depth expert analysis — max 1400 characters"
+    },
+    "audit_aura": {
+      "type": "string",
+      "enum": ["White", "SkyBlue", "PaleGreen", "Amber", "Red"],
+      "description": "TAG 22: UI luminosity definition for honest interface rendering"
+    },
+    "provenance_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "TAG 23: SHA-256 intermediate verification hash of TAGs 01–22"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "TAG 24: Semantic versioning (e.g. '4.1.0')"
+    },
+    "state_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "TAG 25: SHA-256 of JCS-normalized TAGs 01–24. Self-referentially excluded from its own input."
+    }
+  },
+  "additionalProperties": false
+}
