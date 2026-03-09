@@ -1,0 +1,66 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* ── Acta AIIE Portal — Global Resets ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #070a0d;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #070a0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a2530;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3f52;
+}
+
+/* Selection */
+::selection {
+  background: rgba(56, 189, 248, 0.2);
+  color: #c8d4e0;
+}
+
+/* Reset heading defaults from theme for AIIE portal */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* ── Unified monospace enforcement ── */
+* {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Grid-line structural elements ── */
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border: none;
+}
