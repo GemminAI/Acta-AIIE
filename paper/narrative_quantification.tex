@@ -1,0 +1,615 @@
+\documentclass[11pt,a4paper]{article}
+
+% ── Packages ──────────────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{authblk}
+\usepackage{abstract}
+
+\geometry{
+  a4paper,
+  top=25mm, bottom=25mm,
+  left=25mm, right=25mm,
+}
+
+% ── Hyperref setup ────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  citecolor=blue!70!black,
+  urlcolor=blue!70!black,
+  pdftitle={Narrative Quantification: Compiling Narrative Structures into Computable Representations for Large Cognitive Models},
+  pdfauthor={Tomohiko Nakamura},
+}
+
+% ── Code listing style ────────────────────────────────────────────────────────
+\lstdefinestyle{json}{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{gray!8},
+  frame=single,
+  rulecolor=\color{gray!40},
+  breaklines=true,
+  showstringspaces=false,
+  keywordstyle=\color{blue!70!black},
+  stringstyle=\color{orange!70!black},
+  commentstyle=\color{green!50!black},
+}
+
+% ── Theorem environments ──────────────────────────────────────────────────────
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Title ─────────────────────────────────────────────────────────────────────
+\title{\textbf{Narrative Quantification:}\\
+Compiling Narrative Structures into Computable\\
+Representations for Large Cognitive Models}
+
+\author[1]{Tomohiko Nakamura}
+\affil[1]{Independent Researcher, Japan \\ \texttt{tomohiko@gemminai.com}}
+
+\date{March 2026}
+
+\maketitle
+
+% ── Abstract ──────────────────────────────────────────────────────────────────
+\begin{abstract}
+Human societies interpret events primarily through narrative structures
+rather than isolated data points. This paper proposes \textbf{Narrative
+Quantification}, a framework for transforming narrative information
+into structured cognitive data. By decomposing narratives into actors,
+events, conflicts, resolutions, emotional context, and causal
+relationships, narratives can be stored as structured datasets and
+analyzed computationally.
+
+To operationalize this transformation, the paper introduces the concept
+of a \textbf{Narrative Compiler}, a system that converts narrative text
+into structured cognitive representations such as the \textbf{24TAG
+structure}. These representations enable the creation of narrative
+databases that may serve as the foundation for \textbf{Large Cognitive
+Models (LCM)}---systems designed to reason over structured
+representations of human narratives rather than purely probabilistic
+language tokens.
+
+This work suggests that narrative quantification may function as a new
+layer of cognitive infrastructure for future AI systems.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Narrative Quantification, Large Cognitive Models,
+24TAG, Narrative Compiler, Cognitive Infrastructure, State Hash, JSON
+Canonicalization Scheme
+
+\hrule
+\vspace{1em}
+
+% ── 1. Introduction ───────────────────────────────────────────────────────────
+\section{Introduction}
+
+Most contemporary AI systems rely on probabilistic language modeling.
+Large Language Models (LLMs) generate text by predicting token
+probabilities within massive corpora. While effective for language
+generation, these systems do not explicitly represent narrative
+structure, causal relationships, or long-term narrative dynamics.
+
+Human cognition, however, rarely processes information as isolated
+tokens. Instead, humans organize knowledge through \textbf{narratives}:
+structured relationships between actors, events, motivations, and
+outcomes.
+
+This paper proposes that quantifying narrative structures can provide an
+alternative computational representation of human cognition. By
+decomposing narratives into structured components, it becomes possible
+to construct databases of collective narrative patterns.
+
+% ── 2. Narrative Cognition ────────────────────────────────────────────────────
+\section{Narrative Cognition}
+
+Human cognition frequently follows a narrative processing loop:
+
+\begin{equation}
+\text{Event} \rightarrow \text{Meaning} \rightarrow \text{Narrative} \rightarrow \text{Memory}
+\end{equation}
+
+Experiences are rarely stored as raw data. Instead, individuals
+interpret events through causal explanations and emotional context,
+forming narratives that are later stored in memory. This mechanism
+allows humans to compress complex experiences into structured stories
+that \textbf{predict future outcomes and guide subsequent decisions}.
+Narrative cognition therefore represents a fundamental cognitive process
+rather than a mere cultural artifact.
+
+% ── 3. Narrative Quantification ───────────────────────────────────────────────
+\section{Narrative Quantification}
+
+Narrative Quantification is the process of converting narrative
+structures into analyzable data. Narratives can be decomposed into
+structural components such as:
+
+\begin{itemize}[noitemsep]
+  \item Actors
+  \item Events
+  \item Conflict
+  \item Resolution
+  \item Emotional context
+  \item Causal relationships
+\end{itemize}
+
+Once extracted, these components can be represented through structured
+tags and stored within databases. This enables large-scale analysis of
+narrative dynamics across media, politics, economics, and culture.
+
+\subsection{Decomposition}
+
+The first stage of quantification is \textbf{Decomposition}, where raw
+narrative text is segmented into its primary semantic units. Rather than
+treating a story as a continuous stream of words, we identify discrete
+entities and their roles. By isolating \textbf{Actors} (the agents of
+change), \textbf{Events} (the actions taken), and \textbf{Causal
+Relationships} (the `why' behind the actions), we transform linguistic
+ambiguity into a set of distinct variables.
+
+\subsection{Event Formation}
+
+The second stage of quantification is \textbf{Event Formation}, where
+continuous occurrences are discretized into logical structures. Within
+this framework, \textbf{an event is defined as the minimum causal
+interaction unit between actors unfolding over time.}
+
+Unlike traditional data processing, event formation recognizes the
+inherent unity of an action and its subsequent response. A typical
+event unit is structured as follows:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Actors:} The agents initiating or receiving the interaction.
+  \item \textbf{Action-Reaction Pair:} The core causal loop.
+  \item \textbf{Temporal Boundary:} The specific window from trigger to outcome.
+\end{itemize}
+
+By defining the event as the \emph{minimum causal interaction unit}, we
+enable LCMs to perform reasoning not just on what happened, but on the
+\textbf{logic of the interaction itself}.
+
+\subsection{Narrative Compression}
+
+The final stage of quantification is \textbf{Narrative Compression},
+the process by which structured narrative data is refined into a
+high-density cognitive representation. This operation can be understood
+as an \textbf{active entropy reduction} within the information space.
+
+Raw, real-world data is inherently high-entropy---it is noisy,
+continuous, and lacks explicit meaning. Narrative compression provides
+several key advantages:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Computational Efficiency:} Reasoning over discrete, compressed event units is far more efficient than processing raw linguistic tokens.
+  \item \textbf{Long-Term Coherence:} Stripping away noise reveals the narrative arc, enabling tracking of long-term dynamics that LLMs often lose.
+  \item \textbf{Storage and Retrieval:} Compression enables construction of vast, searchable Narrative Databases.
+\end{itemize}
+
+Ultimately, narrative compression transforms ``text'' into
+``knowledge.'' This compressed, structured format serves as the
+fundamental input for the Large Cognitive Model (LCM).
+
+% ── 4. The Narrative Compiler ─────────────────────────────────────────────────
+\section{The Narrative Compiler: Search and Optimization}
+
+The Narrative Compiler does not merely extract data; it explores a vast
+space of potential interpretations to find the most probable narrative
+structures. Given that a single text can yield an exponential number of
+event connections, the Compiler employs specific \textbf{Search
+Constraints} to manage this complexity and generate the final
+probability distribution $P(N \mid \text{text})$.
+
+\subsection{Generating Possible Narrative Graphs}
+
+The Compiler treats narrative construction as a graph-search problem.
+From a set of extracted events, it attempts to build a \textbf{Narrative
+Graph} $G$ where nodes represent events and edges represent causal or
+temporal transitions.
+
+\subsection{Beam Search for Hypothesis Management}
+
+To maintain a manageable ``hash set'' of narrative states, the Compiler
+utilizes \textbf{Beam Search}. Rather than exploring every possible
+graph configuration, the Compiler keeps only the top-$k$ most plausible
+narrative hypotheses at each step of the construction.
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Top-$k$ Survival:} At each stage of event linking, only the graphs with the highest cumulative probability scores are retained.
+  \item \textbf{Diversity Maintenance:} The beam search is tuned to preserve divergent narrative paths if their probabilities are sufficiently high.
+\end{itemize}
+
+\subsection{Graph Pruning and Information Entropy}
+
+\textbf{Graph Pruning} is the active removal of low-probability or
+redundant branches in the narrative tree.
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Redundancy Filtering:} Multiple paths leading to the same structural state with lower efficiency are pruned.
+  \item \textbf{Entropy Thresholding:} Branches that increase conditional entropy without adding semantic value are eliminated.
+\end{itemize}
+
+\subsection{Causal Constraints: The Logical Filter}
+
+The most critical constraint is the \textbf{Causal Constraint}, which
+acts as the ``physics'' of the Narrative Space. The Compiler applies
+logical rules to validate every proposed edge in the graph:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Temporal Precedence:} A cause must strictly precede its effect.
+  \item \textbf{Actor Consistency:} Actions must align with the capabilities and known motivations of the involved actors.
+  \item \textbf{Interaction Logic:} The Action-Reaction loop must maintain coherent flow.
+\end{itemize}
+
+\subsection{Final State Synthesis}
+
+Through these constraints, the Narrative Compiler collapses the
+near-infinite possibilities of prose into a refined \textbf{hash set}.
+This set represents the ``State'' of the narrative---a weighted
+distribution of graphs that have survived beam search and passed all
+causal filters.
+
+% ── 5. The 24TAG Taxonomy ─────────────────────────────────────────────────────
+\section{The 24TAG Taxonomy}
+
+To ensure universal compatibility and deterministic hashing, the
+Narrative Quantification protocol defines a fixed schema of 24
+structured tags. These tags are categorized into four primary layers.
+
+\begin{table}[h!]
+\centering
+\caption{The 24TAG Framework Definitions}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Layer} & \textbf{Tag ID} & \textbf{Tag Name} & \textbf{Description} \\
+\midrule
+\multirow{6}{*}{\textbf{Actor \& Agency}}
+  & T01 & Primary\_Actor      & Main entity initiating the interaction \\
+  & T02 & Secondary\_Actor    & Entity receiving or responding to action \\
+  & T03 & Actor\_Role\_A      & Functional role of primary actor \\
+  & T04 & Actor\_Role\_B      & Functional role of secondary actor \\
+  & T05 & Actor\_Motivation\_A & Underlying goal for Actor A \\
+  & T06 & Actor\_Motivation\_B & Underlying goal for Actor B \\
+\midrule
+\multirow{6}{*}{\textbf{Event \& Action}}
+  & T07 & Action\_Type        & Category of event (Verbal, Physical, etc.) \\
+  & T08 & Action\_Intensity   & Magnitude of action (0.0--1.0) \\
+  & T09 & Target\_Resource    & Specific object or value being contested \\
+  & T10 & Event\_Modality     & Factual, hypothetical, or desired \\
+  & T11 & Temporal\_Sequence  & Relative order within narrative arc \\
+  & T12 & Spatial\_Context    & Domain or environment of event \\
+\midrule
+\multirow{6}{*}{\textbf{Causal \& Logic}}
+  & T13 & Causal\_Link\_Type  & Nature of connection (Direct Cause, etc.) \\
+  & T14 & Conflict\_Nature    & Type of opposition (Internal, etc.) \\
+  & T15 & Conflict\_Intensity & Severity of friction between actors \\
+  & T16 & Resolution\_Status  & Degree of conflict settlement \\
+  & T17 & Outcome\_Valence    & Positive or negative impact \\
+  & T18 & Logic\_Consistency  & Alignment with prior narrative states \\
+\midrule
+\multirow{6}{*}{\textbf{Context \& Tone}}
+  & T19 & Emotional\_Tone\_A  & Emotional state of Actor A \\
+  & T20 & Emotional\_Tone\_B  & Emotional state of Actor B \\
+  & T21 & Perspective\_Bias   & Point of view of the narrative \\
+  & T22 & Info\_Asymmetry     & Knowledge gap between actors \\
+  & T23 & Significance\_Score & Relative importance of event \\
+  & T24 & Narrative\_Closure  & Extent of thread conclusion \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Data Structure and Compilation}
+
+Each tag ($T_{01 \dots 24}$) is populated by the Narrative Compiler
+using the Beam Search and Causal Constraints defined in Section~4. The
+resulting data structure is a JSON object. As specified in the
+\textbf{Crystallization Protocol}, the \texttt{state\_hash} is
+calculated by applying SHA-256 to the JCS-normalized string of these 24
+tags:
+
+\begin{lstlisting}[style=json]
+{
+  "T01": "Actor_A",
+  "T02": "Actor_B",
+  ...
+  "T24": "Closure_Value",
+  "state_hash": "6b86b273ff34fce19d6b804eff5a3f57..."
+}
+\end{lstlisting}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Normalization (JCS):} Following RFC~8785~\cite{rfc8785}, the Compiler sorts the 24 structured tags into a canonical JSON format.
+  \item \textbf{Self-Referential Exclusion:} The \texttt{state\_hash} field itself is strictly excluded from the hash input to prevent circular dependencies.
+  \item \textbf{Hashing (SHA-256):} The Compiler applies SHA-256 to the canonical byte-stream of the 24 tags.
+\end{itemize}
+
+The mathematical definition of the state is:
+
+\begin{equation}
+  state\_hash = \mathrm{SHA256}\!\left(\mathrm{JCS}\!\left(\{TAG_{01 \dots 24}\} \setminus \{state\_hash\}\right)\right)
+\end{equation}
+
+\subsection{Integrity and Verification}
+
+By excluding the \texttt{state\_hash} from its own input, we create a
+\textbf{One-Way Cognitive Seal}. A receiver can verify the integrity of
+a narrative state by re-running the JCS and SHA-256 process on the
+remaining 24 tags and comparing against the original \texttt{state\_hash}.
+
+% ── 6. Narrative Space ────────────────────────────────────────────────────────
+\section{Narrative Observation and the Narrative Space}
+
+\subsection{Defining Narrative Space}
+
+\begin{definition}
+\textbf{Narrative Space} is the multi-dimensional space formed by the
+set of possible narrative states. Each specific state is represented as
+a point within this space.
+\end{definition}
+
+\subsection{The Mathematical Foundation: Graph Embedding}
+
+Each narrative graph $G$ is projected into a $d$-dimensional
+real-valued space via an embedding function $e$:
+
+\begin{equation}
+  e : G \rightarrow \mathbb{R}^d
+\end{equation}
+
+\subsection{Quantifying Divergence through Distance}
+
+The divergence between two narrative states $G_1$ and $G_2$ is defined
+by the distance between their corresponding embeddings:
+
+\begin{equation}
+  \text{distance} = \| e(G_1) - e(G_2) \|
+\end{equation}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Low Distance (Convergence):} Indicates cognitive consensus.
+  \item \textbf{High Distance (Divergence):} Indicates competing interpretations or ``Narrative Rifts.''
+\end{itemize}
+
+\subsection{Mapping the Narrative Ecosystem}
+
+By observing the distribution and trajectory of vectors $e(G)$ within
+the Narrative Space, researchers can identify:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Attractors:} Regions where narrative vectors cluster, indicating dominant societal beliefs.
+  \item \textbf{Bifurcation Points:} Moments where a single event causes the distribution to split into two distant clusters.
+  \item \textbf{Narrative Velocity:} The rate at which $e(G)$ moves through the space as new information is integrated.
+\end{itemize}
+
+% ── 7. Cognitive Infrastructure ───────────────────────────────────────────────
+\section{Cognitive Infrastructure}
+
+\subsection{From Knowledge Bases to Narrative Databases}
+
+Traditional knowledge bases (e.g., Wikidata, Knowledge Graphs) are
+effective at storing \emph{what} happened---discrete facts such as
+dates, locations, and actors. However, they lack the capacity to store
+\emph{how} those facts are interpreted. A \textbf{Narrative Database},
+powered by the Narrative Compiler, stores \textbf{Crystallized Narrative
+States}. This shifts the focus from ``Data Storage'' to ``Cognitive
+State Storage.''
+
+\subsection{Information Integrity and the State Hash}
+
+The deterministic nature of the \texttt{state\_hash} provides a
+mechanism for \textbf{Information Integrity}:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Proof of Interpretation:} A \texttt{state\_hash} attached to a report provides a ``Cognitive Seal.''
+  \item \textbf{Divergence Detection:} Comparing \texttt{state\_hash} outputs across media outlets objectively indicates narrative structural differences.
+\end{itemize}
+
+\subsection{Applications of the Infrastructure}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Media \& Information Integrity:} Automated detection of narrative manipulation.
+  \item \textbf{Geopolitical Narrative Mapping:} Real-time observation of how different nations interpret the same international event.
+  \item \textbf{Corporate \& Economic Intelligence:} Tracking the evolution of market narratives through structured event formation.
+\end{itemize}
+
+% ── 8. LCM ────────────────────────────────────────────────────────────────────
+\section{Reasoning over Narrative Distributions (LCM)}
+
+By defining a state as $P(N \mid \text{text})$, the \textbf{Large
+Cognitive Model (LCM)} gains the ability to perform ``superpositional''
+reasoning.
+
+\subsection{Inference as Distribution Transformation}
+
+While LLMs predict tokens, the LCM performs inference by transforming
+one probability distribution into another. The reasoning core evaluates
+how the current distribution $P(N_t \mid \text{text}_t)$ evolves into a
+future distribution $P(N_{t+1})$ when a new event occurs.
+
+\subsection{Handling Ambiguity and Divergence}
+
+This probabilistic approach allows the LCM to handle \textbf{Narrative
+Divergence} natively. When a text is highly ambiguous, the Compiler
+produces a broad ``hash set'' with distributed probabilities. The LCM
+can track multiple ``possible worlds'' simultaneously.
+
+\subsection{Reasoning over Causal Trajectories}
+
+Because an event is defined as the \emph{minimum causal interaction
+unit}, the LCM can track long-term narrative arcs without the
+``forgetting'' or ``hallucination'' common in LLMs. Reasoning in an LCM
+is not a search for the next word, but a calculation of \textbf{state
+transitions}:
+
+\begin{equation}
+  \text{State } A\,(\mathrm{Hash}_1)
+  \xrightarrow{\text{Causal Logic}}
+  \text{State } B\,(\mathrm{Hash}_2)
+\end{equation}
+
+% ── 9. Human Memory ───────────────────────────────────────────────────────────
+\section{Human Memory and Narrative Cognition}
+
+Human memory does not function as a raw sensory log; rather, it
+operates through a sophisticated process of \textbf{narrative
+compression}.
+
+\subsection{Memory as a Compiled Distribution}
+
+When humans experience an event, the brain acts as a biological
+\textbf{Narrative Compiler}, transforming continuous experience into a
+discrete set of structured narrative units. Human memory can be viewed
+as the storage of the probability distribution:
+
+\begin{equation}
+  P(N \mid \text{Experience})
+\end{equation}
+
+What we ``remember'' is not the raw text of reality, but the
+\textbf{hash set} of the most probable narrative structures.
+
+\subsection{The Primitives of Biological Storage}
+
+The human cognitive system captures only essential semantic primitives:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Key Actors:} Identifying who was involved.
+  \item \textbf{Causal Interpretations:} Assigning a ``why'' to the sequence of events.
+  \item \textbf{Emotional Evaluation:} Tagging the event with a valence.
+  \item \textbf{Outcomes:} The final state after the interaction is resolved.
+\end{itemize}
+
+\subsection{Biomimetic Validation}
+
+The approach of Narrative Quantification is fundamentally
+\textbf{biomimetic}. By using the \texttt{state\_hash} to represent a
+``crystallized'' interpretation, we emulate the way human synapses
+consolidate complex experiences into stable, retrievable ``concepts.''
+
+% ── 10. Limitations ───────────────────────────────────────────────────────────
+\section{Limitations}
+
+\subsection{Subjectivity and Algorithmic Bias}
+
+The primary challenge is the inherent subjectivity of human
+interpretation. The ``priors'' used to assign probabilities are often
+derived from the training data of the underlying models, which can
+introduce systemic biases where the compiler favors specific cultural
+tropes.
+
+\subsection{Computational Complexity of Graph Generation}
+
+Constructing \textbf{possible narrative graphs} is a non-trivial
+computational task. In complex, multi-actor texts, the number of
+potential causal connections grows exponentially.
+
+\subsection{Cultural and Linguistic Heterogeneity}
+
+Narrative structures are not universal. Different cultures employ
+different storytelling archetypes. A 24TAG framework optimized for one
+may fail to capture the nuances of another.
+
+\subsection{Data Sovereignty and ``Narrative Warfare''}
+
+If a centralized authority can define the ``standard'' \texttt{state\_hash}
+for a global event, they possess the power to delegitimize divergent
+but valid interpretations. The risk of using this infrastructure for
+``narrative warfare'' is a serious ethical concern.
+
+\subsection{Semantic Loss during Compression}
+
+Narrative compression is an active entropy reduction process. There is a
+persistent risk that subtle but crucial ``soft'' data---such as irony,
+subtext, or poetic ambiguity---may be lost during the transition from
+raw text to a structured \texttt{state\_hash}.
+
+% ── 11. Conclusion ────────────────────────────────────────────────────────────
+\section{Conclusion}
+
+Despite these limitations, Narrative Quantification represents a
+necessary evolution in Artificial Intelligence. By moving beyond the
+probabilistic prediction of language tokens and toward the
+\textbf{structured reasoning of narrative states}, we provide a
+framework that more closely mirrors human cognition.
+
+The transition from \textbf{Narrative Structures to Large Cognitive
+Models (LCM)} offers more than just technical efficiency; it provides a
+way to map the ``Narrative Space'' of our society, making the invisible
+structures of our interpretations visible, measurable, and verifiable.
+
+Future research will focus on mitigating bias through diverse
+``compiler ensembles'' and exploring the decentralized governance of
+narrative hashes to ensure that this cognitive infrastructure serves as
+a tool for clarity, not control.
+
+The path toward \textbf{Artificial General Intelligence (AGI)} lies not
+in bigger models, but in deeper structures. Narrative Quantification is
+the first step in building an AI that doesn't just talk like a human,
+but understands like one.
+
+% ── References ────────────────────────────────────────────────────────────────
+\begin{thebibliography}{99}
+
+\bibitem{rfc8785}
+Rundgren, A., Jordan, B., \& Erdtman, S. (2020).
+\textit{JSON Canonicalization Scheme (JCS)}.
+RFC 8785. Internet Engineering Task Force.
+\url{https://www.rfc-editor.org/rfc/rfc8785}
+
+\bibitem{shannon1948}
+Shannon, C. E. (1948).
+A mathematical theory of communication.
+\textit{Bell System Technical Journal}, 27(3), 379--423.
+
+\bibitem{minsky1975}
+Minsky, M. (1975).
+A framework for representing knowledge.
+In P. H. Winston (Ed.), \textit{The Psychology of Computer Vision} (pp. 211--277). McGraw-Hill.
+
+\bibitem{schank1977}
+Schank, R. C., \& Abelson, R. P. (1977).
+\textit{Scripts, Plans, Goals and Understanding}.
+Lawrence Erlbaum Associates.
+
+\bibitem{bruner1991}
+Bruner, J. (1991).
+The narrative construction of reality.
+\textit{Critical Inquiry}, 18(1), 1--21.
+
+\bibitem{vaswani2017}
+Vaswani, A., Shazeer, N., Parmar, N., et al. (2017).
+Attention is all you need.
+\textit{Advances in Neural Information Processing Systems}, 30.
+
+\bibitem{devlin2018}
+Devlin, J., Chang, M. W., Lee, K., \& Toutanova, K. (2018).
+BERT: Pre-training of deep bidirectional transformers for language understanding.
+\textit{arXiv preprint arXiv:1810.04805}.
+
+\bibitem{hamilton2017}
+Hamilton, W., Ying, Z., \& Leskovec, J. (2017).
+Inductive representation learning on large graphs.
+\textit{Advances in Neural Information Processing Systems}, 30.
+
+\bibitem{ecma262}
+Ecma International. (2024).
+\textit{ECMAScript 2024 Language Specification (ECMA-262)}.
+\url{https://tc39.es/ecma262/}
+
+\end{thebibliography}
+
+\end{document}
