@@ -182,6 +182,82 @@ By defining the event as the \emph{minimum causal interaction unit}, we
 enable LCMs to perform reasoning not just on what happened, but on the
 \textbf{logic of the interaction itself}.
 
+\subsubsection{Eventualization: Entropy Suppression through Gravitational Convergence}
+
+Without event formation, information entropy increases monotonically over
+time. A single real-world occurrence typically generates dozens of
+articles across different media outlets — each carrying its own framing,
+emphasis, and omissions. Left unstructured, this proliferation of
+fragments causes the informational representation of a single event to
+\emph{diverge}, consuming disproportionate computational and cognitive
+resources.
+
+\textbf{Eventualization} is the process by which the \textbf{Event
+Builder} counteracts this divergence. Rather than treating each article
+as an independent data point, the Event Builder applies a gravitational
+model: semantically related articles are attracted toward a shared
+\texttt{event\_id}, collapsing the high-entropy cloud of fragments into
+a single, stable coordinate in Narrative Space.
+
+Formally, given a set of $n$ articles $\{a_1, a_2, \ldots, a_n\}$
+referencing the same real-world occurrence, Eventualization assigns them
+to a common event object $E$:
+
+\begin{equation}
+  E = \text{EventBuilder}\!\left(\{a_1, \ldots, a_n\}\right), \quad
+  \text{sim}(e(a_i),\, e(a_j)) \geq \theta
+\end{equation}
+
+where $e(\cdot)$ is the embedding function mapping an article to its
+vector representation in Narrative Space, and $\theta$ is the similarity
+threshold above which two articles are considered to reference the same
+event. This operation is the narrative analogue of entropy reduction:
+the $n$ fragments, each carrying partial and often contradictory
+information, are compressed into one canonical object whose
+informational content is greater than the sum of its parts.
+
+\subsubsection{The Centroid Vector and Crystallization Completeness}
+
+A direct consequence of Eventualization is the emergence of the
+\textbf{centroid vector} $\bar{v}$. Each article $a_i$ assigned to
+event $E$ contributes a 6-dimensional \texttt{strategic\_interest\_vector}
+$v_i \in [-1, 1]^6$, representing its narrative perspective across the
+dimensions of security, economy, technology, resource, ideology, and
+environment. The centroid is defined as the arithmetic mean across all
+contributing perspectives:
+
+\begin{equation}
+  \bar{v} = \frac{1}{n} \sum_{i=1}^{n} v_i
+\end{equation}
+
+The centroid represents the \textbf{gravitational center of the
+event} — the best available approximation of the event's objective
+geopolitical weight, computed from the ensemble of all contributing
+narrative perspectives. As more articles converge on the same
+\texttt{event\_id}, the centroid stabilizes: the variance of
+$\{v_i\}$ decreases and the estimate of $\bar{v}$ becomes
+progressively more reliable.
+
+This gives rise to a natural measure of \textbf{crystallization
+completeness}. When all six canonical narrative perspectives
+(jp, us, cn, gb, eu, qa) have been compiled for a given event,
+the \texttt{source\_count} reaches 6. At this point the event is
+considered \emph{fully crystallized} — its centroid has been
+computed from the maximum available set of viewpoints and no
+further perspective shift is expected. The distance between any
+individual narrative vector $v_i$ and the centroid $\bar{v}$,
+
+\begin{equation}
+  \text{CDC}_i = \| v_i - \bar{v} \|_2
+\end{equation}
+
+then functions as the \textbf{Cross-Domain Correlation (CDC)} metric:
+a quantitative measure of how far a given national narrative deviates
+from the ensemble center of gravity. High CDC values indicate
+narrative outliers — perspectives that are structurally distant from
+the consensus — and serve as the primary signal for the
+\texttt{audit\_aura} indicator in the presentation layer.
+
 \subsection{Narrative Compression}
 
 The final stage of quantification is \textbf{Narrative Compression},

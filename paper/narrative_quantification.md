@@ -84,7 +84,7 @@ narrative dynamics across media, politics, economics, and culture.
 
 The first stage of quantification is **Decomposition**, where raw narrative text is segmented into its primary semantic units. Rather than treating a story as a continuous stream of words, we identify discrete entities and their roles. By isolating **Actors** (the agents of change), **Events** (the actions taken), and **Causal Relationships** (the 'why' behind the actions), we transform linguistic ambiguity into a set of distinct variables. This step is crucial for transitioning from a subjective reading of a text to an objective, computational representation.
 
-### ### **3.2 Event Formation**
+### **3.2 Event Formation**
 
 The second stage of quantification is **Event Formation**, where continuous occurrences are discretized into logical structures. Within this framework, **an event is defined as the minimum causal interaction unit between actors unfolding over time.**
 
@@ -93,13 +93,36 @@ Unlike traditional data processing, which might treat an action and its subseque
 A typical event unit is structured as follows:
 
 - **Actors:** The agents initiating or receiving the interaction.
-    
 - **Action-Reaction Pair:** The core causal loop (e.g., _Actor A_ exerts influence, _Actor B_ undergoes a transition or retaliates).
-    
 - **Temporal Boundary:** The specific window from the trigger to the resulting outcome.
-    
 
 By defining the event as the _minimum causal interaction unit_, we enable Large Cognitive Models (LCM) to perform reasoning not just on what happened, but on the **logic of the interaction itself**. This is the prerequisite for moving from linguistic probability to true causal understanding.
+
+#### **3.2.1 Eventualization: Entropy Suppression through Gravitational Convergence**
+
+Without event formation, information entropy increases monotonically over time. A single real-world occurrence typically generates dozens of articles across different media outlets — each carrying its own framing, emphasis, and omissions. Left unstructured, this proliferation of fragments causes the informational representation of a single event to *diverge*, consuming disproportionate computational and cognitive resources.
+
+**Eventualization** is the process by which the **Event Builder** counteracts this divergence. Rather than treating each article as an independent data point, the Event Builder applies a gravitational model: semantically related articles are attracted toward a shared `event_id`, collapsing the high-entropy cloud of fragments into a single, stable coordinate in Narrative Space.
+
+Formally, given a set of $n$ articles $\{a_1, a_2, \ldots, a_n\}$ referencing the same real-world occurrence, Eventualization assigns them to a common event object $E$:
+
+$$E = \text{EventBuilder}(\{a_1, \ldots, a_n\}), \quad \text{sim}(e(a_i),\, e(a_j)) \geq \theta$$
+
+where $e(\cdot)$ is the embedding function mapping an article to its vector representation in Narrative Space, and $\theta$ is the similarity threshold above which two articles are considered to reference the same event. This operation is the narrative analogue of entropy reduction: the $n$ fragments are compressed into one canonical object whose informational content is greater than the sum of its parts.
+
+#### **3.2.2 The Centroid Vector and Crystallization Completeness**
+
+A direct consequence of Eventualization is the emergence of the **centroid vector** $\bar{v}$. Each article $a_i$ assigned to event $E$ contributes a 6-dimensional `strategic_interest_vector` $v_i \in [-1, 1]^6$, representing its narrative perspective across the dimensions of security, economy, technology, resource, ideology, and environment. The centroid is defined as the arithmetic mean across all contributing perspectives:
+
+$$\bar{v} = \frac{1}{n} \sum_{i=1}^{n} v_i$$
+
+The centroid represents the **gravitational center of the event** — the best available approximation of the event's objective geopolitical weight, computed from the ensemble of all contributing narrative perspectives. As more articles converge on the same `event_id`, the centroid stabilizes and the estimate becomes progressively more reliable.
+
+This gives rise to a natural measure of **crystallization completeness**. When all six canonical narrative perspectives (jp, us, cn, gb, eu, qa) have been compiled for a given event, the `source_count` reaches 6. At this point the event is considered *fully crystallized*. The distance between any individual narrative vector $v_i$ and the centroid $\bar{v}$,
+
+$$\text{CDC}_i = \| v_i - \bar{v} \|_2$$
+
+functions as the **Cross-Domain Correlation (CDC)** metric: a quantitative measure of how far a given national narrative deviates from the ensemble center of gravity. High CDC values indicate narrative outliers — perspectives that are structurally distant from the consensus — and serve as the primary signal for the `audit_aura` indicator in the presentation layer.
 
 ### **3.3 Narrative Compression**
 
