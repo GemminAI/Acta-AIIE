@@ -84,7 +84,7 @@ narrative dynamics across media, politics, economics, and culture.
 
 The first stage of quantification is **Decomposition**, where raw narrative text is segmented into its primary semantic units. Rather than treating a story as a continuous stream of words, we identify discrete entities and their roles. By isolating **Actors** (the agents of change), **Events** (the actions taken), and **Causal Relationships** (the 'why' behind the actions), we transform linguistic ambiguity into a set of distinct variables. This step is crucial for transitioning from a subjective reading of a text to an objective, computational representation.
 
-### **3.2 Event Formation**
+### ### **3.2 Event Formation**
 
 The second stage of quantification is **Event Formation**, where continuous occurrences are discretized into logical structures. Within this framework, **an event is defined as the minimum causal interaction unit between actors unfolding over time.**
 
@@ -93,36 +93,13 @@ Unlike traditional data processing, which might treat an action and its subseque
 A typical event unit is structured as follows:
 
 - **Actors:** The agents initiating or receiving the interaction.
+    
 - **Action-Reaction Pair:** The core causal loop (e.g., _Actor A_ exerts influence, _Actor B_ undergoes a transition or retaliates).
+    
 - **Temporal Boundary:** The specific window from the trigger to the resulting outcome.
+    
 
 By defining the event as the _minimum causal interaction unit_, we enable Large Cognitive Models (LCM) to perform reasoning not just on what happened, but on the **logic of the interaction itself**. This is the prerequisite for moving from linguistic probability to true causal understanding.
-
-#### **3.2.1 Eventualization: Entropy Suppression through Gravitational Convergence**
-
-Without event formation, information entropy increases monotonically over time. A single real-world occurrence typically generates dozens of articles across different media outlets — each carrying its own framing, emphasis, and omissions. Left unstructured, this proliferation of fragments causes the informational representation of a single event to *diverge*, consuming disproportionate computational and cognitive resources.
-
-**Eventualization** is the process by which the **Event Builder** counteracts this divergence. Rather than treating each article as an independent data point, the Event Builder applies a gravitational model: semantically related articles are attracted toward a shared `event_id`, collapsing the high-entropy cloud of fragments into a single, stable coordinate in Narrative Space.
-
-Formally, given a set of $n$ articles $\{a_1, a_2, \ldots, a_n\}$ referencing the same real-world occurrence, Eventualization assigns them to a common event object $E$:
-
-$$E = \text{EventBuilder}(\{a_1, \ldots, a_n\}), \quad \text{sim}(e(a_i),\, e(a_j)) \geq \theta$$
-
-where $e(\cdot)$ is the embedding function mapping an article to its vector representation in Narrative Space, and $\theta$ is the similarity threshold above which two articles are considered to reference the same event. This operation is the narrative analogue of entropy reduction: the $n$ fragments are compressed into one canonical object whose informational content is greater than the sum of its parts.
-
-#### **3.2.2 The Centroid Vector and Crystallization Completeness**
-
-A direct consequence of Eventualization is the emergence of the **centroid vector** $\bar{v}$. Each article $a_i$ assigned to event $E$ contributes a 6-dimensional `strategic_interest_vector` $v_i \in [-1, 1]^6$, representing its narrative perspective across the dimensions of security, economy, technology, resource, ideology, and environment. The centroid is defined as the arithmetic mean across all contributing perspectives:
-
-$$\bar{v} = \frac{1}{n} \sum_{i=1}^{n} v_i$$
-
-The centroid represents the **gravitational center of the event** — the best available approximation of the event's objective geopolitical weight, computed from the ensemble of all contributing narrative perspectives. As more articles converge on the same `event_id`, the centroid stabilizes and the estimate becomes progressively more reliable.
-
-This gives rise to a natural measure of **crystallization completeness**. When all six canonical narrative perspectives (jp, us, cn, gb, eu, qa) have been compiled for a given event, the `source_count` reaches 6. At this point the event is considered *fully crystallized*. The distance between any individual narrative vector $v_i$ and the centroid $\bar{v}$,
-
-$$\text{CDC}_i = \| v_i - \bar{v} \|_2$$
-
-functions as the **Cross-Domain Correlation (CDC)** metric: a quantitative measure of how far a given national narrative deviates from the ensemble center of gravity. High CDC values indicate narrative outliers — perspectives that are structurally distant from the consensus — and serve as the primary signal for the `audit_aura` indicator in the presentation layer.
 
 ### **3.3 Narrative Compression**
 
@@ -140,6 +117,140 @@ In this framework, narrative compression provides several key advantages:
     
 
 Ultimately, narrative compression is what transforms "text" into "knowledge." It is this compressed, structured format that serves as the fundamental input for the **Large Cognitive Model (LCM)**.
+
+### **3.4 Observational Projection: Transforming 5W1H into Event Coordinates**
+
+While the processes of **Decomposition** and **Event Formation** convert narrative text into structured semantic units, a structural challenge remains: the classical journalistic framework of **5W1H** (Who, What, When, Where, Why, How) represents information in a descriptive linear format rather than a form suitable for computational reasoning.
+
+To bridge this gap, the Narrative Quantification framework introduces an **Observational Projection**, a transformation that converts descriptive observations into structured **Event Coordinates**.
+
+---
+
+#### **3.4.1 Observation Representation**
+
+Let an observation extracted from text be defined as:
+
+$$O = (who,\ what,\ when,\ where,\ why,\ how)$$
+
+This tuple represents the narrative observation obtained during the **Decomposition** phase. However, these elements are expressed in natural language and cannot be directly used for computational reasoning. We therefore define a transformation:
+
+$$\Phi : O \rightarrow E$$
+
+where $E$ represents the **Event Coordinate** representation.
+
+---
+
+#### **3.4.2 Event Coordinate Structure**
+
+Rather than representing an event as a single label, the system decomposes it into multiple structured components:
+
+$$E = (A,\ R,\ T,\ S,\ C,\ M)$$
+
+where:
+
+- $A$ – Actor set  
+- $R$ – Actor relationships  
+- $T$ – Temporal vector  
+- $S$ – Spatial vector  
+- $C$ – Causal classification  
+- $M$ – Mechanism category  
+
+This representation provides a structured coordinate description of the event within the narrative system.
+
+---
+
+#### **3.4.3 Temporal Expansion**
+
+Natural language typically expresses time as a single timestamp:
+
+$$when = t$$
+
+However, causal interactions unfold across multiple stages. The system therefore expands temporal information into a **temporal vector**:
+
+$$T = (t_{cause},\ t_{event},\ t_{impact})$$
+
+where:
+
+- $t_{cause}$ – emergence of causal conditions  
+- $t_{event}$ – primary observable interaction  
+- $t_{impact}$ – manifestation of consequences  
+
+This representation allows the Narrative Compiler to distinguish between **causal origin**, **observable event**, and **downstream effects**. It directly corresponds to the `causality_direction` dimension (TAG08) in the 24TAG structure, grounding the upstream / midstream / downstream classification in a mathematical temporal coordinate.
+
+---
+
+#### **3.4.4 Spatial Expansion**
+
+Narrative reports often compress spatial information into a single location label. However, many events involve multiple spatial domains. The spatial coordinate is therefore represented as:
+
+$$S = (s_{origin},\ s_{event},\ s_{impact})$$
+
+where:
+
+- $s_{origin}$ – location of decision or causal initiation  
+- $s_{event}$ – physical location of the event  
+- $s_{impact}$ – domain where consequences emerge  
+
+This structure allows a single event to propagate across spatial domains while remaining within the same causal unit.
+
+---
+
+#### **3.4.5 Actor and Relationship Structure**
+
+Actors participating in an event are represented as a set:
+
+$$A = \{a_1, a_2, \dots, a_n\}$$
+
+Interactions between actors are represented as directed relations:
+
+$$R = \{(a_i \rightarrow a_j)\}$$
+
+where each edge represents an observed action–reaction interaction between actors.
+
+To capture the semantic nature of the interaction, each directed relation is annotated with a relation type:
+
+$$a_i \xrightarrow{\tau} a_j$$
+
+where $\tau \in \{cooperate,\ oppose,\ sanction,\ respond,\ \dots\}$ represents the predicate classification defined in TAG03.
+
+This typed relation structure allows the Narrative Compiler to distinguish between cooperative, adversarial, and reactive interactions while preserving the directional structure of the event graph. The resulting structure forms a **typed directed interaction graph**, which serves as the basis for the Narrative Graph construction described in Section 4.
+
+---
+
+#### **3.4.6 Implementation of the Projection Function**
+
+In practice, $\Phi$ is not a deterministic function but a **probabilistic estimator**. Given the inherent ambiguity of natural language, the projection is formalized as:
+
+$$\hat{E} = \Phi(O;\ \theta)$$
+
+where $\theta$ represents the parameters of the extraction model. $\Phi$ is implemented as a probabilistic structured extraction model combining **large language model inference** with **rule-based constraints**.
+
+The transformation proceeds in three stages:
+
+1. **Entity Extraction** — Natural language processing identifies candidate actors, locations, and temporal expressions.  
+2. **Semantic Classification** — Extracted entities are mapped into the coordinate components $(A, R, T, S, C, M)$.  
+3. **Constraint Filtering** — Logical rules enforce causal consistency, including temporal precedence, actor capability alignment, and action–reaction coherence.
+
+This hybrid approach allows the system to convert narrative text into structured event coordinates while maintaining causal plausibility.
+
+---
+
+#### **3.4.7 Causal Classification**
+
+The component $C$ in the Event Coordinate represents a **causal classification inferred from temporal precedence and interaction structure** within the event coordinate. Rather than treating causality as an assumed label, the system derives causal direction from the temporal ordering of $T = (t_{cause}, t_{event}, t_{impact})$ and the interaction pattern encoded in $R$.
+
+This inference-based approach ensures that $C$ reflects a structurally grounded causal judgment rather than a simple correlation, enabling the Narrative Compiler to build causal chains across events without conflating sequence with causation.
+
+---
+
+#### **3.4.8 Integration with Narrative Graph Construction**
+
+The resulting event coordinate $\hat{E}$ forms the atomic unit used in the **Narrative Graph construction** described in Section 4.
+
+Each event coordinate becomes a node within the narrative graph, while the relations encoded in $R$, $T$, and $C$ define the edges linking events across time and causality.
+
+Through this structure, the Observational Projection provides the critical bridge between **textual observation** and **computable narrative reasoning**, enabling subsequent processes such as graph embedding, narrative divergence measurement, and cognitive state hashing.
+
 
 ------------------------------------------------------------------------
 
@@ -183,6 +294,24 @@ The most critical constraint is the **Causal Constraint**, which acts as the "ph
 #### **4.5 Final State Synthesis**
 
 Through these constraints, the Narrative Compiler collapses the near-infinite possibilities of prose into a refined **hash set**. This set represents the "State" of the narrative—a weighted distribution of graphs that have survived the beam search and passed all causal filters.
+
+#### **4.6 Narrative State Representation**
+
+Once event coordinates are connected into a Narrative Graph $G = (V, E)$, the system derives a **Narrative State** representing the global configuration of interactions within the observed narrative space.
+
+Formally, the narrative state is defined as a mapping:
+
+$$N = \Psi(G)$$
+
+where $G$ denotes the Narrative Graph composed of event nodes $V$ and interaction edges $E$. The mapping function $\Psi$ transforms the structural properties of the graph—including actor interactions, temporal ordering, and relation types—into a compact state representation.
+
+More explicitly:
+
+$$N = \Psi(V,\ E,\ \tau)$$
+
+where $\tau$ represents the relation types defined in TAG03 and encoded in the typed directed interaction graph introduced in Section 3.4.5.
+
+This formulation establishes the narrative state as a function of graph structure rather than raw text, enabling the system to treat evolving narratives as **dynamic states within a structured information space**. Comparison, divergence measurement, and state hashing across narrative trajectories all operate on $N$—making this representation the direct mathematical antecedent of the `state_hash` defined in Section 5.
 
 
 ---
