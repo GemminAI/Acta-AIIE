@@ -118,6 +118,8 @@ In this framework, narrative compression provides several key advantages:
 
 Ultimately, narrative compression is what transforms "text" into "knowledge." It is this compressed, structured format that serves as the fundamental input for the **Large Cognitive Model (LCM)**.
 
+
+
 ### **3.4 Observational Projection: Transforming 5W1H into Event Coordinates**
 
 While the processes of **Decomposition** and **Event Formation** convert narrative text into structured semantic units, a structural challenge remains: the classical journalistic framework of **5W1H** (Who, What, When, Where, Why, How) represents information in a descriptive linear format rather than a form suitable for computational reasoning.
@@ -126,133 +128,142 @@ To bridge this gap, the Narrative Quantification framework introduces an **Obser
 
 ---
 
-#### **3.4.1 Observation Representation**
+### **3.4.1 Observation Representation**
 
 Let an observation extracted from text be defined as:
 
-$$O = (who,\ what,\ when,\ where,\ why,\ how)$$
+[ O = (who,, what,, when,, where,, why,, how) ]
 
-This tuple represents the narrative observation obtained during the **Decomposition** phase. However, these elements are expressed in natural language and cannot be directly used for computational reasoning. We therefore define a transformation:
+This tuple represents the narrative observation obtained during the **Decomposition** phase.
 
-$$\Phi : O \rightarrow E$$
+However, these elements are expressed in natural language and cannot be directly used for computational reasoning. We therefore define a transformation:
 
-where $E$ represents the **Event Coordinate** representation.
+[ \Phi : O \rightarrow E ]
+
+where E represents the **Event Coordinate representation**.
 
 ---
 
-#### **3.4.2 Event Coordinate Structure**
+### **3.4.2 Event Coordinate Structure**
 
 Rather than representing an event as a single label, the system decomposes it into multiple structured components:
 
-$$E = (A,\ R,\ T,\ S,\ C,\ M)$$
+[ E = (A, R, T, S, C, M) ]
 
 where:
 
-- $A$ – Actor set  
-- $R$ – Actor relationships  
-- $T$ – Temporal vector  
-- $S$ – Spatial vector  
-- $C$ – Causal classification  
-- $M$ – Mechanism category  
+- **A** – Actor set
+- **R** – Actor relationships
+- **T** – Temporal vector
+- **S** – Spatial vector
+- **C** – Causal classification
+- **M** – Mechanism category
 
 This representation provides a structured coordinate description of the event within the narrative system.
 
 ---
 
-#### **3.4.3 Temporal Expansion**
+### **3.4.3 Temporal Expansion**
 
 Natural language typically expresses time as a single timestamp:
 
-$$when = t$$
+[ when = t ]
 
 However, causal interactions unfold across multiple stages. The system therefore expands temporal information into a **temporal vector**:
 
-$$T = (t_{cause},\ t_{event},\ t_{impact})$$
+[ T = (t_{cause},, t_{event},, t_{impact}) ]
 
 where:
 
-- $t_{cause}$ – emergence of causal conditions  
-- $t_{event}$ – primary observable interaction  
-- $t_{impact}$ – manifestation of consequences  
+- t_{cause} – emergence of causal conditions
+- t_{event} – primary observable interaction
+- t_{impact} – manifestation of consequences
 
-This representation allows the Narrative Compiler to distinguish between **causal origin**, **observable event**, and **downstream effects**. It directly corresponds to the `causality_direction` dimension (TAG08) in the 24TAG structure, grounding the upstream / midstream / downstream classification in a mathematical temporal coordinate.
+This representation allows the Narrative Compiler to distinguish between **causal origin**, **observable event**, and **downstream effects**.
 
 ---
 
-#### **3.4.4 Spatial Expansion**
+### **3.4.4 Spatial Expansion**
 
-Narrative reports often compress spatial information into a single location label. However, many events involve multiple spatial domains. The spatial coordinate is therefore represented as:
+Narrative reports often compress spatial information into a single location label. However, many events involve multiple spatial domains.
 
-$$S = (s_{origin},\ s_{event},\ s_{impact})$$
+The spatial coordinate is therefore represented as:
+
+[ S = (s_{origin},, s_{event},, s_{impact}) ]
 
 where:
 
-- $s_{origin}$ – location of decision or causal initiation  
-- $s_{event}$ – physical location of the event  
-- $s_{impact}$ – domain where consequences emerge  
+- s_{origin} – location of decision or causal initiation
+- s_{event} – physical location of the event
+- s_{impact} – domain where consequences emerge
 
 This structure allows a single event to propagate across spatial domains while remaining within the same causal unit.
 
 ---
 
-#### **3.4.5 Actor and Relationship Structure**
+### **3.4.5 Actor and 
+Relationship Structure**
 
 Actors participating in an event are represented as a set:
 
-$$A = \{a_1, a_2, \dots, a_n\}$$
+[ A = {a_1, a_2, ..., a_n} ]
 
 Interactions between actors are represented as directed relations:
 
-$$R = \{(a_i \rightarrow a_j)\}$$
+[ R = {(a_i \rightarrow a_j)} ]
 
 where each edge represents an observed action–reaction interaction between actors.
 
-To capture the semantic nature of the interaction, each directed relation is annotated with a relation type:
+To capture the semantic nature of the interaction, each directed relation is annotated with a **relation type**:
 
-$$a_i \xrightarrow{\tau} a_j$$
+[ (a_i \xrightarrow{\tau} a_j) ]
 
-where $\tau \in \{cooperate,\ oppose,\ sanction,\ respond,\ \dots\}$ represents the predicate classification defined in TAG03.
+where
 
-This typed relation structure allows the Narrative Compiler to distinguish between cooperative, adversarial, and reactive interactions while preserving the directional structure of the event graph. The resulting structure forms a **typed directed interaction graph**, which serves as the basis for the Narrative Graph construction described in Section 4.
+[ \tau \in {cooperate,\ oppose,\ sanction,\ respond,\ ...} ]
+
+represents the **predicate classification defined in TAG03**.
+
+This typed relation structure allows the Narrative Compiler to distinguish between cooperative, adversarial, and reactive interactions while preserving the directional structure of the event graph.
+
+The resulting structure forms a **typed directed interaction graph**, which serves as the basis for the Narrative Graph construction described in Section 4.
 
 ---
 
-#### **3.4.6 Implementation of the Projection Function**
+### **3.4.6 Implementation of the Projection Function**
 
-In practice, $\Phi$ is not a deterministic function but a **probabilistic estimator**. Given the inherent ambiguity of natural language, the projection is formalized as:
+In practice, Φ is not a deterministic function but a **probabilistic estimator**. Given the inherent ambiguity of natural language, the projection is formalized as:
 
 $$\hat{E} = \Phi(O;\ \theta)$$
 
-where $\theta$ represents the parameters of the extraction model. $\Phi$ is implemented as a probabilistic structured extraction model combining **large language model inference** with **rule-based constraints**.
+where θ represents the parameters of the extraction model. Φ is implemented as a probabilistic structured extraction model combining **large language model inference** with **rule-based constraints**.
 
 The transformation proceeds in three stages:
 
-1. **Entity Extraction** — Natural language processing identifies candidate actors, locations, and temporal expressions.  
-2. **Semantic Classification** — Extracted entities are mapped into the coordinate components $(A, R, T, S, C, M)$.  
+1. **Entity Extraction** — Natural language processing identifies candidate actors, locations, and temporal expressions.
+2. **Semantic Classification** — Extracted entities are mapped into the coordinate components (A, R, T, S, C, M).
 3. **Constraint Filtering** — Logical rules enforce causal consistency, including temporal precedence, actor capability alignment, and action–reaction coherence.
 
 This hybrid approach allows the system to convert narrative text into structured event coordinates while maintaining causal plausibility.
 
 ---
 
-#### **3.4.7 Causal Classification**
+### **3.4.7 Causal Classification**
 
-The component $C$ in the Event Coordinate represents a **causal classification inferred from temporal precedence and interaction structure** within the event coordinate. Rather than treating causality as an assumed label, the system derives causal direction from the temporal ordering of $T = (t_{cause}, t_{event}, t_{impact})$ and the interaction pattern encoded in $R$.
+The component C in the Event Coordinate represents a **causal classification inferred from temporal precedence and interaction structure** within the event coordinate. Rather than treating causality as an assumed label, the system derives causal direction from the temporal ordering of T = (t_cause, t_event, t_impact) and the interaction pattern encoded in R.
 
-This inference-based approach ensures that $C$ reflects a structurally grounded causal judgment rather than a simple correlation, enabling the Narrative Compiler to build causal chains across events without conflating sequence with causation.
+This inference-based approach ensures that C reflects a structurally grounded causal judgment rather than a simple correlation, enabling the Narrative Compiler to build causal chains across events without conflating sequence with causation.
 
 ---
 
-#### **3.4.8 Integration with Narrative Graph Construction**
+### **3.4.8 Integration with Narrative Graph Construction**
 
-The resulting event coordinate $\hat{E}$ forms the atomic unit used in the **Narrative Graph construction** described in Section 4.
+The resulting event coordinate Ê forms the atomic unit used in the **Narrative Graph construction** described in Section 4.
 
-Each event coordinate becomes a node within the narrative graph, while the relations encoded in $R$, $T$, and $C$ define the edges linking events across time and causality.
+Each event coordinate becomes a node within the narrative graph, while the relations encoded in R, T, and C define the edges linking events across time and causality.
 
 Through this structure, the Observational Projection provides the critical bridge between **textual observation** and **computable narrative reasoning**, enabling subsequent processes such as graph embedding, narrative divergence measurement, and cognitive state hashing.
 
-
-------------------------------------------------------------------------
 
 ## **4. The Narrative Compiler: Search and Optimization**
 
@@ -278,43 +289,66 @@ To maintain a manageable "hash set" of narrative states, the Compiler utilizes *
 - **Redundancy Filtering:** If multiple paths lead to the same structural state with lower efficiency, they are pruned to reduce computational overhead.
     
 - **Entropy Thresholding:** Branches that increase the conditional entropy of the narrative without adding significant semantic value are eliminated, facilitating the **Narrative Compression** described in Section 3.3.
-    
 
-#### **4.4 Causal Constraints: The Logical Filter**
+### 4.4 Causal Constraints: The Logical Filter
 
-The most critical constraint is the **Causal Constraint**, which acts as the "physics" of the Narrative Space. The Compiler applies a set of logical rules to validate every proposed edge in the graph:
+The most critical constraint is the **Causal Constraint**, which acts as a structural constraint system within the Narrative Space. The Narrative Compiler applies a set of logical rules to validate every proposed edge in the graph.
 
-- **Temporal Precedence:** A cause must strictly precede its effect in the temporal dimension of the event unit.
-    
-- **Actor Consistency:** Actions must align with the capabilities and known motivations of the involved actors, or the probability of that graph is penalized.
-    
-- **Interaction Logic:** The "Action-Reaction" loop defined in Section 3.2 must maintain a coherent flow; a reaction cannot occur without a preceding action within the same minimum causal unit.
-    
+- **Temporal Precedence**: A cause must strictly precede its effect in the temporal dimension of the event unit.
+- **Actor Consistency**: Actions must align with the capabilities and known motivations of the involved actors.
+- **Interaction Logic**: The Action–Reaction loop defined in Section 3.2 must maintain a coherent flow.
 
-#### **4.5 Final State Synthesis**
-
-Through these constraints, the Narrative Compiler collapses the near-infinite possibilities of prose into a refined **hash set**. This set represents the "State" of the narrative—a weighted distribution of graphs that have survived the beam search and passed all causal filters.
-
-#### **4.6 Narrative State Representation**
-
-Once event coordinates are connected into a Narrative Graph $G = (V, E)$, the system derives a **Narrative State** representing the global configuration of interactions within the observed narrative space.
-
-Formally, the narrative state is defined as a mapping:
-
-$$N = \Psi(G)$$
-
-where $G$ denotes the Narrative Graph composed of event nodes $V$ and interaction edges $E$. The mapping function $\Psi$ transforms the structural properties of the graph—including actor interactions, temporal ordering, and relation types—into a compact state representation.
-
-More explicitly:
-
-$$N = \Psi(V,\ E,\ \tau)$$
-
-where $\tau$ represents the relation types defined in TAG03 and encoded in the typed directed interaction graph introduced in Section 3.4.5.
-
-This formulation establishes the narrative state as a function of graph structure rather than raw text, enabling the system to treat evolving narratives as **dynamic states within a structured information space**. Comparison, divergence measurement, and state hashing across narrative trajectories all operate on $N$—making this representation the direct mathematical antecedent of the `state_hash` defined in Section 5.
-
+These constraints prevent logically impossible interpretations from surviving the graph construction process.
 
 ---
+
+### 4.4.1 Narrative Graph Scoring Function
+
+The constraints defined above are integrated into a unified scoring function that evaluates each candidate narrative graph G for plausibility and structural efficiency:
+
+[ S(G) = \alpha \Gamma_{causal} + \beta \Lambda_{consistency} + \gamma \Omega_{compression} ]
+
+where
+
+[ \Gamma_{causal} = \sum_{(E_i \rightarrow E_j)\in G} C_{ij} ]
+
+measures the cumulative causal plausibility of event connections,
+
+[ \Lambda_{consistency} = \sum_k L_k(G) ]
+
+represents logical and structural consistency constraints derived from the **24TAG framework**, and
+
+[ \Omega_{compression} = -(|V| + |E|) ]
+
+encourages compact narrative structures by penalizing redundant nodes and edges.
+
+The coefficients \alpha, \beta, \gamma are hyperparameters controlling the relative importance of causal plausibility, logical consistency, and narrative compression.
+
+Beam Search retains the top-k graphs ranked by S(G) at each step.
+
+
+### 4.5 Final State Synthesis
+
+After iterative graph expansion and scoring, the Narrative Compiler selects the highest-scoring narrative graph G^* from the beam search candidate set.
+
+[ G^* = \arg\max_{G \in \mathcal{B}} S(G) ]
+
+where \mathcal{B} represents the beam search candidate pool and S(G) is the narrative scoring function defined in Section 4.4.
+
+The selected graph is then transformed into a **Narrative State Vector** by aggregating the attributes of its constituent event units according to the 24TAG schema.
+
+[ \mathbf{s} = (T_1, T_2, ..., T_{24}) ]
+
+This vector represents the final semantic configuration of the interpreted narrative.
+
+To ensure reproducibility and external verification, the state vector is deterministically serialized and converted into a cryptographic fingerprint:
+
+[ h = H(\mathbf{s}) ]
+
+where H is a cryptographic hash function.
+
+The resulting **state hash** uniquely identifies the interpreted narrative state, allowing independent systems to verify whether two narrative analyses correspond to the same semantic interpretation.
+
 
 ## **5. The 24TAG Taxonomy**
 
@@ -350,6 +384,24 @@ To ensure universal compatibility and deterministic hashing, the Narrative Quant
 |                    | T24        | Narrative_Closure  | The extent to which this event concludes a specific thread.    |
 
 ---
+
+
+### 5.0 Rationale for the 24-Tag Schema
+
+The proposed framework adopts a schema consisting of 24 structural tags.  
+This design is motivated by two primary considerations:
+
+**Cognitive inspiration:**  
+The tag set is designed with reference to the approximate complexity threshold that human cognition can integrate and process when interpreting causal narratives.
+
+**Empirical optimization:**  
+The number and structure of tags were informed by narrative decomposition experiments across multiple narrative datasets, aiming to maximize agreement in event interpretation.
+
+The tags function as **structural primitives** that encode causal roles, interaction types, and narrative outcomes within the narrative graph.
+
+The 24TAG schema should not be interpreted as a fixed universal ontology, but rather as an initial structural basis for narrative representation. Future work may extend or adapt the tag set depending on domain, language, and cultural context.
+
+
 
 ### **5.1 Data Structure and Compilation**
 
@@ -397,170 +449,394 @@ Any **divergence** discovered during this verification process indicates that th
 
 
 ------------------------------------------------------------------------
+## 6. Geometric Definition of Narrative Space
 
-## **6. Narrative Observation and the Narrative Space**
+### 6.1 Narrative Space (Manifold)
 
-Once narratives are compiled into distributions of narrative states, we can formalize the landscape in which they exist.
+Narrative space is defined as a high-dimensional manifold representing the set of all possible narrative states that can be derived from observed events.
 
-#### **6.1 Defining Narrative Space**
+Formally, let G denote a narrative graph constructed from a set of events and their causal relations.  
+We define an embedding function
 
-**Narrative Space is defined as the multi-dimensional space formed by the set of possible narrative states.** Each specific state is represented as a point within this space.
+[ e : G \rightarrow \mathbb{R}^d ]
 
-#### **6.2 The Mathematical Foundation: Graph Embedding**
+which maps each narrative graph into a point in a d-dimensional vector space.
 
-To operationalize the Narrative Space, we must map the discrete, structural information of a Narrative Graph ($G$) into a continuous vector space. This is achieved through a **Graph Embedding** function, $e$:
+Under this formulation, each narrative state corresponds to a point on the **narrative manifold**:
 
-$$G \rightarrow \text{vector}$$
+[ N = e(G) \in \mathbb{R}^d ]
 
-Specifically, each narrative graph $G$ is projected into a $d$-dimensional real-valued space:
+The collection of all such embedded narrative states forms the **narrative space**.
 
-$$e(G) \in \mathbb{R}^d$$
-
-This embedding ensures that the structural and causal logic of the narrative is preserved as a set of coordinates. By transforming graphs into vectors, we can apply rigorous geometric analysis to human interpretations.
-
-#### **6.3 Quantifying Divergence through Distance**
-
-In this vectorized Narrative Space, the similarity or conflict between two interpretations can be calculated using standard metric functions. The **divergence** between two narrative states, $G_1$ and $G_2$, is defined by the distance between their corresponding embeddings:
-
-$$\text{distance} = \| e(G_1) - e(G_2) \|$$
-
-- **Low Distance (Convergence):** Indicates that the underlying narrative graphs are structurally and logically similar, reflecting a cognitive consensus.
-    
-- **High Distance (Divergence):** Indicates a fundamental split in the narrative tag structure, revealing competing interpretations or "Narrative Rifts."
-    
-
-#### **6.4 Mapping the Narrative Ecosystem**
-
-By observing the distribution and trajectory of these vectors ($e(G)$) within the Narrative Space, researchers can identify:
-
-- **Attractors:** Regions in $\mathbb{R}^d$ where narrative vectors cluster, indicating dominant societal beliefs.
-    
-- **Bifurcation Points:** Moments where a single event causes the distribution $P(N \mid \text{text})$ to split into two distant clusters in the vector space.
-    
-- **Narrative Velocity:** The rate at which the vector $e(G)$ moves through the space as new information is integrated, capturing the speed of societal change.
-
-------------------------------------------------------------------------
-
-
-## **7. Cognitive Infrastructure**
-
-If narrative data can be systematically compiled and structured, it functions as a foundational **Cognitive Infrastructure**. Unlike traditional data infrastructures that focus on the storage of raw facts, this new layer is designed to manage the **structure of interpretation**.
-
-#### **7.1 From Knowledge Bases to Narrative Databases**
-
-Traditional knowledge bases (e.g., Wikidata, Knowledge Graphs) are effective at storing "what" happened—discrete facts such as dates, locations, and actors. However, they lack the capacity to store "how" those facts are interpreted. A **Narrative Database**, powered by the Narrative Compiler, stores **Crystallized Narrative States**. It preserves not just the event, but the causal logic, emotional weight, and conflict dynamics as understood by a specific system at a specific time. This shifts the focus from "Data Storage" to "Cognitive State Storage."
-
-#### **7.2 Information Integrity and the State Hash**
-
-The deterministic nature of the `state hash` provides a revolutionary mechanism for **Information Integrity**.
-
-- **Proof of Interpretation:** By attaching a state hash to a news report or an official statement, the author provides a "Cognitive Seal."
-    
-- **Divergence Detection:** If two different media outlets report on the same event, their respective `state hash` outputs can be compared instantly. Any **divergence** in the hash acts as an objective indicator that the underlying narrative structures differ, allowing for the mathematical mapping of bias or misinformation.
-    
-
-#### **7.3 Applications of the Infrastructure**
-
-This infrastructure supports a wide range of critical applications:
-
-- **Media & Information Integrity:** Automated detection of narrative manipulation or divergent reporting.
-    
-- **Geopolitical Narrative Mapping:** Real-time observation of how different nations or cultures interpret the same international event, identifying "Narrative Rifts" before they escalate into physical conflict.
-    
-- **Corporate & Economic Intelligence:** Tracking the evolution of market narratives and investor sentiment through structured event formation.
-
-------------------------------------------------------------------------
-
-## **8. Reasoning over Narrative Distributions (LCM)**
-
-By defining a state as $P(N \mid \text{text})$, the **Large Cognitive Model (LCM)** gains the ability to perform "superpositional" reasoning.
-
-#### **8.1 Inference as Distribution Transformation**
-
-While LLMs predict tokens, the LCM performs inference by transforming one probability distribution into another. The reasoning core evaluates how the current distribution $P(N_t \mid \text{text}_t)$ evolves into a future distribution $P(N_{t+1})$ when a new event occurs.
-
-#### **8.2 Handling Ambiguity and Divergence**
-
-This probabilistic approach allows the LCM to handle **Narrative Divergence** natively. When a text is highly ambiguous, the Compiler produces a broad "hash set" with distributed probabilities. The LCM can track these multiple "possible worlds" simultaneously, collapsing them only when subsequent information makes one narrative significantly more probable.
-    
-
-#### **8.3 Reasoning over Causal Trajectories**
-
-Because an event is defined as the _minimum causal interaction unit_, the LCM can track long-term narrative arcs without the "forgetting" or "hallucination" common in LLMs. Reasoning in an LCM is not a search for the next word, but a calculation of **state transitions**:
-
-$$\text{State } A (\text{Hash}_1) \xrightarrow{\text{Causal Logic}} \text{State } B (\text{Hash}_2)$$
-
-This allows the model to identify logical inconsistencies—where a proposed "next event" is mathematically distant from the current state in the Narrative Space.
-
-------------------------------------------------------------------------
-
-## **9. Human Memory and Narrative Cognition**
-
-Human memory does not function as a raw sensory log; rather, it operates through a sophisticated process of **narrative compression**. This section explores how the Narrative Quantification framework mirrors the biological reality of human cognition.
-
-#### **9.1 Memory as a Compiled Distribution**
-
-When humans experience an event, the brain does not store every frame of visual or auditory data. Instead, it acts as a biological **Narrative Compiler**, transforming continuous experience into a discrete set of structured narrative units.
-
-In the context of our framework, human memory can be viewed as the storage of the probability distribution:
-
-$$P(N \mid \text{Experience})$$
-
-What we "remember" is not the raw text of reality, but the **hash set** of the most probable narrative structures. This explains why human memory is reconstructive; "recalling" a memory is effectively a process of **re-compiling** the stored distribution back into a coherent story.
-
-#### **9.2 The Primitives of Biological Storage**
-
-To achieve efficient storage, the human cognitive system captures only the essential semantic primitives:
-
-- **Key Actors:** Identifying who was involved.
-    
-- **Causal Interpretations:** Assigning a "why" to the sequence of events.
-    
-- **Emotional Evaluation:** Tagging the event with a valence that determines its priority in the Narrative Space.
-    
-- **Outcomes:** The final state after the interaction is resolved.
-    
-
-#### **9.3 Biomimetic Validation**
-
-The approach of Narrative Quantification is fundamentally **biomimetic**. By using the **state hash** to represent a "crystallized" interpretation, we emulate the way human synapses consolidate complex experiences into stable, retrievable "concepts."
-
-Just as a Narrative Compiler identifies **divergence** in hashes, human cognitive dissonance occurs when a new experience generates a narrative state that is mathematically distant from our existing "memory manifold." Our intelligence grows by constantly updating these distributions to minimize the surprise (entropy) of the world.
-
-------------------------------------------------------------------------
-
-## While the framework of **Narrative Quantification** offers a revolutionary path toward structured cognitive reasoning, several significant limitations must be addressed to ensure its scientific validity and ethical implementation.
+This geometric representation enables the comparison, clustering, and trajectory analysis of narrative interpretations within a unified mathematical framework.
 
 ---
 
-## **10. Limitations**
+### 6.2 Narrative Trajectories
 
-#### **10.1 Subjectivity and Algorithmic Bias**
+Narratives are not static entities.  
+As new events occur and interpretations evolve, narrative graphs are updated over time.
 
-The primary challenge in narrative quantification is the inherent subjectivity of human interpretation. While the Narrative Compiler calculates a probability distribution $P(N \mid \text{text})$, the "priors" used to assign these probabilities are often derived from the training data of the underlying models. This can introduce systemic biases, where the compiler favors Western-centric causal logic or specific cultural tropes, leading to a **state hash** that reflects a biased "crystallization" of reality.
+This process generates **narrative trajectories** within the narrative manifold:
 
-#### **10.2 Computational Complexity of Graph Generation**
+[ T = { e(G_t) \mid t = 1,2,\dots,T } ]
 
-Constructing **possible narrative graphs** is a non-trivial computational task. In complex, multi-actor texts, the number of potential causal connections grows exponentially. Managing the trade-off between the granularity of event extraction and the computational cost of maintaining a high-fidelity **hash set** remains a significant hurdle for real-time applications.
+where G_t denotes the narrative graph at time t.
 
-#### **10.3 Cultural and Linguistic Heterogeneity**
-
-Narrative structures are not universal. Different cultures employ different storytelling archetypes—such as the circular narratives found in some Eastern philosophies versus the linear, conflict-driven arcs prevalent in Western traditions. A 24TAG framework optimized for one may fail to capture the nuances of the other, resulting in a high degree of **divergence** that is cultural rather than factual.
-
-#### **10.4 Data Sovereignty and "Narrative Warfare"**
-
-As we build **Cognitive Infrastructure**, the question of who controls the **Narrative Databases** becomes paramount. If a centralized authority can define the "standard" state hash for a global event, they possess the power to delegitimize divergent but valid interpretations. The risk of using this infrastructure for "narrative warfare"—mathematically suppressing opposing viewpoints by labeling them as "divergent noise"—is a serious ethical concern.
-
-#### **10.5 Semantic Loss during Compression**
-
-Narrative compression is an active entropy reduction process. By definition, some information must be discarded to reach a crystallized state. There is a persistent risk that subtle but crucial "soft" data—such as irony, subtext, or poetic ambiguity—may be lost during the transition from raw text to a structured **state hash**.
+These trajectories capture the temporal evolution of interpretations, enabling the analysis of narrative drift, stabilization, or convergence.
 
 ---
 
-## **11. Conclusion**
+### 6.3 Quantifying Narrative Divergence
 
-Despite these limitations, Narrative Quantification represents a necessary evolution in Artificial Intelligence. By moving beyond the probabilistic prediction of language tokens and toward the **structured reasoning of narrative states**, we provide a framework that more closely mirrors human cognition.
+Differences between interpretations can be quantified as distances within the narrative manifold.
 
-The transition from **Narrative Structures to Large Cognitive Models (LCM)** offers more than just technical efficiency; it provides a way to map the "Narrative Space" of our society, making the invisible structures of our interpretations visible, measurable, and verifiable. Future research will focus on mitigating bias through diverse "compiler ensembles" and exploring the decentralized governance of narrative hashes to ensure that this cognitive infrastructure serves as a tool for clarity, not control.
+One possible distance metric is the Euclidean distance between narrative embeddings:
 
-The path toward **Artificial General Intelligence (AGI)** lies not in bigger models, but in deeper structures. Narrative Quantification is the first step in building an AI that doesn't just talk like a human, but understands like one.
+[ d(G_1, G_2) = | e(G_1) - e(G_2) |_2 ]
+
+where G_1 and G_2 represent two alternative narrative graphs constructed from the same or related events.
+
+This distance provides a quantitative measure of **narrative divergence**, allowing objective comparison between competing interpretations.
+
+Alternative distance metrics (e.g., cosine similarity or geodesic distances on the manifold) may also be employed depending on the embedding structure.
+
+---
+
+### 6.4 Interpretation Geometry
+
+By embedding narrative graphs into a geometric space, interpretations become mathematically analyzable objects.
+
+Within this framework, it becomes possible to:
+
+- measure divergence between competing interpretations
+- identify clusters of similar narratives
+- detect anomalous narrative trajectories
+- analyze convergence or polarization of interpretations across populations
+
+This geometric formulation transforms narratives from purely qualitative constructs into measurable entities within a computational representation space.
+
+
+---
+ 
+
+## 7. Cognitive Infrastructure
+
+Once narrative data can be systematically compiled and structured, the resulting system evolves beyond simple data storage into what can be described as a **cognitive infrastructure**—a framework for managing the structure of interpretation itself.
+
+Traditional information infrastructures focus on storing _raw facts_.  
+In contrast, the proposed layer manages the **contextual and logical structure of information**, capturing how events are interpreted within narrative frameworks.
+
+---
+
+### 7.1 From Knowledge Bases to Narrative Databases
+
+Conventional knowledge bases such as excel at storing factual attributes—dates, locations, and entities—representing _what_ happened.
+
+However, they generally lack mechanisms for recording _how_ events are interpreted.
+
+The Narrative Compiler enables the creation of a **Narrative Database** that stores **Crystallized Narrative States**.
+
+A crystallized narrative state preserves:
+
+- causal logic
+- emotional weighting
+- conflict structures
+
+captured at a specific moment in time.
+
+This represents a shift from **data storage** to **cognitive state storage**.
+
+---
+
+### 7.2 Information Integrity and the State Hash
+
+The deterministic **state hash** provides a mechanism for verifying narrative interpretations.
+
+A **Proof of Interpretation** can be defined as:
+
+[ P = (s, h) ]
+
+where
+
+- s is the narrative state vector
+- h = H(s) is the cryptographic hash
+
+This pair acts as a **cognitive seal** that allows systems to verify whether two analyses correspond to the same narrative interpretation.
+
+**Divergence Detection**
+
+When different sources report on the same event, their narrative states can be compared.
+
+If two reports produce embeddings e(G_1) and e(G_2), the narrative divergence can be measured as:
+
+[ d(G_1,G_2) = | e(G_1) - e(G_2) | ]
+
+Large divergence indicates substantial interpretive disagreement between narratives.
+
+---
+
+### 7.3 Applications of the Infrastructure
+
+The proposed cognitive infrastructure supports several applications:
+
+**Media Integrity Analysis**
+
+Automated detection of narrative inconsistencies and interpretive divergence across information sources.
+
+**Geopolitical Narrative Mapping**
+
+Monitoring how different nations or communities interpret the same international event, allowing analysts to detect emerging **Narrative Rifts** before they escalate into physical conflicts.
+
+**Economic and Corporate Intelligence**
+
+Tracking the evolution of market narratives by observing how structured events reshape investor sentiment and strategic interpretations.
+
+
+## 8. Reasoning over Narrative Distributions (LCM)
+
+By representing narrative interpretations as probability distributions over narrative states, the proposed **Large Cognitive Model (LCM)** performs reasoning as transformations of narrative distributions.
+
+Let \mathcal{N} denote the set of possible narrative states.  
+A text T induces a probability distribution:
+
+[ P(N \mid T), \quad N \in \mathcal{N} ]
+
+which represents the system's belief over possible narrative interpretations.
+
+---
+
+### 8.1 Inference as Distribution Transformation
+
+While conventional large language models generate text by predicting the next token, LCM performs inference by transforming narrative distributions.
+
+Given a current narrative distribution
+
+[ P(N_t \mid T_t) ]
+
+and a newly observed event I_t, the system evaluates the updated distribution:
+
+[ P(N_{t+1}) ]
+
+representing the evolution of narrative interpretations over time.
+
+---
+
+### 8.2 Handling Ambiguity and Parallel Narrative Hypotheses
+
+Ambiguous information often supports multiple plausible interpretations.
+
+Instead of collapsing prematurely to a single interpretation, the Narrative Compiler maintains multiple candidate narrative states represented as a distribution over hashes:
+
+[ {(N_i, h_i, P(N_i))} ]
+
+This allows the system to track multiple **parallel narrative hypotheses**, which may later converge as additional information becomes available.
+
+---
+
+### 8.3 Reasoning over Causal Trajectories
+
+Because events are represented as minimal causal interaction units, LCM can reason over long causal chains without relying on token-level continuation.
+
+Inference in LCM is therefore modeled as a sequence of state transitions:
+
+[ N_t \xrightarrow{F} N_{t+1} ]
+
+where F represents the narrative update function.
+
+Each transition corresponds to a change in narrative state and results in a new state hash:
+
+[ h_{t+1} = H(N_{t+1}) ]
+
+This framework enables the system to detect logically implausible narrative updates when a proposed transition leads to a state that is structurally inconsistent with the current narrative trajectory.
+
+---
+
+### 8.4 Mathematical Framework of LCM Inference
+
+The inference process can be formulated as a probabilistic state transition:
+
+[ P(N_{t+1}) = \sum_{N_t} P(N_{t+1} \mid N_t, I_t) P(N_t) ]
+
+where I_t represents newly observed information.
+
+LCM performs reasoning through three steps:
+
+**Trajectory Prediction**
+
+Using the current embedding e(G_t) and past observations, the system predicts a plausible future narrative position \hat{e}(G_{t+1}).
+
+**Consistency Check**
+
+The predicted embedding is compared with the embedding derived from observed information:
+
+[ d(\hat{e}, e_{obs}) ]
+
+which measures the degree of narrative surprise.
+
+**Distribution Update**
+
+Using the observed evidence, the probability distribution over narrative states is updated using Bayesian inference, and the beam search candidate set is revised accordingly.
+
+
+## 9. Human Memory and Narrative Cognition
+
+Human memory does not function as a raw sensory log of experience.  
+Instead, psychological research suggests that memory operates through processes of reconstruction and abstraction.
+
+Within the Narrative Quantification framework, this phenomenon can be interpreted as a form of **narrative compression**, in which complex experiences are distilled into structured narrative representations.
+
+---
+
+### 9.1 Memory as a Compiled Distribution
+
+When humans experience events, the brain does not store every perceptual frame.  
+Instead, experiences appear to be encoded into structured representations that capture the essential relationships between actors, causes, and outcomes.
+
+Within this framework, memory can be interpreted as maintaining a probability distribution over narrative states:
+
+[ P(N \mid Experience) ]
+
+Recall can then be viewed as the reconstruction of a coherent narrative from this distribution.
+
+The most probable narrative interpretation may be approximated as
+
+[ N^* = \arg\max_N P(N \mid Experience) ]
+
+which represents the compressed narrative structure that best explains the observed experience.
+
+---
+
+### 9.2 Semantic Primitives of Biological Storage
+
+For efficiency, human cognition appears to prioritize a limited set of semantic primitives when encoding experiences.
+
+These include:
+
+**Key Actors**
+
+Identification of the primary agents involved in the interaction.
+
+**Causal Interpretations**
+
+Assignment of explanations that connect events into coherent cause–effect structures.
+
+**Emotional Evaluation**
+
+Tagging events with affective valence, which influences prioritization in memory.
+
+**Outcomes**
+
+Encoding the final state or resolution of an interaction.
+
+These primitives closely resemble the structural components used in the Narrative Quantification framework.
+
+---
+
+### 9.3 Biomimetic Interpretation
+
+The Narrative Quantification approach can be interpreted as **biomimetic**, in that it mirrors several properties associated with human narrative cognition.
+
+Representing narrative interpretations through **state hashes** resembles how biological memory systems consolidate complex experiences into stable conceptual representations.
+
+Similarly, discrepancies between new experiences and stored narrative structures may resemble what psychology describes as cognitive dissonance.
+
+In geometric terms, this can be interpreted as a large distance between a stored narrative embedding and a newly observed narrative state:
+
+[ D = d(e(G_{memory}), e(G_{new})) ]
+
+When this divergence is large, cognitive systems may attempt to reconcile the discrepancy by updating the internal narrative distribution.
+
+This continual updating process may be interpreted as a mechanism for minimizing surprise or informational entropy in the organism's model of the world.
+
+
+## 10. Limitations
+
+While the Narrative Quantification framework presents a promising approach to structured cognitive reasoning, several important limitations must be addressed to ensure its scientific validity and ethical deployment.
+
+---
+
+### 10.1 Subjectivity and Algorithmic Bias
+
+A central challenge in narrative quantification arises from the inherent subjectivity of interpretation.
+
+Although the Narrative Compiler computes probability distributions
+
+[ P(N \mid \text{text}) ]
+
+the priors used to assign these probabilities often originate from training data used to build the underlying models.
+
+As a result, the system may inherit systematic biases—for example, favoring Western causal logic or culturally specific narrative structures. Such biases could lead to narrative states that appear mathematically consistent while still reflecting culturally skewed interpretations.
+
+---
+
+### 10.2 Computational Complexity of Graph Generation
+
+Constructing candidate narrative graphs is computationally intensive.
+
+For texts involving n events, the number of potential causal edges may scale approximately as
+
+[ O(n^2) ]
+
+and the number of possible graph configurations can grow combinatorially.
+
+Managing the trade-off between event extraction granularity and the computational cost of maintaining high-fidelity narrative state sets remains a significant challenge for real-time applications.
+
+---
+
+### 10.3 Cultural and Linguistic Heterogeneity
+
+Narrative structures are not universal.
+
+Some cultural traditions emphasize circular or cyclical storytelling patterns, while others rely on linear, conflict-driven narrative arcs.
+
+A framework optimized for one narrative structure may fail to capture the nuances of another. Consequently, high narrative divergence between two interpretations may sometimes reflect cultural narrative differences rather than factual disagreement.
+
+---
+
+### 10.4 Data Sovereignty and Strategic Narrative Influence
+
+The construction of a global narrative database raises important governance questions.
+
+If centralized authorities gain the power to define “standard” narrative states for global events, alternative interpretations could be marginalized or treated as anomalous deviations.
+
+Such dynamics raise concerns about how narrative infrastructures could potentially be used for strategic influence or information control.
+
+---
+
+### 10.5 Semantic Loss during Compression
+
+Narrative compression inherently involves information reduction.
+
+To reach crystallized narrative states, some elements of the original text must be discarded.
+
+Subtle aspects of meaning—such as irony, subtext, or poetic ambiguity—may be difficult to preserve when transforming raw text into structured narrative states.
+
+Maintaining a balance between structural clarity and semantic richness remains an ongoing challenge for narrative quantification systems.
+
+
+
+## 11. Conclusion and Future Work
+
+This paper introduced the theoretical framework of **Narrative Quantification**, a computational approach for formalizing the cognitive process by which humans construct meaning from fragmented information.
+
+While modern language models estimate probabilities over sequences of tokens, the framework proposed in this work envisions **Large Cognitive Models (LCMs)** capable of reasoning over structured narrative representations. By elevating the fundamental unit of information from tokens to **events**, and transforming event interactions into **crystallized narrative states** through the 24TAG structural hash, the framework enables the objective comparison, verification, and prediction of interpretations.
+
+The introduction of **narrative graphs** and their embedding into a **geometric narrative manifold** further allows interpretations to be analyzed within a measurable representation space. Within this space, competing interpretations can be compared through distance metrics, enabling the quantification of narrative divergence and convergence across information systems.
+
+This shift represents more than a technical improvement. It suggests a transition from AI systems that merely generate fluent language to systems capable of modeling the **structural dynamics of interpretation**.
+
+### Future Work
+
+Several research directions remain open for further investigation:
+
+**Large-scale narrative graph construction**  
+Future work will focus on the development of scalable algorithms capable of constructing narrative graphs from large-scale event streams and real-world textual corpora.
+
+**Cross-cultural narrative modeling**  
+Narrative structures vary across cultural and linguistic contexts. Extending the framework to support culturally adaptive narrative embeddings represents an important research direction.
+
+**Deployment of narrative infrastructures**  
+The practical deployment of narrative hashing and narrative-space analysis within real-time information systems may enable new tools for analyzing information integrity, narrative divergence, and consensus formation in complex media environments.
+
+Together, these directions point toward the development of a computational infrastructure for the quantitative analysis of narrative interpretation in large-scale information ecosystems.
