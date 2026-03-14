@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 980" style="background:#ffffff">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <style>
+    text { font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .th { font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+    .ts { font-size: 12px; font-weight: 400; fill: #555; }
+  </style>
+</defs>
+
+<!-- STEP 1 -->
+<rect x="200" y="30" width="280" height="44" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+<text class="th" x="340" y="52" text-anchor="middle" dominant-baseline="central" fill="#633806">raw news article</text>
+<text class="ts" x="90" y="48" text-anchor="middle" fill="#854F0B">geopolitics_articles</text>
+<text class="ts" x="90" y="62" text-anchor="middle" fill="#854F0B">status: raw</text>
+
+<line x1="340" y1="74" x2="340" y2="110" stroke="#534AB7" stroke-width="1" marker-end="url(#arrow)"/>
+
+<!-- STEP 2: Constitution -->
+<rect x="140" y="110" width="400" height="130" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="340" y="132" text-anchor="middle" dominant-baseline="central" fill="#3C3489">結晶化憲法 — The Crystallization Code</text>
+
+<rect x="160" y="148" width="170" height="22" rx="4" fill="#AFA9EC" opacity="0.4" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="245" y="163" text-anchor="middle" fill="#3C3489">§0  origin ∈ {jp,us,cn,gb,eu,qa}</text>
+<rect x="350" y="148" width="170" height="22" rx="4" fill="#AFA9EC" opacity="0.4" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="435" y="163" text-anchor="middle" fill="#3C3489">§1  fact ∈ source only</text>
+<rect x="160" y="178" width="170" height="22" rx="4" fill="#AFA9EC" opacity="0.4" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="245" y="193" text-anchor="middle" fill="#3C3489">§2  T = published_at + Δt</text>
+<rect x="350" y="178" width="170" height="22" rx="4" fill="#AFA9EC" opacity="0.4" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="435" y="193" text-anchor="middle" fill="#3C3489">§3  direction ∈ {up,mid,down}</text>
+
+<line x1="340" y1="240" x2="340" y2="276" stroke="#534AB7" stroke-width="1" marker-end="url(#arrow)"/>
+
+<!-- STEP 3: Pydantic Schema -->
+<rect x="100" y="276" width="480" height="230" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="340" y="298" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Pydantic schema — response_schema=_Tag</text>
+
+<rect x="120" y="312" width="200" height="20" rx="3" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="130" y="325" fill="#3C3489">subject_origin</text>
+<rect x="328" y="312" width="232" height="20" rx="3" fill="#AFA9EC" opacity="0.2"/>
+<text class="ts" x="338" y="325" fill="#534AB7">enum [jp, us, cn, gb, eu, qa]</text>
+
+<rect x="120" y="338" width="200" height="20" rx="3" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="130" y="351" fill="#3C3489">time_frame</text>
+<rect x="328" y="338" width="232" height="20" rx="3" fill="#AFA9EC" opacity="0.2"/>
+<text class="ts" x="338" y="351" fill="#534AB7">pattern: YYYY-MM-DDTHH:MM:SSZ</text>
+
+<rect x="120" y="364" width="200" height="20" rx="3" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="130" y="377" fill="#3C3489">causality_direction</text>
+<rect x="328" y="364" width="232" height="20" rx="3" fill="#AFA9EC" opacity="0.2"/>
+<text class="ts" x="338" y="377" fill="#534AB7">enum [upstream, midstream, downstream]</text>
+
+<rect x="120" y="390" width="200" height="20" rx="3" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="130" y="403" fill="#3C3489">epistemic_confidence</text>
+<rect x="328" y="390" width="232" height="20" rx="3" fill="#AFA9EC" opacity="0.2"/>
+<text class="ts" x="338" y="403" fill="#534AB7">float  ge=0.0  le=1.0</text>
+
+<rect x="120" y="416" width="200" height="20" rx="3" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="130" y="429" fill="#3C3489">strategic_interest_vector</text>
+<rect x="328" y="416" width="232" height="20" rx="3" fill="#AFA9EC" opacity="0.2"/>
+<text class="ts" x="338" y="429" fill="#534AB7">6 dims  ge=-1.0  le=1.0</text>
+
+<rect x="120" y="442" width="200" height="20" rx="3" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="130" y="455" fill="#3C3489">audit_aura</text>
+<rect x="328" y="442" width="232" height="20" rx="3" fill="#AFA9EC" opacity="0.2"/>
+<text class="ts" x="338" y="455" fill="#534AB7">enum [White, SkyBlue, Amber, Red ...]</text>
+
+<line x1="340" y1="506" x2="340" y2="540" stroke="#534AB7" stroke-width="1" marker-end="url(#arrow)"/>
+<text class="ts" x="390" y="526" fill="#534AB7">1発合格 / 4秒</text>
+
+<!-- Performance badge -->
+<rect x="490" y="540" width="150" height="56" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="ts" x="565" y="558" text-anchor="middle" fill="#3B6D11">before: ~2 min / 30% fail</text>
+<text class="th" x="565" y="584" text-anchor="middle" fill="#27500A">now: 4 sec / 0% fail</text>
+
+<!-- STEP 4: JCS -->
+<rect x="160" y="540" width="320" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text class="th" x="320" y="563" text-anchor="middle" dominant-baseline="central" fill="#0C447C">JCS 正規化 (RFC 8785)</text>
+<text class="ts" x="320" y="581" text-anchor="middle" dominant-baseline="central" fill="#185FA5">SHA-256( jcs_serialize(T01..T24) )</text>
+
+<line x1="320" y1="596" x2="320" y2="630" stroke="#185FA5" stroke-width="1" marker-end="url(#arrow)"/>
+
+<!-- STEP 5: state_hash -->
+<rect x="100" y="630" width="440" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text class="th" x="320" y="653" text-anchor="middle" dominant-baseline="central" fill="#0C447C">state_hash</text>
+<text class="ts" x="320" y="671" text-anchor="middle" dominant-baseline="central" fill="#185FA5">85f6c059...  (SHA-256 / 64 hex chars)</text>
+
+<line x1="320" y1="686" x2="320" y2="720" stroke="#185FA5" stroke-width="1" marker-end="url(#arrow)"/>
+
+<!-- STEP 6: narrative_states -->
+<rect x="100" y="720" width="440" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="320" y="743" text-anchor="middle" dominant-baseline="central" fill="#04342C">narrative_states</text>
+<text class="ts" x="320" y="761" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">state_hash PK · event_id FK · embedding 3072dim</text>
+
+<line x1="320" y1="776" x2="320" y2="810" stroke="#0F6E56" stroke-width="1" marker-end="url(#arrow)"/>
+
+<!-- STEP 7: Queue -->
+<rect x="140" y="810" width="360" height="44" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+<text class="th" x="320" y="832" text-anchor="middle" dominant-baseline="central">long_content_queue</text>
+
+<rect x="110" y="870" width="90" height="22" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="155" y="885" text-anchor="middle" fill="#085041">backbone</text>
+<rect x="208" y="870" width="70" height="22" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="243" y="885" text-anchor="middle" fill="#085041">deep_dive</text>
+<rect x="286" y="870" width="55" height="22" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="313" y="885" text-anchor="middle" fill="#085041">var_jp</text>
+<rect x="349" y="870" width="55" height="22" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="376" y="885" text-anchor="middle" fill="#085041">var_cn</text>
+<rect x="412" y="870" width="55" height="22" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="439" y="885" text-anchor="middle" fill="#085041">var_us</text>
+<rect x="475" y="870" width="55" height="22" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="502" y="885" text-anchor="middle" fill="#085041">+3 more</text>
+
+<line x1="320" y1="854" x2="320" y2="870" stroke="#0F6E56" stroke-width="0.8" marker-end="url(#arrow)"/>
+
+<text class="ts" x="340" y="940" text-anchor="middle" fill="#aaa">Figure 1. The Narrative Crystallization Pipeline: An end-to-end architecture for multi-layered data purification and structural mapping. — Gemmina Intelligence LLC. / AIIE Protocol v5.0</text>
+</svg>

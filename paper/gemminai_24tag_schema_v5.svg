@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 1060" style="background:#ffffff">
+<defs>
+  <style>
+    text { font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .th { font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+    .ts { font-size: 12px; font-weight: 400; fill: #555; }
+  </style>
+</defs>
+
+<text class="th" x="340" y="28" text-anchor="middle">GemminAI 24TAG 結晶化スキーマ v5.0</text>
+<text class="ts" x="340" y="46" text-anchor="middle">情報の純度を守る「濾過装置」— response_schema として Gemini API に直接渡す</text>
+
+<rect x="30" y="60" width="620" height="880" rx="16" fill="none" stroke="#534AB7" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.5"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="50" y="80" fill="#534AB7" font-weight="500">JSON Schema (RFC Draft-07 / Pydantic)</text>
+
+<!-- Cat I -->
+<rect x="46" y="90" width="608" height="210" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5" opacity="0.35"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="60" y="108" fill="#534AB7" font-weight="500">Cat. I — 識別と基本コンテキスト</text>
+
+<rect x="60" y="116" width="580" height="28" rx="4" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="72" y="134" fill="#3C3489" font-weight="500">t01  epistemic_confidence</text>
+<text class="ts" x="310" y="134" fill="#888">number  ·  ge=0.0  le=1.0</text>
+<rect x="500" y="119" width="128" height="20" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="564" y="132" text-anchor="middle" fill="#534AB7">0.0 → 1.0</text>
+
+<rect x="60" y="150" width="580" height="28" rx="4" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="ts" x="72" y="168" fill="#26215C" font-weight="500">t02  subject_origin</text>
+<text class="ts" x="310" y="168" fill="#534AB7">enum  ·  §0 主語国の等式</text>
+<rect x="460" y="153" width="168" height="20" rx="10" fill="#534AB7"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="544" y="166" text-anchor="middle" fill="#EEEDFE">jp · us · cn · gb · eu · qa</text>
+
+<rect x="60" y="184" width="580" height="28" rx="4" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="72" y="202" fill="#3C3489" font-weight="500">t03  predicate_type</text>
+<text class="ts" x="310" y="202" fill="#888">string  ·  事象の核心動詞</text>
+<text class="ts" x="500" y="202" fill="#888">declare · sanction · invest ...</text>
+
+<rect x="60" y="218" width="580" height="28" rx="4" fill="#ffffff" stroke="#534AB7" stroke-width="0.3"/>
+<text class="ts" x="72" y="236" fill="#3C3489" font-weight="500">t05  location</text>
+<text class="ts" x="310" y="236" fill="#888">object  ·  §1 存在の等式</text>
+<text class="ts" x="500" y="236" fill="#888">country: string · city: null?</text>
+
+<rect x="60" y="252" width="580" height="28" rx="4" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="ts" x="72" y="270" fill="#26215C" font-weight="500">t06  time_frame</text>
+<text class="ts" x="310" y="270" fill="#534AB7">pattern  ·  §2 時空の等式</text>
+<rect x="438" y="255" width="190" height="20" rx="10" fill="#534AB7"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="10" x="533" y="268" text-anchor="middle" fill="#EEEDFE">^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$</text>
+
+<!-- Cat II -->
+<rect x="46" y="312" width="608" height="170" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5" opacity="0.35"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="60" y="330" fill="#185FA5" font-weight="500">Cat. II — 力学と構造</text>
+
+<rect x="60" y="338" width="580" height="28" rx="4" fill="#ffffff" stroke="#185FA5" stroke-width="0.3"/>
+<text class="ts" x="72" y="356" fill="#0C447C" font-weight="500">t07  subject_actor</text>
+<text class="ts" x="310" y="356" fill="#888">string  ·  §1 主導した主体</text>
+
+<rect x="60" y="372" width="580" height="28" rx="4" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text class="ts" x="72" y="390" fill="#042C53" font-weight="500">t08  causality_direction</text>
+<text class="ts" x="310" y="390" fill="#185FA5">enum  ·  §3 因果の等式</text>
+<rect x="460" y="375" width="168" height="20" rx="10" fill="#185FA5"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="544" y="388" text-anchor="middle" fill="#E6F1FB">upstream · midstream · downstream</text>
+
+<rect x="60" y="406" width="580" height="64" rx="4" fill="#ffffff" stroke="#185FA5" stroke-width="0.3"/>
+<text class="ts" x="72" y="422" fill="#0C447C" font-weight="500">t09  strategic_interest_vector</text>
+<text class="ts" x="310" y="422" fill="#888">object  ·  6次元  -1.0 → 1.0</text>
+<rect x="72" y="428" width="75" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.3"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="10" x="109" y="440" text-anchor="middle" fill="#185FA5">security</text>
+<rect x="153" y="428" width="75" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.3"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="10" x="190" y="440" text-anchor="middle" fill="#185FA5">economy</text>
+<rect x="234" y="428" width="75" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.3"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="10" x="271" y="440" text-anchor="middle" fill="#185FA5">tech</text>
+<rect x="315" y="428" width="75" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.3"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="10" x="352" y="440" text-anchor="middle" fill="#185FA5">resource</text>
+<rect x="396" y="428" width="75" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.3"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="10" x="433" y="440" text-anchor="middle" fill="#185FA5">ideology</text>
+<rect x="477" y="428" width="80" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.3"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="10" x="517" y="440" text-anchor="middle" fill="#185FA5">environment</text>
+
+<!-- Cat V -->
+<rect x="46" y="494" width="608" height="106" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5" opacity="0.35"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="60" y="512" fill="#0F6E56" font-weight="500">Cat. V — コンテンツ（Phase B）</text>
+
+<rect x="60" y="520" width="580" height="28" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="72" y="538" fill="#04342C" font-weight="500">deep_dive</text>
+<text class="ts" x="310" y="538" fill="#0F6E56">string  ·  minLength: 800</text>
+<rect x="500" y="523" width="128" height="20" rx="10" fill="#0F6E56"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="564" y="536" text-anchor="middle" fill="#E1F5EE">1400字 多角的分析</text>
+
+<rect x="60" y="554" width="580" height="28" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="72" y="572" fill="#04342C" font-weight="500">backbone_history</text>
+<text class="ts" x="310" y="572" fill="#0F6E56">string  ·  minLength: 500</text>
+<rect x="500" y="557" width="128" height="20" rx="10" fill="#0F6E56"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="564" y="570" text-anchor="middle" fill="#E1F5EE">1000字 歴史的背景</text>
+
+<!-- Required -->
+<rect x="46" y="612" width="608" height="60" rx="10" fill="#F1EFE8" stroke="#888780" stroke-width="0.5" opacity="0.5"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="60" y="630" fill="#444" font-weight="500">required fields</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="60" y="648" fill="#5F5E5A">t01 · t02 · t03 · t05 · t06 · t07 · t08 · t09 · deep_dive · backbone_history</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="630" y="648" text-anchor="end" fill="#888">欠落 = 結晶不可</text>
+
+<!-- state_hash -->
+<rect x="46" y="684" width="608" height="88" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="12" x="340" y="704" text-anchor="middle" fill="#534AB7" font-weight="500">25番目の絶対定数 — state_hash</text>
+<rect x="60" y="712" width="580" height="22" rx="4" fill="#534AB7"/>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="340" y="727" text-anchor="middle" fill="#EEEDFE">state_hash = SHA-256( JCS( T01..T24 ) )  ·  RFC 8785</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="340" y="756" text-anchor="middle" fill="#534AB7">1ビットの改ざんも検知する「情報の指紋」</text>
+
+<!-- 4 Pillars -->
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="340" y="800" text-anchor="middle" fill="#888" font-weight="500">スキーマがもたらす「強制力」</text>
+
+<rect x="46" y="812" width="138" height="88" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="ts" x="115" y="832" text-anchor="middle" fill="#534AB7" font-weight="500">物理的遮断</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="115" y="848" text-anchor="middle" fill="#3C3489">enum</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="115" y="864" text-anchor="middle" fill="#888">Globalをapi拒絶</text>
+
+<rect x="196" y="812" width="138" height="88" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text class="ts" x="265" y="832" text-anchor="middle" fill="#185FA5" font-weight="500">時空の固定</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="265" y="848" text-anchor="middle" fill="#0C447C">pattern</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="265" y="864" text-anchor="middle" fill="#888">秒欠落を拒絶</text>
+
+<rect x="346" y="812" width="138" height="88" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="415" y="832" text-anchor="middle" fill="#0F6E56" font-weight="500">怠慢の排除</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="415" y="848" text-anchor="middle" fill="#085041">minLength</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="415" y="864" text-anchor="middle" fill="#888">短文を物理的に防ぐ</text>
+
+<rect x="496" y="812" width="138" height="88" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+<text class="ts" x="565" y="832" text-anchor="middle" fill="#854F0B" font-weight="500">不純物防止</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="565" y="848" text-anchor="middle" fill="#633806">required</text>
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="565" y="864" text-anchor="middle" fill="#888">欠落 = 結晶不可</text>
+
+<text font-family="Helvetica Neue,Arial,sans-serif" font-size="11" x="340" y="960" text-anchor="middle" fill="#aaa">Figure 2. AIIE Protocol v5.0 Schema: Formal definition of the 24TAG structure with strict type constraints and logical constants. — Gemmina Intelligence LLC.</text>
+</svg>
