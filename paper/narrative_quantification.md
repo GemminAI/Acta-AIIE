@@ -2,7 +2,7 @@
 title: "Narrative Quantification: Compiling Narrative Structures into Geometric State Representations"
 author: "Tomohiko Nakamura"
 date: "2026"
-mathfont: "STIX Two Math"
+mathfont: "STIX Math"
 header-includes:
   - \usepackage{amsmath}
 ---
@@ -41,6 +41,8 @@ Human cognition, however, rarely processes information as isolated tokens. Inste
 
 We propose and formalize **Narrative Quantification** as a computational framework for representing, transforming, and verifying narrative interpretations as structured states. By decomposing narratives into structured components—such as actors, events, causal relationships, conflicts, and outcomes—it becomes possible to construct databases of collective narrative patterns. This enables narrative interpretations to be treated as measurable, comparable, and computationally tractable objects.
 
+![Figure 1: Processing pipeline comparison between LLM (token-based) and LCM (narrative-state-based).](figures/fig1_llm_vs_lcm.png)
+
 * * *
 ## 2. Narrative Cognition
 
@@ -60,6 +62,8 @@ Narrative cognition therefore represents a fundamental cognitive process rather 
 ## 3. Narrative Quantification
 
 **Narrative Quantification** is the formal process of converting unstructured narrative text into analyzable, high-density cognitive data. This transformation is achieved through a multi-stage pipeline: **Decomposition**, **Event Formation**, and **Narrative Compression**.
+
+![Figure 2: Narrative compilation pipeline from raw text to crystallized state hash.](figures/fig2_pipeline.png)
 
 ### 3.1 Decomposition
 
@@ -406,6 +410,8 @@ This geometric formulation allows for the following analytical operations:
 
 **Together, these operations establish interpretation as a measurable geometric process.**
 
+![Figure 3: Narrative divergence (CDC) and trajectory in geometric state space.](figures/fig3_geometry.png)
+
 
 * * *
  
@@ -526,6 +532,8 @@ where $Z$ is a normalization constant.
 2. **Consistency Check**: Compute the deviation $d(\hat{S}, S_{obs})$ between predicted and observed states.
     
 3. **Distribution Update**: Update the probability distribution $P(S)$ via Bayesian inference and refine the active candidate set.
+
+![Figure 4: LCM inference as Bayesian distribution transformation over narrative state space.](figures/fig4_inference.png)
 
 
 * * *
