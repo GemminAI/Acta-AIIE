@@ -41,9 +41,9 @@ Acta-AIIE/
 │       └── step5_deploy_and_scheduler.sh
 │
 ├── paper/                          # Academic paper
-│   ├── narrative_quantification.tex       ← arXiv source
-│   ├── narrative_quantification.pdf       ← Compiled PDF
-│   └── narrative_quantification.md        ← Markdown version
+│   ├── narrative_quantification.md        ← Canonical paper source
+│   ├── FIGURES.md                         ← Figure integration notes
+│   └── figures/                           ← SVG / PNG figure assets
 │
 └── src/                            # Documentation portal (acta-aiie.org)
     └── ...
@@ -55,10 +55,10 @@ Acta-AIIE/
 
 ### The 24TAG Schema
 
-Every event processed by the AIIE Protocol is encoded as a JSON object with 24 structured fields — covering identity, causal dynamics, bias audit, risk propagation, and content presentation. The 25th field, `state_hash`, is a SHA-256 hash of the JCS-normalized 24 tags. It is the cryptographic seal.
+Every event processed by the AIIE Protocol is encoded as a JSON object with 24 structured fields. These 24 tags form the canonical narrative state representation. The `state_hash` is a separate cryptographic seal computed from the JCS-normalized 24 tags and excluded from its own input.
 
 ```
-state_hash = SHA256(JCS(TAG_01 ... TAG_24))
+state_hash = SHA256(JCS(T01 ... T24))
 ```
 
 ### The Narrative Compiler
@@ -92,12 +92,12 @@ Full protocol documentation is available at **[acta-aiie.org](https://acta-aiie.
 
 ## Academic Paper
 
-**Narrative Quantification as Cognitive Infrastructure**  
+**Narrative Quantification: Compiling Narrative Structures into Geometric State Representations**  
 Tomohiko Nakamura — Independent Researcher, Japan (2026)
 
-The paper introduces the theoretical foundation: Narrative Quantification, the 24TAG taxonomy, the Narrative Compiler architecture, Large Cognitive Models (LCM), and the cognitive infrastructure model.
+The paper introduces the theoretical foundation: Narrative Quantification, the 24TAG taxonomy, the Narrative Compiler architecture, Large Cognitive Models (LCM), and the geometric state representation framework.
 
-→ [`paper/narrative_quantification.pdf`](paper/narrative_quantification.pdf)
+→ [`paper/narrative_quantification.md`](paper/narrative_quantification.md)
 
 ---
 

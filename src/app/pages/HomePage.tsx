@@ -220,13 +220,13 @@ const TAGS = [
   { layer: "Event & Action", id: "T07", name: "Action_Type",        type: "enum",    desc: "Category of event — Verbal | Physical | Financial | Symbolic." },
   { layer: "",               id: "T08", name: "Action_Intensity",   type: "float",   desc: "Magnitude of the action. Scale: 0.0 → 1.0." },
   { layer: "",               id: "T09", name: "Target_Resource",    type: "string",  desc: "Specific object or value being contested." },
-  { layer: "",               id: "T10", name: "Event_Modality",     type: "enum",    desc: "Factual | Hypothetical | Desired." },
+  { layer: "",               id: "T10", name: "Event_Modality",     type: "enum",    desc: "{Fact, Hypothesis, Desire, Counterfactual}" },
   { layer: "",               id: "T11", name: "Temporal_Sequence",  type: "integer", desc: "Relative order of event within the narrative arc." },
   { layer: "",               id: "T12", name: "Spatial_Context",    type: "string",  desc: "Domain or environment where the event occurs." },
-  { layer: "Causal & Logic", id: "T13", name: "Causal_Link_Type",   type: "enum",    desc: "Direct Cause | Enabling | Correlating." },
+  { layer: "Causal & Logic", id: "T13", name: "Causal_Link_Type",   type: "enum",    desc: "{Direct, Enabling, Inhibiting, Trigger}" },
   { layer: "",               id: "T14", name: "Conflict_Nature",    type: "enum",    desc: "Internal | Interpersonal | Institutional | Systemic." },
   { layer: "",               id: "T15", name: "Conflict_Intensity", type: "float",   desc: "Severity of friction between actors. Scale: 0.0 → 1.0." },
-  { layer: "",               id: "T16", name: "Resolution_Status",  type: "enum",    desc: "Unresolved | Partial | Resolved." },
+  { layer: "",               id: "T16", name: "Resolution_Status",  type: "int",     desc: "{0, 1, 2, 3}" },
   { layer: "",               id: "T17", name: "Outcome_Valence",    type: "float",   desc: "Positive/negative impact. Scale: −1.0 → +1.0." },
   { layer: "",               id: "T18", name: "Logic_Consistency",  type: "float",   desc: "Alignment with prior narrative states. Scale: 0.0 → 1.0." },
   { layer: "Context & Tone", id: "T19", name: "Emotional_Tone_A",   type: "enum",    desc: "Emotional state of Actor A during the event." },
@@ -235,7 +235,6 @@ const TAGS = [
   { layer: "",               id: "T22", name: "Info_Asymmetry",     type: "float",   desc: "Knowledge gap between actors. Scale: 0.0 → 1.0." },
   { layer: "",               id: "T23", name: "Significance_Score", type: "float",   desc: "Relative importance of event to the overall arc. Scale: 0.0 → 1.0." },
   { layer: "",               id: "T24", name: "Narrative_Closure",  type: "float",   desc: "Extent to which this event concludes a specific thread." },
-  { layer: "Protocol Seal",  id: "T25", name: "state_hash",         type: "sha256",  desc: "SHA-256 of JCS-normalised T01–T24. Excluded from its own input. One-Way Cognitive Seal.", seal: true },
 ];
 
 function Tag24Registry() {
@@ -243,133 +242,161 @@ function Tag24Registry() {
   const COL_DIM = "1px solid rgba(255,255,255,0.12)";
 
   return (
-    <div style={{ border: COL, overflowX: "auto" as const }}>
-      {/* Header row */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "100px 52px 190px 70px 1fr",
-          borderBottom: COL,
-          background: "#000000",
-        }}
-      >
-        {["Layer", "ID", "Tag Name", "Type", "Definition"].map((h, i) => (
-          <div
-            key={h}
-            style={{
-              fontFamily: MONO,
-              fontSize: "8px",
-              color: "#ffffff",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase" as const,
-              padding: "7px 10px",
-              borderRight: i < 4 ? COL : "none",
-            }}
-          >
-            {h}
-          </div>
-        ))}
+    <div>
+      <div style={{ border: COL, overflowX: "auto" as const }}>
+        {/* Header row */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "100px 52px 190px 70px 1fr",
+            borderBottom: COL,
+            background: "#000000",
+          }}
+        >
+          {["Layer", "ID", "Tag Name", "Type", "Definition"].map((h, i) => (
+            <div
+              key={h}
+              style={{
+                fontFamily: MONO,
+                fontSize: "8px",
+                color: "#ffffff",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase" as const,
+                padding: "7px 10px",
+                borderRight: i < 4 ? COL : "none",
+              }}
+            >
+              {h}
+            </div>
+          ))}
+        </div>
+
+        {/* Data rows */}
+        {TAGS.map((row, i) => {
+          const isLayerStart = row.layer !== "";
+          const rowBorder = i === TAGS.length - 1 ? "none" : COL_DIM;
+
+          return (
+            <div
+              key={row.id}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "100px 52px 190px 70px 1fr",
+                borderBottom: rowBorder,
+                background: isLayerStart ? "rgba(255,255,255,0.015)" : "transparent",
+              }}
+            >
+              {/* Layer */}
+              <div
+                style={{
+                  fontFamily: MONO,
+                  fontSize: "8px",
+                  color: isLayerStart ? "rgba(255,255,255,0.5)" : "transparent",
+                  letterSpacing: "0.05em",
+                  padding: "6px 10px",
+                  borderRight: COL_DIM,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {row.layer || "·"}
+              </div>
+              {/* ID */}
+              <div
+                style={{
+                  fontFamily: MONO,
+                  fontSize: "9px",
+                  color: "#4a8fa8",
+                  letterSpacing: "0.04em",
+                  padding: "6px 10px",
+                  borderRight: COL_DIM,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {row.id}
+              </div>
+              {/* Name */}
+              <div
+                style={{
+                  fontFamily: MONO,
+                  fontSize: "9px",
+                  color: "#c8d4e0",
+                  letterSpacing: "0.01em",
+                  padding: "6px 10px",
+                  borderRight: COL_DIM,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {row.name}
+              </div>
+              {/* Type */}
+              <div
+                style={{
+                  fontFamily: MONO,
+                  fontSize: "8px",
+                  color: "#3d5a72",
+                  letterSpacing: "0.06em",
+                  padding: "6px 10px",
+                  borderRight: COL_DIM,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {row.type}
+              </div>
+              {/* Definition */}
+              <div
+                style={{
+                  fontFamily: MONO,
+                  fontSize: "9px",
+                  color: "#5a7a8e",
+                  lineHeight: 1.65,
+                  padding: "6px 10px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {row.desc}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Data rows */}
-      {TAGS.map((row, i) => {
-        const isLayerStart = row.layer !== "";
-        const isSeal = "seal" in row && row.seal;
-        const rowBorder = i === TAGS.length - 1 ? "none" : isSeal ? COL : COL_DIM;
-
-        return (
-          <div
-            key={row.id}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "100px 52px 190px 70px 1fr",
-              borderBottom: rowBorder,
-              background: isSeal
-                ? "rgba(56,189,248,0.04)"
-                : isLayerStart
-                ? "rgba(255,255,255,0.015)"
-                : "transparent",
-            }}
-          >
-            {/* Layer */}
-            <div
-              style={{
-                fontFamily: MONO,
-                fontSize: "8px",
-                color: isSeal ? "#38bdf8" : isLayerStart ? "rgba(255,255,255,0.5)" : "transparent",
-                letterSpacing: "0.05em",
-                padding: "6px 10px",
-                borderRight: isSeal ? "1px solid rgba(56,189,248,0.4)" : COL_DIM,
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {row.layer || "·"}
-            </div>
-            {/* ID */}
-            <div
-              style={{
-                fontFamily: MONO,
-                fontSize: "9px",
-                color: isSeal ? "#38bdf8" : "#4a8fa8",
-                letterSpacing: "0.04em",
-                padding: "6px 10px",
-                borderRight: isSeal ? "1px solid rgba(56,189,248,0.4)" : COL_DIM,
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {row.id}
-            </div>
-            {/* Name */}
-            <div
-              style={{
-                fontFamily: MONO,
-                fontSize: "9px",
-                color: isSeal ? "#38bdf8" : "#c8d4e0",
-                letterSpacing: "0.01em",
-                padding: "6px 10px",
-                borderRight: isSeal ? "1px solid rgba(56,189,248,0.4)" : COL_DIM,
-                display: "flex",
-                alignItems: "center",
-                fontWeight: isSeal ? 600 : 400,
-              }}
-            >
-              {row.name}
-            </div>
-            {/* Type */}
-            <div
-              style={{
-                fontFamily: MONO,
-                fontSize: "8px",
-                color: isSeal ? "#38bdf8" : "#3d5a72",
-                letterSpacing: "0.06em",
-                padding: "6px 10px",
-                borderRight: isSeal ? "1px solid rgba(56,189,248,0.4)" : COL_DIM,
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {row.type}
-            </div>
-            {/* Definition */}
-            <div
-              style={{
-                fontFamily: MONO,
-                fontSize: "9px",
-                color: isSeal ? "#5ab8e8" : "#5a7a8e",
-                lineHeight: 1.65,
-                padding: "6px 10px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {row.desc}
-              {isSeal && <Ref id="01" />}
-            </div>
-          </div>
-        );
-      })}
+      <div
+        style={{
+          marginTop: "10px",
+          border: "1px solid rgba(56,189,248,0.35)",
+          background: "rgba(56,189,248,0.04)",
+          padding: "10px 12px",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: MONO,
+            fontSize: "9px",
+            color: "#38bdf8",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase" as const,
+            marginBottom: "6px",
+          }}
+        >
+          Protocol Seal<Ref id="01" />
+        </div>
+        <div
+          style={{
+            fontFamily: MONO,
+            fontSize: "10px",
+            color: "#c8d4e0",
+            lineHeight: 1.7,
+            whiteSpace: "pre-line" as const,
+          }}
+        >
+          {"state_hash = SHA256( JCS( T01…T24 ) )\nExcluded from its own input. One-Way Cognitive Seal."}
+        </div>
+      </div>
     </div>
   );
 }
