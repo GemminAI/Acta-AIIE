@@ -7,6 +7,7 @@ const NAV = [
     items: [
       { label: "AIIE 24TAG Schema Specification", sub: "v4.1.0", path: "/protocol/24tag-schema" },
       { label: "Mathematical Standardization of Narrative Intent", sub: "v4.1.1", path: "/protocol/mathematical-standardization" },
+      { label: ".hxt Format", sub: "", path: "/protocol/hxt-format" },
     ],
   },
   {
