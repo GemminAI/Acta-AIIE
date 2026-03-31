@@ -1,4 +1,0 @@
-// routes.ts に追加する行
-// 既存の protocol ルート群に追記してください
-
-{ path: "/protocol/hxt-format", Component: HxtFormat },

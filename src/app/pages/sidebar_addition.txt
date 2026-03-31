@@ -1,4 +1,0 @@
-// Sidebar.tsx の Protocol セクションに追加する項目
-// 既存の 24TAG Schema や Mathematical Standardization と同じグループに追記
-
-{ label: ".hxt Format", href: "/protocol/hxt-format" },
