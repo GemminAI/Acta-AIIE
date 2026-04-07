@@ -5,13 +5,24 @@ const NAV = [
   {
     section: "01. Protocol Standard",
     items: [
-      { label: "AIIE 24TAG Schema Specification", sub: "v4.1.0", path: "/protocol/24tag-schema" },
+      { label: "Acta AIIE Protocol Definition", sub: "v1.0.0 — RATIFIED", path: "/protocol/definition" },
+      { label: "35TAG Schema Specification", sub: "v6.0", path: "/protocol/35tag-schema" },
       { label: "Mathematical Standardization of Narrative Intent", sub: "v4.1.1", path: "/protocol/mathematical-standardization" },
       { label: ".hxt Format", sub: "", path: "/protocol/hxt-format" },
     ],
   },
   {
-    section: "02. Whitepapers",
+    section: "02. RFC Series",
+    items: [
+      { label: "RFC Index", sub: "All RFCs", path: "/rfc" },
+      { label: "RFC-0001: Delta Variance (ΔV)", sub: "RATIFIED", path: "/rfc/0001" },
+      { label: "RFC-0002: PCE Detection", sub: "RATIFIED", path: "/rfc/0002" },
+      { label: "RFC-0003: Graph Interaction Model", sub: "DRAFT", path: "/rfc/0003" },
+      { label: "RFC-0004: Relaxation Dynamics", sub: "DRAFT", path: "/rfc/0004" },
+    ],
+  },
+  {
+    section: "03. Whitepapers",
     items: [
       { label: "Whitepapers Index", sub: "Overview", path: "/whitepapers" },
       { label: "Narrative Quantification as Cognitive Infrastructure", sub: "WP-1 v1.1", path: "/whitepapers/narrative-quantification" },
@@ -19,7 +30,7 @@ const NAV = [
     ],
   },
   {
-    section: "03. SDK / Implementations",
+    section: "04. SDK / Implementations",
     items: [
       { label: "Acta AIIE JCS SDK", sub: "Crystallization Engine v1.0", path: "/sdk/crystallization-engine" },
       { label: "Organization Structure", sub: "Repository Index", path: "/org/structure" },
@@ -228,7 +239,7 @@ export function Sidebar() {
             letterSpacing: "0.06em",
           }}
         >
-          AIIE Protocol · RFC 8785 Compliant
+          AIIE Protocol v1.0.0 · RFC 8785 Compliant
         </div>
         <div
           style={{

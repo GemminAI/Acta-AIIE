@@ -435,7 +435,7 @@ export function HomePage() {
         <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
           <Label>Acta AIIE · Primary Archive</Label>
           <Label>RFC 8785 · SHA-256</Label>
-          <Label>v4.1.0</Label>
+          <Label>v1.0.0</Label>
         </div>
         <div
           style={{
@@ -481,7 +481,7 @@ export function HomePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            gridTemplateColumns: "repeat(5, 1fr)",
             gap: "1px",
             background: "#1a2530",
             border: "1px solid #1a2530",
@@ -490,9 +490,10 @@ export function HomePage() {
         >
           {[
             { k: "Document Class",   v: "Protocol Repository" },
+            { k: "Protocol Version", v: "v1.0.0 RATIFIED" },
             { k: "Compliance",       v: "RFC 8785 / JCS" },
             { k: "Status",           v: "Active" },
-            { k: "Issued",           v: "2025-Q2" },
+            { k: "Issued",           v: "2026-Q2" },
           ].map((m) => (
             <div key={m.k} style={{ background: "#070a0d", padding: "10px 14px" }}>
               <div style={{ fontFamily: MONO, fontSize: "8px", color: "#2d4455", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "4px" }}>
