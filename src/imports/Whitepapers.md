@@ -12,7 +12,7 @@
     
 - **Conclusion:** Narrative quantification serves as a new layer of cognitive infrastructure, compressing complex experiences to guide future decision-making.
     
-[[📄Narrative Quantification as Cognitive Infrastructure]]
+[[Narrative_Quantification_as_Cognitive_Infrastructure]]
 
 ---
 
@@ -30,7 +30,7 @@
     
 - **CFI Score (Conflict-of-Fact Index):** A metric that automatically detects contradictions between physical evidence (e.g., shadow angles, GPS, timestamps) and narrative claims to deductively evaluate information reliability.
     
-[[📄The AIIE Protocol - Mathematical Standardization of Narrative Intent]]
+[[Acta_AIIE_Protocol_Definition_v1.0.0]]
 
 ---
 
@@ -48,4 +48,4 @@
     
 - **Integrity-Driven UI:** Interface requirements that utilize `audit_aura` (color and luminosity) to intuitively convey data purity, minimizing the user's cognitive load.
     
-[[📄Narrative Observation]]
+[[GemminAI_Narrative_Observation_Device]]

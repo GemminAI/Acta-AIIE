@@ -28,9 +28,11 @@ Acta-AIIE/
 │
 ├── specs/                                    # Authoritative specifications (English)
 │   ├── Acta_AIIE_Protocol_Definition_v1.0.0.md   # RATIFIED constitution (v1.0.0)
+│   ├── 35TAG_Standard_v6.0.0.md                # Canonical 35TAG field registry & T25 preimage
+│   ├── Narrative_Quantification_as_Cognitive_Infrastructure.md
 │   ├── Acta_AIIE_JCS_SDK_Crystallization_Engine.md
 │   ├── GemminAI_Narrative_Observation_Device.md
-│   ├── Whitepapers.md
+│   ├── Whitepapers.md                          # Index; wiki links resolve to filenames above
 │   └── rfc/                                  # Standard-track RFC series
 │       ├── README.md                         # RFC index & dependency graph
 │       ├── RFC-0001-AIIE-Delta-Variance-Standard.md

@@ -430,7 +430,7 @@ export function HomePage() {
                 margin: "6px 0 4px",
               }}
             >
-              35TAG v6.0.0 — 35次元の構造診断
+              35TAG v6.0.0 — 35-Dimensional Structural Diagnosis
             </h2>
             <div style={{ fontFamily: MONO, fontSize: "9px", color: "#2d4455", letterSpacing: "0.08em" }}>
               AIIE Protocol · Compliance: RFC 8785 · Governance: Acta AIIE Standardization Committee

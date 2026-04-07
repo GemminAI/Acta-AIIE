@@ -10,7 +10,7 @@
 
 ## 1. Abstract
 
-This specification defines the ultimate data structure "35TAG" within the Acta AIIE Protocol (v6.0.0). The 35TAG structure encapsulates the entire thermodynamic and geometric lifecycle of information. It transitions non-structural data streams into absolute physical coordinates (TAGs 01–25), subjects them to kinetic prediction, superposition, and collapse (TAGs 26–28), integrates memory and self-correction (TAGs 29–30), establishes meta-cognition and relative time (TAGs 31–34), and finalizes the mathematical crystallization of a single, immutable worldline (TAG 35).
+This specification defines the ultimate data structure "35TAG" within the Acta AIIE Protocol (v6.0.0). The 35TAG structure encapsulates the entire thermodynamic and geometric lifecycle of information. It transitions non-structural data streams into crystallized base state (TAGs 01–24), seals the normative JCS preimage at TAG 25 (`state_hash`; TAGs 01–34 excluding TAG 25 itself; TAG 35 excluded from the preimage), subjects the state to kinetic prediction, superposition, and collapse (TAGs 26–28), integrates memory and self-correction (TAGs 29–30), establishes meta-cognition and relative time (TAGs 31–34), and finalizes the mathematical crystallization of a single, immutable worldline (TAG 35).
 
 ---
 
@@ -89,7 +89,17 @@ Secures the base variables via cryptographic sealing.
 |---|---|---|---|
 |**23**|`provenance_hash`|`string`|SHA-256 intermediate verification hash for TAGs 01–22.|
 |**24**|`schema_version`|`string`|`6.0.0` (Semantic Versioning). Ensures deterministic decryption logic.|
-|**25**|`state_hash`|`string`|**Base Reality Anchor**. $state\_hash = \text{SHA256}(\text{JCS}(TAG_{01} \dots TAG_{24}))$.|
+|**25**|`state_hash`|`string`|**Base Reality Anchor.** *Definition:* JCS-normalized SHA-256 hash of TAG 01–34 (excluding TAG 25 itself). *Normative formula:* below.|
+
+### TAG 25 (`state_hash`) — Normative preimage
+
+**Definition.** JCS-normalized SHA-256 hash of TAG 01–34 (excluding TAG 25 itself).
+
+**Formula.**
+
+$$state\_hash = \text{SHA256}(\text{JCS}(T_{01}, \dots, T_{24}, T_{26}, \dots, T_{34}))$$
+
+**Conformance.** The ordered set of field keys in the JCS object MUST equal `STATE_HASH_JCS_KEYS` in `sdk/tag_v6.py` (canonical `TAG_FIELD_ORDER` with `state_hash` and `worldline_optimization` omitted). TAG 35 (`worldline_optimization`) is never an input to the anchor hash.
 
 ---
 

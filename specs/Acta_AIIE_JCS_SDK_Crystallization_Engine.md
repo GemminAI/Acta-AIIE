@@ -122,16 +122,17 @@ def to_jcs_timestamp(dt: datetime) -> str:
 The self-referential exclusion design creates a **one-way cognitive seal**:
 
 ```
-state_hash = SHA256(JCS({TAG_01 ... TAG_24}))
-             ─────────────────────────────────
-             state_hash field is NOT included
-             in the input to its own calculation
+state_hash = SHA256(JCS({ T_01 … T_24, T_26 … T_34 }))
+             ─────────────────────────────────────────
+             TAG 25 (state_hash) is excluded from its own preimage;
+             TAG 35 (worldline_optimization) is not in the preimage.
+             Key order: sdk/tag_v6.py → STATE_HASH_JCS_KEYS
 ```
 
 A receiver can verify any 35TAG v6.0.0 object by:
 
 1. Temporarily removing the `state_hash` field from the received data.
-2. Re-running the JCS serialization and SHA-256 process on the remaining 24 tags.
+2. Re-running the JCS serialization and SHA-256 process on the remaining fields enumerated by `STATE_HASH_JCS_KEYS` (TAGs 01–34 excluding `state_hash`).
 3. Comparing the re-calculated hash against the original `state_hash` field.
 
 Any divergence indicates that the narrative structure was modified or corrupted after crystallization.
