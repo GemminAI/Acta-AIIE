@@ -172,7 +172,7 @@ The protocol's "Intent fixation" mechanism is a powerful tool. Potential misuse 
 
 ### Mitigation
 
-All Intent values are subject to the same JCS crystallization and `state_hash` verification as 24TAG data. Any post-hoc modification of Intent is mathematically detectable as a hash divergence.
+All Intent values are subject to the same JCS crystallization and `state_hash` verification as **35TAG v6.0.0** narrative data. Any post-hoc modification of Intent is mathematically detectable as a hash divergence.
 
 ---
 
@@ -193,14 +193,14 @@ The `temperature=0.1` setting in INTELLIGENCE_GAP mode is a **philosophical cons
 
 ---
 
-## 11. Connection to 24TAG and JCS
+## 11. Connection to 35TAG v6.0.0 and JCS
 
-The Acta AIIE Protocol is the cognitive framework. The **24TAG schema** is its data structure. The **JCS Crystallization Engine** is its integrity proof.
+The Acta AIIE Protocol is the cognitive framework. The **35TAG v6.0.0 schema** is its data structure. The **JCS Crystallization Engine** is its integrity proof.
 
 ```
 Acta AIIE Protocol (cognitive flow)
         ↓
-   24TAG Schema (data structure)
+   35TAG v6.0.0 Schema (data structure)
         ↓
 JCS Engine + SHA-256 (mathematical seal)
         ↓

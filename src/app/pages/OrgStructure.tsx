@@ -8,9 +8,9 @@ const REPOS = [
   {
     name: "spec",
     fullName: "Acta-AIIE / spec",
-    description: "AIIE Protocol 24TAG Schema (v4.1.0) — The canonical specification repository.",
+    description: "AIIE Protocol 35TAG v6.0.0 — The canonical specification repository.",
     docPath: "/protocol/24tag-schema",
-    docLabel: "AIIE Protocol 24TAG Schema Specification",
+    docLabel: "AIIE Protocol 35TAG v6.0.0 Schema Specification",
     tags: ["Protocol Standard", "RFC 8785", "JSON Schema"],
     status: "Active",
     version: "v4.1.0",
@@ -195,7 +195,7 @@ export function OrgStructure() {
           SDK implementations track the protocol specification version they implement. A JCS SDK marked <InlineCode>v1.0.0</InlineCode> implements the <InlineCode>4.1.x</InlineCode> protocol specification. Minor SDK updates (bug fixes, performance improvements) do not change the protocol version they target.
         </Body>
         <InfoBox accent>
-          Governance Note: Changes to the core 24TAG schema require formal review by the Acta AIIE Standardization Committee and must be accompanied by an updated set of selftest vectors in <InlineCode>selftest_vectors.json</InlineCode>. Backward-incompatible changes increment the MAJOR protocol version.
+          Governance Note: Changes to the core 35TAG v6.0.0 schema require formal review by the Acta AIIE Standardization Committee and must be accompanied by an updated set of selftest vectors in <InlineCode>selftest_vectors.json</InlineCode>. Backward-incompatible changes increment the MAJOR protocol version.
         </InfoBox>
       </Section>
     </DocPage>

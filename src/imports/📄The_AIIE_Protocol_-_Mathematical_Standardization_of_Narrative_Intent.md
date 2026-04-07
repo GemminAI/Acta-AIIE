@@ -11,9 +11,9 @@
 
 #### **1. Abstract**
 
-This specification defines the technical structure of the **24TAG** data schema within the **Acta AIIE Protocol** (Artificial Intelligence Intent Encapsulation). The protocol is designed to pack the entire process—from the emergence of information to its mathematical proof—into a single, immutable JSON object. This ensures the **"Crystallization of Information,"** where even a 1-bit alteration is detectable, thereby fixing the original intent against posterior manipulation.
+This specification defines the technical structure of the **35TAG v6.0.0** data schema within the **Acta AIIE Protocol** (Artificial Intelligence Intent Encapsulation). The protocol is designed to pack the entire process—from the emergence of information to its mathematical proof—into a single, immutable JSON object. This ensures the **"Crystallization of Information,"** where even a 1-bit alteration is detectable, thereby fixing the original intent against posterior manipulation.
 
-#### **2. The 24TAG Taxonomy: Structural Definitions**
+#### **2. The 35TAG v6.0.0 Taxonomy: Structural Definitions**
 
 Information is multidimensionally described through 24 specific tags across 6 categories. These tags transform subjective narratives into computable vectors.
 

@@ -20,7 +20,7 @@ export function MathStandardization() {
       <Section num="1.0">
         <SectionTitle>Abstract</SectionTitle>
         <Body>
-          This specification defines the technical structure of the 24TAG data schema within the Acta AIIE Protocol (Artificial Intelligence Intent Encapsulation). The protocol is designed to pack the entire process — from the emergence of information to its mathematical proof — into a single, immutable JSON object. This ensures the{" "}
+          This specification defines the technical structure of the <strong>35TAG v6.0.0</strong> data schema within the Acta AIIE Protocol (Artificial Intelligence Intent Encapsulation). The protocol is designed to pack the entire process — from the emergence of information to its mathematical proof — into a single, immutable JSON object. This ensures the{" "}
           <strong style={{ fontFamily: MONO, fontSize: "13px", color: "#c8d4e0", fontWeight: 600 }}>"Crystallization of Information,"</strong>{" "}
           where even a 1-bit alteration is detectable, thereby fixing the original intent against posterior manipulation.
         </Body>
@@ -30,9 +30,9 @@ export function MathStandardization() {
       </Section>
 
       <Section num="2.0">
-        <SectionTitle>The 24TAG Taxonomy: Structural Definitions</SectionTitle>
+        <SectionTitle>The 35TAG v6.0.0 Taxonomy: Structural Definitions</SectionTitle>
         <Body>
-          Information is multidimensionally described through 24 specific tags across 6 categories. These tags transform subjective narratives into computable vectors — fixed points in a multi-dimensional coordinate system that can be compared, analyzed, and verified across any computational environment.
+          Information is multidimensionally described through <strong>thirty-five semantic fields</strong> in <strong>ten categories (I–X)</strong>, plus the <InlineCode>state_hash</InlineCode> (T25) anchor. These fields transform subjective narratives into computable structures — fixed points that can be compared, analyzed, and verified across any computational environment.
         </Body>
 
         <SubsectionTitle>Category I: Identification & Base Context</SubsectionTitle>
@@ -54,7 +54,7 @@ export function MathStandardization() {
         <BulletList
           items={[
             { label: "09. strategic_interest_vector", content: "Represents impact across six dimensions (Security, Economy, Technology, Resource, Ideology, Environment) on a scale of -1.0 to 1.0. This 6D vector constitutes the \"Physics of Information\" — a quantitative mapping of events in multi-dimensional geopolitical space." },
-            { label: "12. narrative_viscosity", content: "Measures the resistance of a narrative to external corrective information. High viscosity indicates a deeply embedded narrative with high resistance to factual correction." },
+            { label: "22. epistemic_diffusion_state", content: "Crystallized | Diffused | Polarized — visual state derived from entropy and CFI (Category V)." },
           ]}
         />
 
@@ -82,7 +82,7 @@ export function MathStandardization() {
           To ensure the "Crystallization" of the protocol, every AIIE object must be hashed using the JCS standard (RFC 8785). This mathematical lock ensures that the observer's intent and the observed data are inseparable and tamper-proof. The process is irreversible: once the <InlineCode>state_hash</InlineCode> is generated, any modification to the underlying data produces a completely different hash.
         </Body>
         <InfoBox accent>
-          The JCS Crystallization Engine is the implementation of this specification. It provides the normalization logic required to transition 24TAG JSON data into an immutable state, enabling the generation of a <InlineCode>state_hash</InlineCode> with zero-bit variance across all compliant systems.
+          The JCS Crystallization Engine is the implementation of this specification. It provides the normalization logic required to transition <strong>35TAG v6.0.0</strong> JSON data into an immutable state, enabling the generation of a <InlineCode>state_hash</InlineCode> (T25) with zero-bit variance across all compliant systems.
         </InfoBox>
 
         <SubsectionTitle>CFI Score — Conflict-of-Fact Index</SubsectionTitle>
@@ -99,15 +99,15 @@ export function MathStandardization() {
       </Section>
 
       <Section num="4.0">
-        <SectionTitle>The 25th Tag: state_hash — The Cryptographic Seal</SectionTitle>
+        <SectionTitle>T25 — state_hash: The Cryptographic Seal</SectionTitle>
         <Body>
-          The <InlineCode>state_hash</InlineCode> occupies a unique position in the AIIE schema: it is generated from, but not included in, the input to its own computation. It is the SHA-256 hash of the JCS-normalized representation of TAG 01 through TAG 24, and serves as the mathematical proof of the entire object's integrity.
+          The <InlineCode>state_hash</InlineCode> is generated from, but not included in, its own input. Per the reference verifier, it is <strong>SHA-256</strong> of <strong>RFC 8785 (JCS)</strong> over <strong>TAG 01–34</strong> excluding <InlineCode>state_hash</InlineCode>. TAG 35 (<InlineCode>worldline_optimization</InlineCode>) is not part of the JCS payload for T25.
         </Body>
         <Body>
-          This design — computing a hash over all 24 tags in strict canonical form — means that the <InlineCode>state_hash</InlineCode> is uniquely deterministic: given the same 24 tags in any compliant environment, the exact same 64-character hexadecimal string will always result. Any subsequent alteration of any tag, by any amount, will produce a completely different hash.
+          Given the same sealed payload keys and values in any compliant environment, the same 64-character hexadecimal <InlineCode>state_hash</InlineCode> results. Any alteration to a participating field produces a different hash.
         </Body>
         <InfoBox accent>
-          The <InlineCode>state_hash</InlineCode> is the ultimate seal of the AIIE Protocol. It is the 25th TAG — existing outside the counting schema precisely because it encompasses and validates all that came before it.
+          The <InlineCode>state_hash</InlineCode> is the T25 anchor — the cryptographic seal over the canonical narrative state prior to final worldline closure (TAG 35).
         </InfoBox>
       </Section>
     </DocPage>

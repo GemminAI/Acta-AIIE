@@ -298,95 +298,21 @@ Optimizer: AdamW, $\text{lr} = 3 \times 10^{-4}$, $\beta_1 = 0.9$, $\beta_2 = 0.
 
 ## 6. The 35TAG Schema
 
-### 6.1 Schema as Protocol Data Structure
+The canonical **35TAG v6.0.0** field definitions, types, categories (I–X), and semantic ranges are specified exclusively in:
 
-The 35TAG schema is the **canonical data structure** of the AIIE Protocol.
-It is partitioned into two layers: the invariant core (T01–T21) and the
-dynamic reasoning field (T26–T35), with T22–T25 as projection/identity tags.
+**[35TAG Standard v6.0.0](./35TAG_Standard_v6.0.0.md)** (`specs/35TAG_Standard_v6.0.0.md`)
 
-### 6.2 Complete Tag Definitions
+Implementations MUST treat that document as the single source of truth for the data structure. This protocol document references it for ΔV (§9), integrity sealing (§4, `state_hash` / RFC 8785 JCS), and downstream tooling; it does not duplicate the tag table here.
 
-#### Layer A: Invariant Core — Actor & Agency (T01–T06)
-
-| Tag | Name | Type | Domain |
-|---|---|---|---|
-| T01 | Primary_Actor | `string` | UUID / Entity ID |
-| T02 | Secondary_Actor | `string` | UUID / Entity ID |
-| T03 | Actor_Role_A | `enum` | `{Protagonist, Antagonist, Neutral, Mediator, Observer}` |
-| T04 | Actor_Role_B | `enum` | `{Protagonist, Antagonist, Neutral, Mediator, Observer}` |
-| T05 | Actor_Motivation_A | `string` | Natural language / Embedding vector |
-| T06 | Actor_Motivation_B | `string` | Natural language / Embedding vector |
-
-#### Layer A: Invariant Core — Event & Action (T07–T12)
-
-| Tag | Name | Type | Domain |
-|---|---|---|---|
-| T07 | Action_Type | `enum` | `{Verbal, Physical, Financial, Cyber, Diplomatic, Legal}` |
-| T08 | Action_Intensity | `float` | $[0.0, 1.0]$ — normalized magnitude |
-| T09 | Target_Resource | `string` | Contested object or value |
-| T10 | Event_Modality | `enum` | `{Fact, Hypothesis, Desire, Counterfactual}` |
-| T11 | Temporal_Sequence | `int` | $\mathbb{Z}_{\geq 0}$ — sequential index in graph $G$ |
-| T12 | Spatial_Context | `string` | Domain or environment |
-
-#### Layer A: Invariant Core — Causal & Logic (T13–T18)
-
-| Tag | Name | Type | Domain |
-|---|---|---|---|
-| T13 | Causal_Link_Type | `enum` | `{Direct, Enabling, Inhibiting, Trigger, Coincidental}` |
-| T14 | Conflict_Nature | `enum` | `{Internal, Interpersonal, Intergroup, Systemic}` |
-| T15 | Conflict_Intensity | `float` | $[0.0, 1.0]$ |
-| T16 | Resolution_Status | `int` | $\{0, 1, 2, 3\}$ — 0=unresolved, 3=fully resolved |
-| T17 | Outcome_Valence | `float` | $[-1.0, 1.0]$ |
-| T18 | Logic_Consistency | `float` | $[0.0, 1.0]$ — alignment with prior narrative states |
-
-#### Layer A: Invariant Core — Context & Tone (T19–T21)
-
-| Tag | Name | Type | Domain |
-|---|---|---|---|
-| T19 | Emotional_Tone_A | `enum` | `{Neutral, Hostile, Cooperative, Fearful, Assertive}` |
-| T20 | Emotional_Tone_B | `enum` | `{Neutral, Hostile, Cooperative, Fearful, Assertive}` |
-| T21 | Perspective_Bias | `string` | Source origin / geopolitical standpoint |
-
-#### Layer B: Projection & Identity (T22–T25)
-
-| Tag | Name | Type | Role |
-|---|---|---|---|
-| T22 | Semantic_Position | `float[3]` | Derived: $\phi(T_{01\dots21})$ — 3D coordinate in $\mathbb{R}^3$ |
-| T23 | Significance_Score | `float` | $[0.0, 1.0]$ — importance weight |
-| T24 | Narrative_Closure | `float` | $[0.0, 1.0]$ — degree of thread conclusion |
-| T25 | State_Hash | `string` | SHA-256 fingerprint of $s_{core}$ via JCS |
-
-#### Layer C: Dynamic Reasoning Field (T26–T35)
-
-| Tag | Name | Type | Domain | Description |
-|---|---|---|---|---|
-| T26 | Rupture_Risk | `float` | $[0.0, 1.0]$ | Probability of non-equilibrium phase transition |
-| T27 | Branching_Factor | `int` | $[1, 5]$ | $N = 1 + \lfloor 4 \cdot T_{26} \rfloor$ worldlines to generate |
-| T28 | Entropy_Ratio | `float` | $[0.0, 1.0]$ | Normalized $H(s_{field}) / H_{\max}$ |
-| T29 | Regret_Score | `float` | $[0.0, 1.0]$ | Cumulative deviation from optimal past trajectory |
-| T30 | Self_Correction_Flag | `bool` | $\{0, 1\}$ | $\Pi$-stabilized: 1 if self-correction cycle executed |
-| T31 | CFI_Score | `float` | $(0.0, 1.0]$ | Continuous CFI: $\exp(-\sum_k p_k \cdot a_k)$ |
-| T32 | Self_Awareness_Index | `float` | $[0.0, 1.0]$ | Meta-cognitive reliability score |
-| T33 | PCE_Flag | `bool` | $\{0, 1\}$ | $\Pi$-stabilized: 1 if PCE confirmed |
-| T34 | Delta_Distance | `float` | $\mathbb{R}_{\geq 0}$ | $\|s_t - s_{t-1}\|_2$ — trajectory velocity |
-| T35 | Normalized_Impact | `float` | $\mathbb{R}_{\geq 0}$ | Hamming shift / baseline — Rupture if $> 2.0$ |
-
-### 6.3 Cross-Tag Constraints
-
-A narrative state $S \in \mathcal{T}$ is **valid** if and only if it satisfies:
-
-1. **Causal-Temporal Alignment**: $T_{13}$ (Causal Link) must align with $T_{11}$ (Temporal Sequence). A cause cannot follow its effect.
-2. **Resolution-Valence Coherence**: $T_{16}$ (Resolution Status) must be logically consistent with $T_{17}$ (Outcome Valence) within the context of $T_{14}$ (Conflict Nature).
-3. **Branching Derivation**: $T_{27} = 1 + \lfloor 4 \cdot T_{26} \rfloor$. Must not be set independently.
-4. **T22 Derivation**: $T_{22} = \phi(T_{01\dots21})$. Must not be included in T25 hash input.
-5. **T25 Exclusion**: The `state_hash` field (T25) must be excluded from its own hash computation.
-
-### 6.4 Validity Definition
-
-$$S \in \mathcal{T}_{valid} \subseteq \mathcal{T}$$
+### 6.1 Validity (summary)
 
 Schema violation rate target: **0%**. Any output with a schema violation must be
-rejected and re-processed, not passed downstream.
+rejected and re-processed, not passed downstream. Cross-field constraints and
+hash-input rules follow **35TAG v6.0.0** and the integrity verifier
+(`sdk/verify_integrity.py`): `state_hash` (TAG 25) is never an input to its own
+computation; the JCS payload for the anchor hash includes TAG 01–34 excluding
+`state_hash`, per project verifier configuration (extends the v6.0.0 Category VI
+formula when TAG 26–34 participate in the sealed bundle).
 
 ---
 
@@ -851,17 +777,15 @@ without a MAJOR version increment of this protocol.
 
 | Protocol Version | TAG Schema | Compatibility |
 |---|---|---|
-| v0.1.0 (deprecated) | 24TAG v4.1 | ❌ Non-conformant — missing T26–T35 |
+| v0.1.0 (deprecated) | Legacy 24-field draft (v4.1, archived) | ❌ Non-conformant — missing T26–T35 |
 | **v1.0.0 (this document)** | **35TAG v6.0** | ✅ Canonical |
 | v2.0.0 (planned) | 35TAG+ (extension pending) | Backward-compatible if T01–T35 preserved |
 
-### 17.1 Migration from 24TAG to 35TAG
+### 17.1 Migration from legacy 24-field draft to 35TAG v6.0.0
 
-Fields T01–T24 are preserved with identical semantics.
-Fields T25 is redefined: was `Narrative_Closure` in v4.1; is now `State_Hash` in v6.0.
-Fields T26–T35 are new additions in v6.0.
+The archived v4.1 draft used 24 content keys before `state_hash`. **35TAG v6.0.0** defines thirty-five semantic field names (Categories I–X); **T25** is exclusively `state_hash` (SHA-256 of JCS over TAG 01–34 excluding `state_hash`). TAG 35 is `worldline_optimization` (final closure), not the hash input.
 
-Any system still using T25 as `Narrative_Closure` is **non-conformant with this protocol**.
+Implementations must follow `specs/35TAG_Standard_v6.0.0.md` and `sdk/tag_v6.py` / `sdk/verify_integrity.py`.
 
 ---
 

@@ -314,7 +314,7 @@
     },
     {
       "id": "49",
-      "description": "Full minimal 24TAG object — key sort verification",
+      "description": "Full minimal sample object — key sort verification (RFC 8785; narrative payloads use 35TAG v6.0.0 field names in production)",
       "input": {
         "subject_origin": "jp",
         "permanent_id": "gmn://20260307/a1b2c3d4",

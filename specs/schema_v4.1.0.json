@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "AIIE 24TAG + 1 Narrative Crystal",
+  "title": "AIIE legacy 24-field + T25 (archived — use 35TAG v6.0.0 for new work)",
   "description": "Standard schema for the Gemmina Intelligence LLC. Acta AIIE Protocol v4.1.0",
   "version": "4.1.0",
   "type": "object",

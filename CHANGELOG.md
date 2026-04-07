@@ -9,13 +9,19 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Canonical schema is **35TAG v6.0.0** (`specs/35TAG_Standard_v6.0.0.md`). Legacy `24TAG_Standards_v4.1.0.md` moved to `archived/specs/`.
+- **T25 (`state_hash`)** reference implementation: SHA-256(RFC 8785 JCS) over TAG **01–34** excluding `state_hash` (TAG 35 not in JCS payload). See `sdk/tag_v6.py` / `sdk/verify_integrity.py`.
+- Documentation portal and UI copy updated from “24TAG” to **35TAG v6.0.0** terminology.
+
 ---
 
 ## [4.1.0] — 2026-03-09
 
 ### Added
 
-- `specs/24TAG_Standards_v4.1.0.md` — Full English specification of all 24 tags
+- `specs/24TAG_Standards_v4.1.0.md` — Full English specification of all 24 tags (now archived under `archived/specs/`)
 - `specs/Acta_AIIE_Protocol_Structural_Definition.md` — Cognitive layer model (v0.1.0 Draft)
 - `specs/Acta_AIIE_JCS_SDK_Crystallization_Engine.md` — JCS implementation rules
 - `specs/GemminAI_Narrative_Observation_Device.md` — Meteorological observation model
@@ -35,7 +41,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ### Protocol Notes
 
-- `state_hash` formula confirmed: `SHA256(JCS(TAG_01 ... TAG_24))`
+- Historical note (v4.1 era): `state_hash` was documented as `SHA256(JCS(TAG_01 ... TAG_24))`; **current** verifier uses TAG 01–34 excluding `state_hash` per 35TAG v6.0.0.
 - `state_hash` field is self-referentially excluded from its own hash input
 - All timestamps fixed to ISO 8601 UTC/Z format, seconds precision
 - Official Implementation Hash: `3a5a3a9d1b13367621b5b34cc25a0d886a7da39ef91015a3f757ae37908602b8`
@@ -47,7 +53,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 ### Added
 
 - Initial JCS Engine implementation (RFC 8785 compliant)
-- 24TAG schema first definition
+- 35TAG lineage: early 24-field schema first definition (superseded by 35TAG v6.0.0)
 - `verify_integrity.py` selftest: 49/49 PASS confirmed
 - GitHub repository initialized: `GemminAI/Acta-AIIE`
 

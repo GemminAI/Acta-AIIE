@@ -24,7 +24,7 @@ analyzed computationally.
 
 To operationalize this transformation, the paper introduces the concept
 of a **Narrative Compiler**, a system that converts narrative text into
-structured cognitive representations such as the **24TAG structure**.
+structured cognitive representations such as the **35TAG v6.0.0 structure**.
 These representations enable the creation of narrative databases that
 may serve as the foundation for **Large Cognitive Models (LCM)** —
 systems designed to reason over structured representations of human
@@ -49,7 +49,7 @@ The pipeline transforms raw OSINT narratives into deterministic narrative states
 3. **Schema-constrained generation** — `response_schema=_Tag` (Pydantic) enforced at API level
 4. **Schema validation** — enum, pattern, range, minLength checks
 5. **Canonicalization** — RFC 8785 JSON Canonicalization Scheme
-6. **Cryptographic state hashing** — `state_hash = SHA-256( JCS( T01..T24 ) )`
+6. **Cryptographic state hashing** — `state_hash = SHA-256( JCS( TAG 01–34 (excl. state_hash) ) )`
 
 | Metric | Before | After |
 |---|---|---|

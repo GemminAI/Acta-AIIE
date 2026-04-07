@@ -1,13 +1,14 @@
 import { DocHeader } from "../components/DocHeader";
 import { DocPage, Section, SectionTitle, SubsectionTitle, Body, BulletList, CodeBlock, InlineCode, InfoBox } from "../components/DocPage";
-import { Tag24Registry } from "../components/Tag24Registry";
+import { Tag35Registry } from "../components/Tag35Registry";
 
 const MONO = "'JetBrains Mono', monospace";
 
 const JSON_SCHEMA_V4 = `{
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "AIIE Protocol 24TAG Schema",
+  "title": "AIIE Protocol — historical 24-field draft (superseded)",
   "version": "4.1.0",
+  "description": "Archived. Canonical schema: 35TAG v6.0.0 — see specs/35TAG_Standard_v6.0.0.md",
   "type": "object",
   "required": [
     "permanent_id", "subject_origin", "predicate_type", "object_entity",
@@ -34,7 +35,7 @@ const JSON_SCHEMA_V4 = `{
     "state_hash": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$",
-      "description": "25th TAG: SHA-256 hash of JCS-normalized TAG01-24"
+      "description": "T25: SHA-256(JCS(TAG 01–34 except state_hash)) — v6.0.0 verifier"
     }
   }
 }`;
@@ -42,7 +43,7 @@ const JSON_SCHEMA_V4 = `{
 const JSON_SCHEMA_V5 = `{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/GemminAI/Acta-AIIE/main/schema/schema_v5.0.json",
-  "title": "AIIE Protocol v5.0 — 24TAG Narrative Crystal Schema",
+  "title": "AIIE Protocol v5.0 — legacy crystal schema (migrate to 35TAG v6.0.0)",
   "version": "5.0.0",
   "author": "Gemmina Intelligence LLC. — Tomohiko Nakamura",
   "license": "MIT",
@@ -104,7 +105,7 @@ const JSON_SCHEMA_V5 = `{
     "state_hash": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$",
-      "description": "SHA-256( JCS( T01..T24 ) ) per RFC 8785."
+      "description": "T25: SHA-256(JCS(TAG 01–34 except state_hash)) per RFC 8785 — 35TAG v6.0.0."
     },
     "schema_version": {
       "type": "string",
@@ -124,9 +125,10 @@ const JSON_SCHEMA_V5 = `{
     "§2": "T = published_at + Δt — ISO 8601 UTC/Z only.",
     "§3": "Direction ∈ {upstream,midstream,downstream} — 3-choice only."
   },
-  "x-state-hash-formula": "state_hash = SHA-256( JCS( T01..T24 ) ) per RFC 8785",
+  "x-state-hash-formula": "state_hash = SHA-256( JCS( TAG 01..34 except state_hash ) ) — 35TAG v6.0.0 / verify_integrity.py",
   "x-implementation": {
     "verify_integrity": "https://raw.githubusercontent.com/GemminAI/Acta-AIIE/main/sdk/verify_integrity.py",
+    "tag_v6": "https://raw.githubusercontent.com/GemminAI/Acta-AIIE/main/sdk/tag_v6.py",
     "paper": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6419019",
     "repository": "https://github.com/GemminAI/Acta-AIIE"
   }
@@ -172,29 +174,32 @@ response = client.models.generate_content(
     ),
 )`;
 
-export function Protocol24TAG() {
+export function Protocol35TAG() {
   return (
     <DocPage>
       <DocHeader
-        title="AIIE Protocol 24TAG Schema Specification"
-        subtitle="A framework that structures the entire process from information emergence to mathematical proof into a single immutable JSON object."
+        title="AIIE Protocol 35TAG v6.0.0 Schema Specification"
+        subtitle="Thirty-five semantic fields (Categories I–X) from identification to worldline closure; T25 anchor via RFC 8785 JCS."
         canonicalHash="a9f3c2e4b8d1047e5c6f9a2b3d8e1f4a7c0b5d2e9f6a3c8b4d1e7f0a5c2b9d"
-        status="Refined"
-        version="v5.0.0"
+        status="RATIFIED"
+        version="v6.0.0"
         editor="Acta AIIE Standardization Committee"
         compliance="RFC 8785 (JSON Canonicalization Scheme)"
-        docId="AIIE-SPEC-001"
+        docId="AIIE-SPEC-035-v6"
       />
 
       <Section num="1.0">
         <SectionTitle>Abstract</SectionTitle>
         <Body>
-          This specification defines the data types, value ranges, and integrity rules for the{" "}
-          <strong style={{ fontFamily: MONO, fontSize: "13px", color: "#c8d4e0", fontWeight: 600 }}>24TAG</strong>{" "}
-          system — a framework that structures the entire process from information emergence to mathematical proof into a single JSON object. Data generated in compliance with this schema is guaranteed to produce an identical <InlineCode>state_hash</InlineCode> regardless of the computing environment.
+          This page summarizes the <strong style={{ fontFamily: MONO, fontSize: "13px", color: "#c8d4e0", fontWeight: 600 }}>35TAG v6.0.0</strong>{" "}
+          standard — the canonical data structure of the AIIE Protocol. It structures the thermodynamic and geometric lifecycle of information
+          into thirty-five fields plus the <InlineCode>state_hash</InlineCode> (T25) anchor. Normative definitions:{" "}
+          <InlineCode>specs/35TAG_Standard_v6.0.0.md</InlineCode>.
         </Body>
         <InfoBox accent>
-          The 24TAG schema is the canonical data structure of the AIIE Protocol. Every object compliant with this specification is a self-contained, mathematically sealed unit of narrative information — a "Crystallized" fact that cannot be altered without detection.
+          Production systems SHALL implement the field registry in <strong>35TAG v6.0.0</strong> (Categories I–X). The
+          <InlineCode>state_hash</InlineCode> is <strong>SHA-256</strong> of <strong>JCS</strong> over TAG 01–34 excluding the hash field itself;
+          TAG 35 (<InlineCode>worldline_optimization</InlineCode>) seals the narrative closure and is not part of the T25 payload.
         </InfoBox>
       </Section>
 
@@ -203,33 +208,36 @@ export function Protocol24TAG() {
 
         <SubsectionTitle>2.1 Category I — Identification & Base Context</SubsectionTitle>
         <Body>
-          Establishes the "Digital Registry" of information. These fields form the immutable identity fingerprint of every AIIE object.
+          Establishes the digital registry: <InlineCode>permanent_id</InlineCode>, <InlineCode>subject_origin</InlineCode>,{" "}
+          <InlineCode>predicate_type</InlineCode>, <InlineCode>object_entity</InlineCode>, <InlineCode>location</InlineCode>,{" "}
+          <InlineCode>time_frame</InlineCode>.
         </Body>
         <BulletList
           items={[
-            { label: "permanent_id", content: "Persistent identifier using the gmn:// scheme. Regex: ^gmn://[0-9]{8}/[a-f0-9]{8}$" },
-            { label: "subject_origin", content: 'The geopolitical origin of the narrative. enum: ["jp", "cn", "us", "gb", "qa", "eu"]' },
-            { label: "time_frame", content: "UTC timestamp in ISO 8601 format, fixed to the second. Must terminate with a Z suffix." },
+            { label: "permanent_id", content: "gmn://YYYYMMDD/[hash8] — persistent global identifier." },
+            { label: "subject_origin", content: "enum: jp | cn | us | uk | qa | eu — observational bias vector." },
+            { label: "time_frame", content: "ISO 8601 UTC/Z — strict temporal boundary for deterministic hashing." },
           ]}
         />
 
         <SubsectionTitle>2.2 Category II — Dynamics & Structure</SubsectionTitle>
         <Body>
-          Quantifies causal relationships and strategic intent through mathematical vectors and confidence scores.
+          <InlineCode>actor_role</InlineCode>, <InlineCode>causality_direction</InlineCode>,{" "}
+          <InlineCode>strategic_interest_vector</InlineCode> (six dimensions, base for ΔV), <InlineCode>epistemic_confidence</InlineCode>.
         </Body>
         <BulletList
           items={[
-            { label: "strategic_interest_vector", content: "A 6-dimensional numerical vector (security, economy, tech, resource, ideology, environment). Range: -1.0 to 1.0." },
-            { label: "epistemic_confidence", content: "AI-evaluated certainty of the information. Range: 0.0 to 1.0." },
-            { label: "narrative_viscosity", content: "Measures the resistance of a narrative to external corrective information. Range: 0.0 to 1.0." },
+            { label: "strategic_interest_vector", content: "Six dimensions (security … environment) in [−1.0, 1.0] — Protocol §9 ΔV base." },
+            { label: "epistemic_confidence", content: "[0.0, 1.0] — objective mass of evidence." },
           ]}
         />
 
-        <SubsectionTitle>2.3 Category IV — Spillover & Risk</SubsectionTitle>
+        <SubsectionTitle>2.3 Categories III–V · VI–X</SubsectionTitle>
         <BulletList
           items={[
-            { label: "conflict_factuality_index (CFI)", content: "Reliability metric based on physical contradictions (e.g., weather, shadows, GPS data). Range: 0.0 to 1.0." },
-            { label: "silence_reasons", content: "IVD indicators — classified reasons for strategic informational silence or omission." },
+            { label: "III–V", content: "Bias & audit, impact & risk, content & presentation — see registry table below." },
+            { label: "VI", content: "provenance_hash, schema_version, state_hash (T25)." },
+            { label: "VII–X", content: "Kinetics, memory, meta-cognition & relative time, reality selection — TAG 26–35." },
           ]}
         />
       </Section>
@@ -239,56 +247,57 @@ export function Protocol24TAG() {
         <Body>
           Processors compliant with this specification{" "}
           <strong style={{ fontFamily: MONO, fontSize: "13px", color: "#c8d4e0", fontWeight: 600 }}>must</strong>{" "}
-          execute the following normalization procedures as a "Mandatory Protocol" before generating the <InlineCode>state_hash</InlineCode>:
+          execute RFC 8785 normalization before computing <InlineCode>state_hash</InlineCode>:
         </Body>
         <BulletList
           items={[
             { label: "UTF-16 Key Sorting", content: "Sort JSON object keys in lexicographical order (UTF-16 code unit order)." },
-            { label: "Numeric Normalization", content: "Convert IEEE 754 double-precision floating-point numbers into decimal strings compliant with ECMA-262, including exponential notation switching rules." },
-            { label: "Timestamp Fixation", content: "Datetime objects must terminate with a Z suffix to eliminate environment-dependent offsets." },
+            { label: "Numeric Normalization", content: "ECMA-262 shortest decimal representation per RFC 8785." },
+            { label: "Timestamp Fixation", content: "Datetime strings UTC/Z where applicable." },
           ]}
         />
         <InfoBox>
-          These three normalization rules constitute the mathematical foundation of the "Crystallization" mechanism. Without strict adherence to all three rules, the generated state_hash will differ between environments — invalidating the core promise of zero-bit variance.
+          Without strict JCS adherence, recomputed T25 diverges across environments — invalidating tamper-evident guarantees.
         </InfoBox>
       </Section>
 
       <Section num="4.0">
-        <SectionTitle>JSON Schema (v4.1.0 — Reference)</SectionTitle>
+        <SectionTitle>JSON Schema (v4.1.0 — Historical reference)</SectionTitle>
         <Body>
-          The original schema definition. For the current production implementation, see Section 5.0.
+          Legacy excerpt retained for migration studies. <strong>Normative field list: 35TAG v6.0.0</strong> (see Section 3.0 registry and repository spec file).
         </Body>
-        <CodeBlock lang="JSON Schema · Draft-07 · v4.1.0">{JSON_SCHEMA_V4}</CodeBlock>
+        <CodeBlock lang="JSON Schema · Draft-07 · v4.1.0 (archived)">{JSON_SCHEMA_V4}</CodeBlock>
       </Section>
 
-      {/* 24TAG Visual Registry */}
-      <Tag24Registry />
+      <Tag35Registry />
 
       <Section num="5.0">
-        <SectionTitle>Schema v5.0 — Production Implementation</SectionTitle>
+        <SectionTitle>Schema v5.0 — Legacy production excerpt</SectionTitle>
         <Body>
-          v5.0 introduces the <strong style={{ fontFamily: MONO, fontSize: "13px", color: "#c8d4e0", fontWeight: 600 }}>Crystallization Constitution</strong> — four absolute equations injected directly into the LLM generation process as <InlineCode>response_schema</InlineCode>. Invalid outputs are rejected at the API level, not retried in software.
+          Earlier <strong>Crystallization Constitution</strong> pipelines used <InlineCode>response_schema</InlineCode> constraints.
+          New deployments align field names and cardinality with <strong>35TAG v6.0.0</strong> and <InlineCode>sdk/tag_v6.py</InlineCode>.
         </Body>
 
         <InfoBox accent>
-          <strong style={{ fontFamily: MONO, fontSize: "12px", color: "#38bdf8", fontWeight: 600 }}>Key result:</strong> Processing time reduced from ~2 min (3× retry) to ~4 sec (1-pass). Schema violation rate: 0%. Corpus: 64/64 articles crystallized without failure.
+          <strong style={{ fontFamily: MONO, fontSize: "12px", color: "#38bdf8", fontWeight: 600 }}>Note:</strong>{" "}
+          v5.0 JSON below uses legacy <InlineCode>t01_</InlineCode> prefixes; v6.0.0 uses semantic snake_case keys from the normative spec.
         </InfoBox>
 
         <SubsectionTitle>5.1 The Crystallization Constitution (§0–§3)</SubsectionTitle>
         <Body>
-          Injected as the preamble of <InlineCode>TAG_GENERATION_PROMPT</InlineCode> to constrain the LLM from "reasoning engine" to "strict compiler":
+          Injected as the preamble of <InlineCode>TAG_GENERATION_PROMPT</InlineCode> to constrain the LLM from &quot;reasoning engine&quot; to &quot;strict compiler&quot;:
         </Body>
         <CodeBlock lang="Crystallization Constitution">{CONSTITUTION}</CodeBlock>
 
-        <SubsectionTitle>5.2 Pydantic Implementation</SubsectionTitle>
+        <SubsectionTitle>5.2 Pydantic Implementation (illustrative)</SubsectionTitle>
         <Body>
-          The constitution is enforced at the type level. Each constraint maps directly to a Pydantic field validator — philosophy becomes type:
+          Type-level enforcement example — map to v6.0.0 field names in production.
         </Body>
         <CodeBlock lang="Python · Pydantic + google-genai SDK">{PYDANTIC}</CodeBlock>
 
-        <SubsectionTitle>5.3 Full Schema Definition</SubsectionTitle>
+        <SubsectionTitle>5.3 Full Schema Definition (v5.0 file)</SubsectionTitle>
         <Body>
-          Raw schema available at:{" "}
+          Raw JSON Schema:{" "}
           <a
             href="https://raw.githubusercontent.com/GemminAI/Acta-AIIE/main/schema/schema_v5.0.json"
             target="_blank"
@@ -298,19 +307,21 @@ export function Protocol24TAG() {
             github.com/GemminAI/Acta-AIIE/schema/schema_v5.0.json
           </a>
         </Body>
-        <CodeBlock lang="JSON Schema · Draft-07 · v5.0.0">{JSON_SCHEMA_V5}</CodeBlock>
+        <CodeBlock lang="JSON Schema · Draft-07 · v5.0.0 (legacy)">{JSON_SCHEMA_V5}</CodeBlock>
       </Section>
 
       <Section num="6.0">
         <SectionTitle>Implementation Obligations</SectionTitle>
         <Body>
-          Developers must use the <InlineCode>selftest_vectors.json</InlineCode> provided in the specification repository to verify that their normalization engine passes all 49/49 test cases in their specific environment. An environment is only certified for "Crystallization" upon achieving a perfect pass rate.
+          Use <InlineCode>sdk/verify_integrity.py</InlineCode> selftest (49/49) and the <strong>35TAG v6.0.0</strong> key list in{" "}
+          <InlineCode>sdk/tag_v6.py</InlineCode> for T25 verification.
         </Body>
         <InfoBox accent>
-          <strong style={{ fontFamily: MONO, fontSize: "12px", color: "#38bdf8", fontWeight: 600 }}>Certification Requirement:</strong> All 49 selftest vectors must pass. Any failure indicates a non-compliant normalization implementation and will produce divergent state_hash values across systems.
+          <strong style={{ fontFamily: MONO, fontSize: "12px", color: "#38bdf8", fontWeight: 600 }}>Certification:</strong> RFC 8785 vectors must pass;
+          <InlineCode>state_hash</InlineCode> must match JCS over TAG 01–34 (excluding <InlineCode>state_hash</InlineCode>).
         </InfoBox>
         <Body>
-          Reference implementation:{" "}
+          Reference:{" "}
           <a
             href="https://github.com/GemminAI/Acta-AIIE/blob/main/sdk/verify_integrity.py"
             target="_blank"
@@ -320,7 +331,6 @@ export function Protocol24TAG() {
             sdk/verify_integrity.py
           </a>
           {" "}·{" "}
-          Paper:{" "}
           <a
             href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6419019"
             target="_blank"

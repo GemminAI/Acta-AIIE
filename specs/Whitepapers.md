@@ -22,7 +22,7 @@
 
 **Core Thesis:** Definition of data structures and the specifications for "Crystallization."
 
-- **24TAG Definition:** Rigorous definition of structured fields across five categories: Identification, Dynamics, Bias, Spillover Risk, and Expression.
+- **35TAG v6.0.0 Definition:** Rigorous definition of structured fields across **ten categories (I–X)** from identification through reality selection, plus T25 `state_hash`.
     
 - **Physics of Information:** Quantitative mapping of events in multi-dimensional space (Geopolitics, Economy, Ideology) using the "Strategic Interest Vector."
     

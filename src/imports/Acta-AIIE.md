@@ -4,8 +4,8 @@
     
 2. **主要リポジトリ**:
     
-    - `spec`: AIIE Protocol 24TAG Schema (v4.1.0)
-        [[📐 AIIEプロトコル：24TAG スキーマ標準仕様]]
+    - `spec`: AIIE Protocol 35TAG v6.0.0 Schema
+        [[📐 AIIEプロトコル：35TAG v6.0.0 スキーマ標準仕様]]
         
     - `whitepapers`: 「認知インフラとしてのナラティブ定量化」等の論文
         [[📄whitepapers]]

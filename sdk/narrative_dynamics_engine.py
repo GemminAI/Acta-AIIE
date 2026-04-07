@@ -1,4 +1,5 @@
 # Compliant with Acta AIIE Protocol v1.0.0 — §9 (ΔV), §10 (CFI 2.0), §11 (PCE);
+# 35TAG v6.0.0 semantic projection — specs/35TAG_Standard_v6.0.0.md
 # AIIE-RFC-0001 (ΔV), RFC-0002 (PCE), RFC-0003 (interaction field), RFC-0004 (relaxation).
 #
 # Architecture: field-centric narrative dynamics — tensors over the coupling manifold,
@@ -9,10 +10,21 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 from enum import IntEnum
-from typing import Final, Sequence
+from typing import Any, Final, Mapping, Sequence, Union
 
 import numpy as np
 from numpy.typing import NDArray
+
+from tag_v6 import (
+    DV_FEATURE_DIM,
+    apply_regret_gradient_step,
+    crystallized_state_from_worldline,
+    default_dv_feature_kinds,
+    default_dv_feature_weights,
+    phase_transition_probability_p_risk,
+    proper_time_dtau,
+    records_to_dv_feature_matrix,
+)
 
 # ---------------------------------------------------------------------------
 # Types
@@ -139,34 +151,39 @@ class NarrativeDynamicsResult:
         return self.phase_lag_radians
 
 
-# T22–T25 excluded from ΔV — Protocol v1.0.0 §9.3
-_EXCLUDED_DV_INDICES: Final[frozenset[int]] = frozenset(range(21, 25))
-
 # CFI penalty weights p_k — Protocol v1.0.0 §10.2 (order: tamper, temporal, spatial, actor, meta)
 _CFI_P_DEFAULT: Final[FloatArray] = np.array([0.8, 0.7, 0.5, 0.4, 0.3], dtype=np.float64)
 
 
+def _coerce_feature_stack(
+    tag_stack: Union[FloatArray, Sequence[Mapping[str, Any]]],
+) -> FloatArray:
+    """(N, DV_FEATURE_DIM) from v6.0.0 records or a precomputed feature matrix."""
+    if isinstance(tag_stack, np.ndarray):
+        if tag_stack.ndim != 2 or tag_stack.shape[1] != DV_FEATURE_DIM:
+            raise ValueError(
+                f"tag_stack must have shape (N, {DV_FEATURE_DIM}) numeric projection of 35TAG v6.0.0; "
+                "or pass a sequence of narrative record dicts."
+            )
+        return tag_stack.astype(np.float64, copy=False)
+    rows = records_to_dv_feature_matrix(list(tag_stack))
+    if rows.shape[1] != DV_FEATURE_DIM:
+        raise ValueError("internal feature matrix shape error")
+    return rows
+
+
+def default_dv_weights() -> FloatArray:
+    """Protocol §9.3 — weights on the v6.0.0 ΔV feature vector (normalized)."""
+    return default_dv_feature_weights()
+
+
 def default_tag_weights_35() -> FloatArray:
-    """Protocol §9.3 — default structural weights (normalized, exclusions zeroed)."""
-    w = np.zeros(35, dtype=np.float64)
-    for i in (4, 5, 12, 13):
-        w[i] = 1.0
-    for i in (7, 18, 19):
-        w[i] = 0.6
-    for i in range(35):
-        if i in _EXCLUDED_DV_INDICES:
-            w[i] = 0.0
-        elif w[i] == 0.0:
-            w[i] = 0.2
-    s = float(np.sum(w))
-    if s <= 0.0:
-        raise ValueError("tag weights sum to zero")
-    w /= s
-    return w
+    """Backward-compatible alias for ``default_dv_weights`` (35TAG v6.0.0 projection)."""
+    return default_dv_weights()
 
 
 def default_tag_kinds_35() -> NDArray[np.int8]:
-    return np.zeros(35, dtype=np.int8)
+    return default_dv_feature_kinds()
 
 
 def per_tag_delta(
@@ -200,58 +217,51 @@ def delta_v_weighted_l2(
     weights: FloatArray | None = None,
     kinds: NDArray[np.int8] | None = None,
 ) -> float:
-    """Protocol §9.1 — scalar ΔV for one pair."""
-    if tags_a.shape != (35,) or tags_b.shape != (35,):
-        raise ValueError("tags must have shape (35,)")
-    w = default_tag_weights_35() if weights is None else np.asarray(weights, dtype=np.float64).copy()
-    if w.shape != (35,):
-        raise ValueError("weights shape (35,)")
-    for i in _EXCLUDED_DV_INDICES:
-        w[i] = 0.0
+    """Protocol §9.1 — scalar ΔV for one pair (v6.0.0 ΔV feature vectors)."""
+    d = DV_FEATURE_DIM
+    if tags_a.shape != (d,) or tags_b.shape != (d,):
+        raise ValueError(f"tags must have shape ({d},)")
+    w = default_dv_weights() if weights is None else np.asarray(weights, dtype=np.float64).copy()
+    if w.shape != (d,):
+        raise ValueError(f"weights shape ({d},)")
     s = float(np.sum(w))
     if s > 0.0:
         w /= s
     k_arr = default_tag_kinds_35() if kinds is None else kinds
-    if k_arr.shape != (35,):
-        raise ValueError("kinds shape (35,)")
+    if k_arr.shape != (d,):
+        raise ValueError(f"kinds shape ({d},)")
 
     acc = 0.0
-    for i in range(35):
-        if i in _EXCLUDED_DV_INDICES:
-            continue
+    for i in range(d):
         acc += float(w[i]) * (per_tag_delta(tags_a[i], tags_b[i], int(k_arr[i])) ** 2)
     return float(math.sqrt(max(acc, 0.0)))
 
 
 def pairwise_delta_v_matrix(
-    tag_stack: FloatArray,
+    tag_stack: Union[FloatArray, Sequence[Mapping[str, Any]]],
     weights: FloatArray | None = None,
     kinds: NDArray[np.int8] | None = None,
 ) -> FloatArray:
     """ΔV_ij — vectorized when all kinds are FLOAT; else pairwise loop."""
-    if tag_stack.ndim != 2 or tag_stack.shape[1] != 35:
-        raise ValueError("tag_stack must have shape (N, 35)")
-    n = int(tag_stack.shape[0])
+    stack = _coerce_feature_stack(tag_stack)
+    if stack.ndim != 2 or stack.shape[1] != DV_FEATURE_DIM:
+        raise ValueError(f"tag_stack must have shape (N, {DV_FEATURE_DIM})")
+    n = int(stack.shape[0])
     kinds = default_tag_kinds_35() if kinds is None else kinds
     if np.any(kinds != 0):
         out = np.zeros((n, n), dtype=np.float64)
         for i in range(n):
             for j in range(i + 1, n):
-                dv = delta_v_weighted_l2(tag_stack[i], tag_stack[j], weights=weights, kinds=kinds)
+                dv = delta_v_weighted_l2(stack[i], stack[j], weights=weights, kinds=kinds)
                 out[i, j] = out[j, i] = dv
         return out
 
-    w = default_tag_weights_35() if weights is None else np.asarray(weights, dtype=np.float64).copy()
-    for i in _EXCLUDED_DV_INDICES:
-        w[i] = 0.0
+    w = default_dv_weights() if weights is None else np.asarray(weights, dtype=np.float64).copy()
     sw = float(np.sum(w))
     if sw > 0.0:
         w /= sw
-    mask = np.ones(35, dtype=np.float64)
-    for i in _EXCLUDED_DV_INDICES:
-        mask[i] = 0.0
-    diff = tag_stack[:, np.newaxis, :] - tag_stack[np.newaxis, :, :]
-    dv = np.sqrt(np.maximum(np.sum(w * (diff ** 2) * mask, axis=2), 0.0))
+    diff = stack[:, np.newaxis, :] - stack[np.newaxis, :, :]
+    dv = np.sqrt(np.maximum(np.sum(w * (diff**2), axis=2), 0.0))
     np.fill_diagonal(dv, 0.0)
     return dv.astype(np.float64)
 
@@ -554,7 +564,7 @@ def analyze_field_pathologies(
 
 
 def run_narrative_dynamics_core(
-    tag_stack: FloatArray,
+    tag_stack: Union[FloatArray, Sequence[Mapping[str, Any]]],
     interpretation_trajectory: FloatArray | None = None,
     amplitude_matrix: FloatArray | None = None,
     interaction_prev: ComplexArray | None = None,
@@ -574,7 +584,7 @@ def run_narrative_dynamics_core(
     PCE ignition is computed only if ``sigma_prev_external`` and both thresholds are provided
     alongside internally computed ``sigma_now`` from the current slice.
     """
-    dv = pairwise_delta_v_matrix(tag_stack, weights=weights, kinds=kinds)
+    dv = pairwise_delta_v_matrix(tag_stack, weights=weights, kinds=kinds)  # accepts v6 dicts or (N,D) features
     n = int(dv.shape[0])
     if interpretation_trajectory is None:
         phi = np.zeros((n, n), dtype=np.float64)
@@ -635,8 +645,14 @@ __all__ = [
     "RelaxationResult",
     "FieldMetrics",
     "InteractionEngineResult",
+    "DV_FEATURE_DIM",
+    "default_dv_weights",
     "default_tag_weights_35",
     "default_tag_kinds_35",
+    "phase_transition_probability_p_risk",
+    "apply_regret_gradient_step",
+    "proper_time_dtau",
+    "crystallized_state_from_worldline",
     "per_tag_delta",
     "delta_v_weighted_l2",
     "sigma_delta_v",

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { Layout } from "./components/Layout";
 import { HomePage } from "./pages/HomePage";
-import { Protocol24TAG } from "./pages/Protocol24TAG";
+import { Protocol35TAG } from "./pages/Protocol35TAG";
 import { MathStandardization } from "./pages/MathStandardization";
 import { WhitepapersIndex } from "./pages/WhitepapersIndex";
 import { NarrativeQuantification } from "./pages/NarrativeQuantification";
@@ -18,8 +18,8 @@ export const router = createBrowserRouter([
     Component: Layout,
     children: [
       { index: true, Component: HomePage },
-      { path: "protocol/24tag-schema", Component: Protocol24TAG },
-      { path: "protocol/35tag-schema", Component: Protocol24TAG },
+      { path: "protocol/24tag-schema", Component: Protocol35TAG },
+      { path: "protocol/35tag-schema", Component: Protocol35TAG },
       { path: "protocol/definition", Component: ProtocolDefinition },
       { path: "protocol/mathematical-standardization", Component: MathStandardization },
       { path: "/protocol/hxt-format", Component: HxtFormat },

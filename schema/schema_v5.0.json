@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/GemminAI/Acta-AIIE/main/schema/schema_v5.0.json",
-  "title": "AIIE Protocol v5.0 — 24TAG Narrative Crystal Schema",
-  "description": "Formal schema for deterministic narrative state objects. Each field is a physical constraint enforced at the LLM API level via response_schema. Incomplete or schema-violating outputs are rejected and re-generated. This schema is the implementation of the Crystallization Constitution (§0–§3).",
+  "title": "AIIE Protocol v5.0 — Legacy narrative crystal schema (use 35TAG v6.0.0 for new work)",
+  "description": "Legacy t01_*-style binding. Canonical narrative state: 35TAG v6.0.0 (specs/35TAG_Standard_v6.0.0.md). T25 state_hash: SHA-256(JCS(TAG 01–34 except state_hash)). Fields are physical constraints when used with response_schema. This schema implements the Crystallization Constitution (§0–§3) in historical form.",
   "version": "5.0.0",
   "author": "Gemmina Intelligence LLC. — Tomohiko Nakamura",
   "license": "MIT",
@@ -146,7 +146,7 @@
     "state_hash": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$",
-      "description": "The 25th constant. SHA-256( JCS( T01..T24 ) ) per RFC 8785. Tamper-evident fingerprint of the narrative crystal. Any single-bit change produces a detectably different hash."
+      "description": "T25 anchor. SHA-256( JCS( TAG 01..34 except state_hash ) ) per RFC 8785 — align with 35TAG v6.0.0 verifier (sdk/tag_v6.py)."
     },
 
     "schema_version": {
@@ -180,7 +180,7 @@
     "§3": "Direction ∈ {upstream, midstream, downstream} — 3-choice enum only."
   },
 
-  "x-state-hash-formula": "state_hash = SHA-256( JCS( T01..T24 ) ) per RFC 8785 (JSON Canonicalization Scheme)",
+  "x-state-hash-formula": "state_hash = SHA-256( JCS( TAG 01..34 except state_hash ) ) per RFC 8785 — canonical: 35TAG v6.0.0",
 
   "x-implementation": {
     "verify_integrity": "https://raw.githubusercontent.com/GemminAI/Acta-AIIE/main/verify_integrity.py",

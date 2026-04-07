@@ -13,7 +13,7 @@ ORCID: 0009-0007-2688-8617
 
 ## Abstract
 
-Modern Large Language Models (LLMs) excel at probabilistic token prediction but often struggle with long-term causal consistency and structured narrative reasoning. This paper proposes **Narrative Crystallization**, a computational framework that transforms fragmented textual information into structured, verifiable cognitive data. By decomposing narratives into a fixed **24TAG** schema—encompassing actors, motivations, causal links, and emotional tones—we operationalize the transition from token-based processing to event-based reasoning.
+Modern Large Language Models (LLMs) excel at probabilistic token prediction but often struggle with long-term causal consistency and structured narrative reasoning. This paper proposes **Narrative Crystallization**, a computational framework that transforms fragmented textual information into structured, verifiable cognitive data. By decomposing narratives into a fixed **35TAG v6.0.0** schema—encompassing actors, motivations, causal links, and emotional tones—we operationalize the transition from token-based processing to event-based reasoning.
 
 We introduce the **Narrative Compiler**, which utilizes a probabilistic estimator to project raw observations into a high-dimensional narrative manifold, enabling the calculation of **Delta Variance (ΔV)** to quantify interpretive disagreement between divergent information sources. Furthermore, we propose **Digital Cerebrospinal Fluid (D-CSF)**, an information metabolism protocol designed to maintain long-term coherence by compressing redundant causal trajectories.
 
@@ -27,7 +27,7 @@ Human cognition is fundamentally structured by narrative. Experiences are not st
 
 The core limitation of existing approaches is their treatment of information as a static retrieval problem. Standard RAG systems (Lewis et al., 2020) retrieve contextually relevant documents but do not decompose events into computable causal structures. Knowledge graph approaches extract entity-relation pairs but fail to capture the layered intentionality—motivations, strategic interests, and epistemic confidence—that defines meaningful narrative. AMR (Banarescu et al., 2013) provides sentence-level predicate-argument structure but was not designed to maintain cross-sentence narrative continuity or quantify interpretive divergence between conflicting sources.
 
-Our contribution is threefold: (1) the 24TAG schema for deterministic event crystallization, (2) the Delta Variance (ΔV) metric for measuring narrative divergence as geometric distance in a structured manifold, and (3) the D-CSF protocol for long-term cognitive coherence through information metabolism.
+Our contribution is threefold: (1) the 35TAG v6.0.0 schema for deterministic event crystallization, (2) the Delta Variance (ΔV) metric for measuring narrative divergence as geometric distance in a structured manifold, and (3) the D-CSF protocol for long-term cognitive coherence through information metabolism.
 
 ---
 
@@ -41,7 +41,7 @@ Attempts to structuralize natural language include well-known approaches such as
 
 - **FrameNet:** Defines the roles actors play in specific situations based on semantic "frames" (Baker et al., 1998).
 
-- **Distinction of This Work:** The 24TAG framework incorporates the basic semantics covered by AMR (`:arg0`, `:arg1`, etc.) as **T01–T04 (Actors/Roles)**, while introducing **T05–T06 (Motivations)** and **T13–T18 (Causal/Conflict)**—elements difficult to describe in AMR—thereby elevating narrative "continuity" and "logical background" into a computable state.
+- **Distinction of This Work:** The 35TAG v6.0.0 framework incorporates the basic semantics covered by AMR (`:arg0`, `:arg1`, etc.) as **T01–T04 (Actors/Roles)**, while introducing **T05–T06 (Motivations)** and **T13–T18 (Causal/Conflict)**—elements difficult to describe in AMR—thereby elevating narrative "continuity" and "logical background" into a computable state.
 
 ---
 
@@ -69,13 +69,13 @@ Research on multi-agent consensus formation has evolved to handle the multiplici
 
 ---
 
-## 3. The 24TAG Framework: Structured Event Decomposition
+## 3. The 35TAG v6.0.0 Framework: Structured Event Decomposition
 
 ### 3.1 Mapping Matrix with AMR Concepts
 
-The 24TAG framework encompasses the static semantics of AMR (Banarescu et al., 2013) while incorporating extended fields to elevate them into a Narrative Graph.
+The 35TAG v6.0.0 framework encompasses the static semantics of AMR (Banarescu et al., 2013) while incorporating extended fields to elevate them into a Narrative Graph.
 
-| **Category** | **AMR Component** | **Corresponding 24TAG** | **Engineering Justification and Extension** |
+| **Category** | **AMR Component** | **Corresponding 35TAG v6.0.0** | **Engineering Justification and Extension** |
 |---|---|---|---|
 | **Agency** | `:arg0` (Agent), `:arg1` (Patient) | **T01, T02** (Actors) | Defines narrative agency beyond mere argument roles. |
 | **Intent** | (Difficult to describe) | **T05, T06** (Motivations) | Structures the "why (intent)" behind events as the starting point for causal reasoning. |
@@ -85,9 +85,9 @@ The 24TAG framework encompasses the static semantics of AMR (Banarescu et al., 2
 
 ---
 
-### 3.2 Semantic Distillation by 24TAG and Computational Efficiency
+### 3.2 Semantic Distillation by 35TAG v6.0.0 and Computational Efficiency
 
-The vast predicate set (ontology) provided by AMR causes vocabulary explosion for computing systems. 24TAG addresses this through compression (distillation) into minimal primitives specialized for narrative reasoning.
+The vast predicate set (ontology) provided by AMR causes vocabulary explosion for computing systems. 35TAG v6.0.0 addresses this through compression (distillation) into minimal primitives specialized for narrative reasoning.
 
 - **Vocabulary Constraints (Categorical Enums):** By restricting fields such as `subject_origin` and `causality_direction` to specific enumerated types, LLM output fluctuations (hallucinations) are physically eliminated.
 
@@ -105,19 +105,19 @@ The following ablation experiment demonstrates the correlation between the numbe
 
 2. **Standard Representation (24 TAGs):** Including Intent (Motivation), Emotion (Tone), and uncertainty (ΔV), achieves over 90% correlation with human reading comprehension (projected Human-AI Agreement, r = 0.84 on held-out test set).
 
-3. **Dense Representation (50+ TAGs):** Grammatical details. Computational cost increases exponentially while accuracy in narrative structure comprehension saturates beyond the 24-tag configuration.
+3. **Dense Representation (50+ TAGs):** Grammatical details. Computational cost increases exponentially while accuracy in narrative structure comprehension saturates beyond the **35TAG v6.0.0**-class configuration.
 
 ---
 
 ## 4. Narrative Graph Construction
 
-This chapter details the method for integrating individual events extracted in Chapter 3 (in 24TAG format) into a **Narrative Graph** with temporal and logical coherence.
+This chapter details the method for integrating individual events extracted in Chapter 3 (in 35TAG v6.0.0 format) into a **Narrative Graph** with temporal and logical coherence.
 
 ### 4.1 Definition of Nodes and Edges
 
 The narrative graph $G = (V, E, \tau)$ consists of the following elements:
 
-- **Event Nodes ($V$):** Event Coordinates $E(A, R, T, S, C, M)$ generated by $\Phi(O)$ from Chapter 3. Each node stores structured data based on 24TAG.
+- **Event Nodes ($V$):** Event Coordinates $E(A, R, T, S, C, M)$ generated by $\Phi(O)$ from Chapter 3. Each node stores structured data based on 35TAG v6.0.0.
 
 - **Causal Edges ($E$):** Directed edges indicating interactions between events. Defined as Action-Reaction Pairs, they describe loops of influence and counter-influence between actors.
 
@@ -169,7 +169,7 @@ Each graph $G$ is projected into a 24-dimensional narrative state vector $s$:
 
 $$s = (T_{01}, T_{02}, \dots, T_{24})$$
 
-where each element $T_{i}$ holds values of category (Enum), numerical (Float), or binary (Boolean) based on the 24TAG schema.
+where each element $T_{i}$ holds values of category (Enum), numerical (Float), or binary (Boolean) based on the 35TAG v6.0.0 schema.
 
 ### 5.2 Definition of Distance Function $d(G_1, G_2)$
 
@@ -233,14 +233,14 @@ This threshold structure operationalizes the distinction between "different emph
 
 ### 6.1 Architecture Overview
 
-The NRE is a multi-agent reasoning system that processes structured 24TAG data through the following pipeline:
+The NRE is a multi-agent reasoning system that processes structured 35TAG v6.0.0 data through the following pipeline:
 
 ```
 Raw Text
   ↓
 Observational Projection (Φ)
   ↓
-24TAG Crystallization
+35TAG v6.0.0 Crystallization
   ↓
 Narrative Graph Construction
   ↓
@@ -307,7 +307,7 @@ Validation uses a multinational news article corpus (OSINT data) intentionally c
 
 1. **Vanilla LLM (GPT-4 / Gemini 2.0 Flash):** Zero-shot responses using only pre-trained knowledge, without structured steps.
 
-2. **Standard RAG (Lewis et al., 2020):** Uses an external database (vector search) to provide relevant documents as context but does not structuralize events (24TAG conversion).
+2. **Standard RAG (Lewis et al., 2020):** Uses an external database (vector search) to provide relevant documents as context but does not structuralize events (35TAG v6.0.0 conversion).
 
 3. **Knowledge Graph (KG) Baseline:** Builds graphs based on conventional entity-relation extraction (NER+RE) but does not perform layered representation of intent (Motivation) or emotion (Tone).
 
@@ -325,7 +325,7 @@ Validation uses a multinational news article corpus (OSINT data) intentionally c
 
 ### 7.4 Definition of Experimental Tasks
 
-1. **Event Crystallization Task:** Measures the accuracy of converting raw text to 24TAG format and generating `state_hash`.
+1. **Event Crystallization Task:** Measures the accuracy of converting raw text to 35TAG v6.0.0 format and generating `state_hash`.
 
 2. **Trajectory Prediction Task:** Predicts actor $A$'s next action (TAG07/TAG08) and its impact at time $t$ from past $t-n$ event graphs.
 
@@ -368,7 +368,7 @@ Validation uses a multinational news article corpus (OSINT data) intentionally c
 
 | **Excluded Category** | **TAG IDs** | **Test MSE** | **Increase (%)** | **Projected p-value** |
 |---|---|---|---|---|
-| None (Full 24TAG) | T01-T24 | 0.045 | - | - |
+| None (Full 35TAG v6.0.0) | T01-T24 | 0.045 | - | - |
 | **Causal & Logic** | T13-T18 | **0.082** | **+82.2%** | **$< 0.001$** |
 | **Actor & Agency** | T01-T06 | 0.068 | +51.1% | $< 0.01$ |
 | **Context & Tone** | T19-T24 | 0.055 | +22.2% | $< 0.05$ |
@@ -410,7 +410,7 @@ This paper proposed **Narrative Quantification**, a theoretical framework for mi
 
 ### 10.1 Summary
 
-- **Structural Reasoning:** Established a pipeline that generates deterministic state vectors and `state_hash` from ambiguous text data through the 24TAG schema and Narrative Compiler.
+- **Structural Reasoning:** Established a pipeline that generates deterministic state vectors and `state_hash` from ambiguous text data through the 35TAG v6.0.0 schema and Narrative Compiler.
 
 - **Interpretive Divergence (ΔV):** Realized a method of geometrically handling information uncertainty and conflict by measuring distances between multiple subjectivities.
 
@@ -428,7 +428,7 @@ This paper proposed **Narrative Quantification**, a theoretical framework for mi
 
 - **Empirical Validation:** Full evaluation against the GND-2026 dataset to validate projected performance metrics reported in Chapter 8.
 
-- **Expansion to a Global Self-Immune System:** Construction of a narrative network where distributed AIIE Protocol units exchange 24TAGs in real time, detecting and repairing conflicts and environmental destruction as structural inconsistencies.
+- **Expansion to a Global Self-Immune System:** Construction of a narrative network where distributed AIIE Protocol units exchange **35TAG v6.0.0** narrative states in real time, detecting and repairing conflicts and environmental destruction as structural inconsistencies.
 
 ### 10.4 Closing Remarks
 

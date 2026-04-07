@@ -30,9 +30,9 @@ const PAPERS = [
     author: "Acta AIIE Standardization Committee",
     thesis: "Definition of data structures and the specifications for 'Crystallization.'",
     abstract:
-      "Rigorous technical definition of the 24TAG schema, the Physics of Information mapping, JCS Crystallization Engine, and CFI Score — the complete mathematical architecture of the AIIE Protocol.",
+      "Rigorous technical definition of the 35TAG v6.0.0 schema, the Physics of Information mapping, JCS Crystallization Engine, and CFI Score — the complete mathematical architecture of the AIIE Protocol.",
     keyTopics: [
-      { label: "24TAG Definition", content: "Rigorous definition of structured fields across five categories: Identification, Dynamics, Bias, Spillover Risk, and Expression." },
+      { label: "35TAG v6.0.0 Definition", content: "Rigorous definition of structured fields across ten categories (I–X): Identification through Reality Selection, plus T25 state_hash anchor." },
       { label: "JCS Crystallization Engine", content: "Mathematical proof of immutability using SHA-256 and the 25th Tag: state_hash, compliant with RFC 8785." },
       { label: "CFI Score", content: "A metric that automatically detects contradictions between physical evidence and narrative claims." },
     ],

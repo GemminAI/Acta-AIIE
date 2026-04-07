@@ -11,7 +11,7 @@ def generate_state_hash(tags_dict):
     Generates a 'Cryptographic Fingerprint' with zero-bit tolerance.
     
     Args:
-        tags_dict: A dictionary containing TAG 01 through TAG 24.
+        tags_dict: Canonical keys for T25: TAG 01–34 except state_hash (35TAG v6.0.0).
     
     Returns:
         A 64-character hexadecimal SHA-256 hash string.
@@ -23,7 +23,7 @@ def generate_state_hash(tags_dict):
     # 1. Ensure Data Integrity
     #    - Convert floats to ECMA-262 compliant decimals
     #    - Format dates to ISO 8601 (UTC/Z)
-    #    - Validate all 24 required fields are present
+    #    - Validate JCS payload fields per tag_v6.STATE_HASH_JCS_KEYS
     normalized_data = prepare_data(tags_dict)
     
     # 2. RFC 8785 Compliant Serialization (Crystallization)
@@ -79,13 +79,13 @@ export function JCSSDK() {
       <Section num="1.0">
         <SectionTitle>Objective</SectionTitle>
         <Body>
-          Within the AIIE Protocol, information reliability is anchored by mathematical immutability. This SDK provides the normalization logic required to transition 24TAG JSON data into an immutable state, enabling the generation of a <InlineCode>state_hash</InlineCode> with zero-bit variance across all compliant systems.
+          Within the AIIE Protocol, information reliability is anchored by mathematical immutability. This SDK provides the normalization logic required to transition <strong>35TAG v6.0.0</strong> JSON data into an immutable state, enabling the generation of a <InlineCode>state_hash</InlineCode> (T25) with zero-bit variance across all compliant systems.
         </Body>
         <Body>
-          The JCS Crystallization Engine eliminates the subtle ambiguities that arise when different programming languages, JSON libraries, and numeric representations produce slightly different serializations of the same data. By enforcing a single canonical form — defined by RFC 8785 — the SDK guarantees that the same 24 tags will always produce the same <InlineCode>state_hash</InlineCode>, on any machine, in any environment.
+          The JCS Crystallization Engine eliminates the subtle ambiguities that arise when different programming languages, JSON libraries, and numeric representations produce slightly different serializations of the same data. By enforcing a single canonical form — defined by RFC 8785 — the SDK guarantees that the same <strong>JCS payload</strong> for T25 will always produce the same <InlineCode>state_hash</InlineCode>, on any machine, in any environment.
         </Body>
         <InfoBox accent>
-          The fundamental guarantee of the Crystallization Engine: given identical TAG 01–24 values, the <InlineCode>state_hash</InlineCode> output will be bit-for-bit identical across Python, TypeScript, PHP, and any other compliant SDK implementation. This cross-language consistency is the mathematical foundation of the AIIE Protocol's verifiability.
+          The fundamental guarantee of the Crystallization Engine: given identical canonical TAG 01–34 inputs (excluding <InlineCode>state_hash</InlineCode>), the <InlineCode>state_hash</InlineCode> output will be bit-for-bit identical across Python, TypeScript, PHP, and any other compliant SDK implementation.
         </InfoBox>
       </Section>
 

@@ -9,7 +9,7 @@
 
 #### **1. Objective**
 
-Within the AIIE Protocol, information reliability is anchored by mathematical immutability. This SDK provides the normalization logic required to transition 24TAG JSON data into an immutable state, enabling the generation of a `state_hash` with zero-bit variance across all compliant systems.
+Within the AIIE Protocol, information reliability is anchored by mathematical immutability. This SDK provides the normalization logic required to transition 35TAG v6.0.0 JSON data into an immutable state, enabling the generation of a `state_hash` with zero-bit variance across all compliant systems.
 
 #### **2. Technical Specifications**
 

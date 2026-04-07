@@ -45,7 +45,7 @@ GemminAI is designed as a news analysis system, but its essence is an **atmosphe
 
 ### 2.1 Core (Structural Layer)
 
-Decomposes news articles into the 24TAG structure, extracting the semantic elements of information. Here, "fact," "claim," "emotion," and "context" are structured. The purpose of this layer is to treat news not as ambiguous text but as **calculable meteorological data (temperature, humidity, wind direction)**.
+Decomposes news articles into the 35TAG v6.0.0 structure, extracting the semantic elements of information. Here, "fact," "claim," "emotion," and "context" are structured. The purpose of this layer is to treat news not as ambiguous text but as **calculable meteorological data (temperature, humidity, wind direction)**.
 
 ### 2.2 HRE — Human Relation Engine
 

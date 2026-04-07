@@ -11,7 +11,7 @@
 
 Human societies interpret events primarily through narrative structures rather than isolated data points. This paper proposes **Narrative Quantification**, a framework for transforming narrative information into structured cognitive data. By decomposing narratives into actors, events, conflicts, resolutions, emotional context, and causal relationships, narratives can be stored as structured datasets and analyzed computationally.
 
-To operationalize this transformation, the paper introduces the concept of a **Narrative Compiler**, a system that converts narrative text into structured cognitive representations such as the **24TAG structure**. These representations enable the creation of narrative databases that may serve as the foundation for **Large Cognitive Models (LCM)** — systems designed to reason over structured representations of human narratives rather than purely probabilistic language tokens.
+To operationalize this transformation, the paper introduces the concept of a **Narrative Compiler**, a system that converts narrative text into structured cognitive representations such as the **35TAG v6.0.0 structure**. These representations enable the creation of narrative databases that may serve as the foundation for **Large Cognitive Models (LCM)** — systems designed to reason over structured representations of human narratives rather than purely probabilistic language tokens.
 
 This work suggests that narrative quantification may function as a new layer of cognitive infrastructure for future AI systems.
 
@@ -51,9 +51,9 @@ The pipeline transforms raw OSINT narratives into deterministic narrative states
 
 > *"AIIE Protocol v5.0 JSON Schema: Formal specification for deterministic narrative states with regex-based temporal anchoring and categorical enums."*
 
-[![Figure 2 — 24TAG Schema v5.0](gemminai_24tag_schema_v5.svg)](gemminai_24tag_schema_v5.svg)
+[![Figure 2 — 35TAG v6.0.0 Schema v5.0](gemminai_24tag_schema_v5.svg)](gemminai_24tag_schema_v5.svg)
 
-**Insertion**: Section 5 "The 24TAG Taxonomy"
+**Insertion**: Section 5 "The 35TAG v6.0.0 Taxonomy"
 
 Unlike a descriptive annotation guideline, this schema is directly injected into the LLM generation process as `response_schema`, meaning that invalid outputs are rejected at the API level.
 

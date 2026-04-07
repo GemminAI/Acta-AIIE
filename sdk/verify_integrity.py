@@ -7,8 +7,8 @@
 #
 #  「言葉はAIが紡ぎ、真実は数学が守る。」
 #
-#  24の属性と本文を RFC 8785 (JCS) で結晶化し、
-#  25番目の刻印として SHA-256 ハッシュを刻む。
+#  35TAG v6.0.0 — TAG 01〜34（`state_hash` を除く）を RFC 8785 (JCS) で結晶化し、
+#  TAG 25 `state_hash` として SHA-256 ハッシュを刻む（実装は sdk/tag_v6.STATE_HASH_JCS_KEYS）。
 #  このスクリプトは、その刻印が偽りでないことを
 #  世界中の誰もが自ら証明するための公的ツールである。
 #
@@ -24,6 +24,8 @@ import struct
 import sys
 from pathlib import Path
 from typing import Any, Union
+
+from tag_v6 import STATE_HASH_JCS_KEYS  # 35TAG v6.0.0 — TAG 01–34 excl. state_hash; TAG 35 not in anchor
 
 __version__ = "1.0.0"
 __author__ = "Tomohiko Nakamura"
@@ -362,14 +364,18 @@ class VerificationResult:
 def verify(data: dict[str, Any]) -> VerificationResult:
     """GemminAI データの整合性を検証する。
 
-    state_hash フィールドをデータ本体から分離し、
-    残りの属性を JCS で正規化、SHA-256 で再計算したハッシュと照合する。
+    ``state_hash`` (TAG 25) を分離し、35TAG v6.0.0 では TAG 01〜34 のうち
+    ``state_hash`` 以外（`STATE_HASH_JCS_KEYS`）のみを JCS ペイロードとする。
+    TAG 35 はアンカー計算に含めない。
     """
     expected = ""
     if _HASH_FIELD in data:
         expected = str(data[_HASH_FIELD])
 
-    payload = {k: v for k, v in data.items() if k != _HASH_FIELD}
+    if STATE_HASH_JCS_KEYS:
+        payload = {k: data[k] for k in STATE_HASH_JCS_KEYS if k in data}
+    else:
+        payload = {k: v for k, v in data.items() if k != _HASH_FIELD}
     canonical = canonicalize(payload)
     computed = compute_hash(canonical)
 

@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { Tag35Registry } from "../components/Tag35Registry";
 
 const MONO = "'JetBrains Mono', monospace";
 
@@ -7,7 +8,7 @@ const MONO = "'JetBrains Mono', monospace";
    ───────────────────────────────────────────── */
 const REFS: Record<string, { label: string; href: string }> = {
   "01": { label: "JCS SDK — Crystallization Engine",              href: "/sdk/crystallization-engine" },
-  "02": { label: "24TAG Schema Specification v4.1.0",            href: "/protocol/24tag-schema" },
+  "02": { label: "35TAG v6.0.0 Schema Specification",            href: "/protocol/35tag-schema" },
   "03": { label: "Narrative Observation — Cross-Domain Corr.",   href: "/whitepapers/narrative-observation" },
   "04": { label: "Mathematical Standardization of Narrative Intent", href: "/protocol/mathematical-standardization" },
   "05": { label: "Whitepapers Archive",                          href: "/whitepapers" },
@@ -208,200 +209,6 @@ function Math({ children }: { children: React.ReactNode }) {
 }
 
 /* ─────────────────────────────────────────────
-   24TAG TABLE (Technical Drawing Style)
-   ───────────────────────────────────────────── */
-const TAGS = [
-  { layer: "Actor & Agency", id: "T01", name: "Primary_Actor",      type: "string",  desc: "Main entity initiating the interaction." },
-  { layer: "",               id: "T02", name: "Secondary_Actor",    type: "string",  desc: "Entity receiving or responding to the action." },
-  { layer: "",               id: "T03", name: "Actor_Role_A",       type: "enum",    desc: "Functional role of primary actor (Protagonist / Antagonist / Neutral)." },
-  { layer: "",               id: "T04", name: "Actor_Role_B",       type: "enum",    desc: "Functional role of secondary actor." },
-  { layer: "",               id: "T05", name: "Actor_Motivation_A", type: "string",  desc: "Underlying goal or 'Why' for Actor A." },
-  { layer: "",               id: "T06", name: "Actor_Motivation_B", type: "string",  desc: "Underlying goal or 'Why' for Actor B." },
-  { layer: "Event & Action", id: "T07", name: "Action_Type",        type: "enum",    desc: "Category of event — Verbal | Physical | Financial | Symbolic." },
-  { layer: "",               id: "T08", name: "Action_Intensity",   type: "float",   desc: "Magnitude of the action. Scale: 0.0 → 1.0." },
-  { layer: "",               id: "T09", name: "Target_Resource",    type: "string",  desc: "Specific object or value being contested." },
-  { layer: "",               id: "T10", name: "Event_Modality",     type: "enum",    desc: "{Fact, Hypothesis, Desire, Counterfactual}" },
-  { layer: "",               id: "T11", name: "Temporal_Sequence",  type: "integer", desc: "Relative order of event within the narrative arc." },
-  { layer: "",               id: "T12", name: "Spatial_Context",    type: "string",  desc: "Domain or environment where the event occurs." },
-  { layer: "Causal & Logic", id: "T13", name: "Causal_Link_Type",   type: "enum",    desc: "{Direct, Enabling, Inhibiting, Trigger}" },
-  { layer: "",               id: "T14", name: "Conflict_Nature",    type: "enum",    desc: "Internal | Interpersonal | Institutional | Systemic." },
-  { layer: "",               id: "T15", name: "Conflict_Intensity", type: "float",   desc: "Severity of friction between actors. Scale: 0.0 → 1.0." },
-  { layer: "",               id: "T16", name: "Resolution_Status",  type: "int",     desc: "{0, 1, 2, 3}" },
-  { layer: "",               id: "T17", name: "Outcome_Valence",    type: "float",   desc: "Positive/negative impact. Scale: −1.0 → +1.0." },
-  { layer: "",               id: "T18", name: "Logic_Consistency",  type: "float",   desc: "Alignment with prior narrative states. Scale: 0.0 → 1.0." },
-  { layer: "Context & Tone", id: "T19", name: "Emotional_Tone_A",   type: "enum",    desc: "Emotional state of Actor A during the event." },
-  { layer: "",               id: "T20", name: "Emotional_Tone_B",   type: "enum",    desc: "Emotional state of Actor B during the event." },
-  { layer: "",               id: "T21", name: "Perspective_Bias",   type: "float",   desc: "Point-of-view bias of the narrative. Scale: −1.0 → +1.0." },
-  { layer: "",               id: "T22", name: "Info_Asymmetry",     type: "float",   desc: "Knowledge gap between actors. Scale: 0.0 → 1.0." },
-  { layer: "",               id: "T23", name: "Significance_Score", type: "float",   desc: "Relative importance of event to the overall arc. Scale: 0.0 → 1.0." },
-  { layer: "",               id: "T24", name: "Narrative_Closure",  type: "float",   desc: "Extent to which this event concludes a specific thread." },
-];
-
-function Tag24Registry() {
-  const COL = "1px solid #ffffff";
-  const COL_DIM = "1px solid rgba(255,255,255,0.12)";
-
-  return (
-    <div>
-      <div style={{ border: COL, overflowX: "auto" as const }}>
-        {/* Header row */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "100px 52px 190px 70px 1fr",
-            borderBottom: COL,
-            background: "#000000",
-          }}
-        >
-          {["Layer", "ID", "Tag Name", "Type", "Definition"].map((h, i) => (
-            <div
-              key={h}
-              style={{
-                fontFamily: MONO,
-                fontSize: "8px",
-                color: "#ffffff",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase" as const,
-                padding: "7px 10px",
-                borderRight: i < 4 ? COL : "none",
-              }}
-            >
-              {h}
-            </div>
-          ))}
-        </div>
-
-        {/* Data rows */}
-        {TAGS.map((row, i) => {
-          const isLayerStart = row.layer !== "";
-          const rowBorder = i === TAGS.length - 1 ? "none" : COL_DIM;
-
-          return (
-            <div
-              key={row.id}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "100px 52px 190px 70px 1fr",
-                borderBottom: rowBorder,
-                background: isLayerStart ? "rgba(255,255,255,0.015)" : "transparent",
-              }}
-            >
-              {/* Layer */}
-              <div
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "8px",
-                  color: isLayerStart ? "rgba(255,255,255,0.5)" : "transparent",
-                  letterSpacing: "0.05em",
-                  padding: "6px 10px",
-                  borderRight: COL_DIM,
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                {row.layer || "·"}
-              </div>
-              {/* ID */}
-              <div
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "9px",
-                  color: "#4a8fa8",
-                  letterSpacing: "0.04em",
-                  padding: "6px 10px",
-                  borderRight: COL_DIM,
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                {row.id}
-              </div>
-              {/* Name */}
-              <div
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "9px",
-                  color: "#c8d4e0",
-                  letterSpacing: "0.01em",
-                  padding: "6px 10px",
-                  borderRight: COL_DIM,
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                {row.name}
-              </div>
-              {/* Type */}
-              <div
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "8px",
-                  color: "#3d5a72",
-                  letterSpacing: "0.06em",
-                  padding: "6px 10px",
-                  borderRight: COL_DIM,
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                {row.type}
-              </div>
-              {/* Definition */}
-              <div
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "9px",
-                  color: "#5a7a8e",
-                  lineHeight: 1.65,
-                  padding: "6px 10px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                {row.desc}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div
-        style={{
-          marginTop: "10px",
-          border: "1px solid rgba(56,189,248,0.35)",
-          background: "rgba(56,189,248,0.04)",
-          padding: "10px 12px",
-        }}
-      >
-        <div
-          style={{
-            fontFamily: MONO,
-            fontSize: "9px",
-            color: "#38bdf8",
-            letterSpacing: "0.08em",
-            textTransform: "uppercase" as const,
-            marginBottom: "6px",
-          }}
-        >
-          Protocol Seal<Ref id="01" />
-        </div>
-        <div
-          style={{
-            fontFamily: MONO,
-            fontSize: "10px",
-            color: "#c8d4e0",
-            lineHeight: 1.7,
-            whiteSpace: "pre-line" as const,
-          }}
-        >
-          {"state_hash = SHA256( JCS( T01…T24 ) )\nExcluded from its own input. One-Way Cognitive Seal."}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────
    MAIN COMPONENT
    ───────────────────────────────────────────── */
 export function HomePage() {
@@ -590,7 +397,7 @@ export function HomePage() {
           <p style={{ fontFamily: MONO, fontSize: "11px", color: "#6b8090", lineHeight: 1.9, margin: 0, letterSpacing: "0.01em" }}>
             To operationalize this transformation, the paper introduces the <B>Narrative Compiler</B>, a system
             converting narrative text into structured cognitive representations such as the{" "}
-            <B>24TAG structure</B><Ref id="02" />. These representations serve as the foundation for{" "}
+            <B>35TAG v6.0.0 structure</B><Ref id="02" />. These representations serve as the foundation for{" "}
             <B>Large Cognitive Models (LCM)</B> — systems that reason over structured narrative representations
             rather than purely probabilistic language tokens.
           </p>
@@ -600,7 +407,7 @@ export function HomePage() {
       <div style={{ height: "1px", background: "#1a2530", marginBottom: "0" }} />
 
       {/* ══════════════════════════════════════════
-          24TAG SCHEMA REGISTRY
+          35TAG v6.0.0 SCHEMA REGISTRY
       ══════════════════════════════════════════ */}
       <div
         style={{
@@ -623,14 +430,14 @@ export function HomePage() {
                 margin: "6px 0 4px",
               }}
             >
-              24TAG Schema Specification
+              35TAG v6.0.0 — 35次元の構造診断
             </h2>
             <div style={{ fontFamily: MONO, fontSize: "9px", color: "#2d4455", letterSpacing: "0.08em" }}>
-              AIIE Protocol v4.1.0 · Compliance: RFC 8785 · Governance: Acta AIIE Standardization Committee
+              AIIE Protocol · Compliance: RFC 8785 · Governance: Acta AIIE Standardization Committee
             </div>
           </div>
           <Link
-            to="/protocol/24tag-schema"
+            to="/protocol/35tag-schema"
             style={{
               fontFamily: MONO,
               fontSize: "9px",
@@ -656,9 +463,9 @@ export function HomePage() {
               marginBottom: "8px",
             }}
           >
-            Figure 1 — 24TAG Framework · Technical Specification Table
+            Figure 1 — 35TAG v6.0.0 · Categories I–X · Technical Specification Grid
           </div>
-          <Tag24Registry />
+          <Tag35Registry />
         </div>
 
         {/* Crystallization rule note */}
@@ -689,8 +496,8 @@ export function HomePage() {
         </div>
 
         <div style={{ marginTop: "14px" }}>
-          <Math>
-            {"state_hash = SHA256( JCS( { T01 … T24 } ) )   ·   T25 excluded from its own input"}
+            <Math>
+            {"state_hash = SHA256( JCS( TAG 01…34 ∖ {state_hash} ) )   ·   T25 anchor · TAG 35 not in JCS payload"}
           </Math>
         </div>
       </div>
@@ -894,39 +701,38 @@ export function HomePage() {
           causal filters.
         </W>
 
-        {/* ── §5 24TAG Taxonomy ────────────────── */}
-        <SectionNum n="5" title="The 24TAG Taxonomy" />
+        {/* ── §5 35TAG v6.0.0 Taxonomy ────────────────── */}
+        <SectionNum n="5" title="The 35TAG v6.0.0 Taxonomy" />
         <W>
-          To ensure universal compatibility and deterministic hashing, the protocol defines a fixed schema
-          of 24 structured tags<Ref id="02" />, categorized into four primary layers. Each tag (T₀₁…T₂₄)
-          is populated by the Narrative Compiler. As specified in the{" "}
-          <B>Crystallization Protocol</B><Ref id="01" />, the{" "}
-          <IC>state_hash</IC> is calculated by applying SHA-256 to the JCS-normalized string of these 24 tags.
+          To ensure universal compatibility and deterministic hashing, the protocol defines{" "}
+          <B>thirty-five semantic fields</B> in ten categories (I–X)<Ref id="02" />, plus the{" "}
+          <IC>state_hash</IC> (T25) anchor. As specified in the <B>Crystallization Protocol</B><Ref id="01" />,{" "}
+          <IC>state_hash</IC> is <B>SHA-256</B> of <B>JCS</B> over <B>TAG 01–34</B> excluding{" "}
+          <IC>state_hash</IC>; <IC>worldline_optimization</IC> (TAG 35) is not part of the T25 JCS payload.
         </W>
 
         <SubNum n="§ 5.1" title="Data Structure and Compilation" />
         <W>
           The resulting data structure is a JSON object. Following <B>RFC 8785</B><Ref id="01" />, the
-          Compiler sorts the 24 structured tags into a canonical format. The{" "}
-          <IC>state_hash</IC> field itself is strictly excluded from the hash input, preventing circular
+          verifier canonicalizes the sealed payload keys. The{" "}
+          <IC>state_hash</IC> field itself is strictly excluded from its own hash input, preventing circular
           dependencies.
         </W>
         <Math>
-          {"state_hash = SHA256( JCS( { TAG₀₁…₂₄ } ∖ { state_hash } ) )"}
+          {"state_hash = SHA256( JCS( TAG 01…34 ∖ { state_hash } ) )"}
         </Math>
         <div style={{ marginBottom: "14px" }}>
-          <Bullet label="Normalization (JCS)">Compiler sorts 24 tags into canonical JSON — variations in whitespace or key ordering do not affect output.</Bullet>
-          <Bullet label="Self-Referential Exclusion">state_hash field is strictly excluded from the hash input — preventing circular dependencies.</Bullet>
-          <Bullet label="Hashing (SHA-256)">Algorithm applied to the canonical byte-stream of the 24 tags to produce a 64-character hex digest.</Bullet>
+          <Bullet label="Normalization (JCS)">Canonical JSON per RFC 8785 — whitespace and key order normalized.</Bullet>
+          <Bullet label="Self-Referential Exclusion">state_hash (T25) excluded from the SHA-256 input.</Bullet>
+          <Bullet label="Hashing (SHA-256)">64-character hex digest of the JCS byte stream of TAG 01–34 (excluding state_hash).</Bullet>
         </div>
 
         <SubNum n="§ 5.2" title="Integrity and Verification" />
         <W>
           By excluding <IC>state_hash</IC><Ref id="01" /> from its own input, we create a{" "}
-          <B>One-Way Cognitive Seal</B>. A receiver verifies integrity by: (1) temporarily removing the
-          state_hash; (2) re-running JCS + SHA-256 on the remaining 24 tags; (3) comparing the re-calculated
-          hash with the original. Any <B>divergence</B> indicates the narrative structure has been modified
-          or corrupted post-compilation.
+          <B>One-Way Cognitive Seal</B>. A receiver verifies integrity by: (1) building the JCS payload from{" "}
+          TAG 01–34 except <IC>state_hash</IC>; (2) recomputing SHA-256; (3) comparing with the stored T25.
+          Any <B>divergence</B> indicates tampering or non-compliant serialization.
         </W>
 
         {/* ── §6 Narrative Space ───────────────── */}
@@ -1070,7 +876,7 @@ export function HomePage() {
 
         <SubNum n="§ 10.3" title="Cultural and Linguistic Heterogeneity" />
         <W>
-          Narrative structures are not universal. A <B>24TAG framework</B><Ref id="02" /> optimized for
+          Narrative structures are not universal. A <B>35TAG v6.0.0 framework</B><Ref id="02" /> optimized for
           one culture may fail to capture the nuances of another — circular narratives vs. linear
           conflict-driven arcs — resulting in <B>divergence</B> that is cultural rather than factual.
         </W>

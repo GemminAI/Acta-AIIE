@@ -17,7 +17,7 @@ transforming, and verifying such interpretations as structured states.
 
 The framework decomposes narratives into structured components—actors, events,
 causal relationships, conflicts, and outcomes—which are encoded into a high-dimensional
-structural representation (24TAG). These representations are deterministically
+structural representation (35TAG v6.0.0). These representations are deterministically
 transformed into a geometric state space via a mapping Φ, enabling narratives
 to be analyzed within a measurable metric space. A cryptographic state_hash
 ensures invariance and verifiability of narrative states under representational transformations.
@@ -140,7 +140,7 @@ This hybrid model combines large language model inference with rule-based constr
 
 #### 3.4.4 Integration into the Pipeline
 
-The resulting event coordinates are subsequently encoded into the **24TAG structural representation**, forming the basis for narrative state construction and the generation of the **Narrative Graph** described in Section 4.
+The resulting event coordinates are subsequently encoded into the **35TAG v6.0.0 structural representation**, forming the basis for narrative state construction and the generation of the **Narrative Graph** described in Section 4.
 
 
 * * *
@@ -200,7 +200,7 @@ After iterative graph expansion, the Compiler selects the highest-scoring narrat
 
 $$G^* = \arg\max_{G \in \mathcal{B}} S(G)$$
 
-The selected graph is transformed into a **Narrative State Vector** $\mathbf{s}$ by aggregating the attributes of its constituent event units according to the **24TAG** schema:
+The selected graph is transformed into a **Narrative State Vector** $\mathbf{s}$ by aggregating the attributes of its constituent event units according to the **35TAG v6.0.0** schema:
 
 $$\mathbf{s} = (T_1, T_2, \dots, T_{24})$$
 
@@ -211,11 +211,11 @@ $$h = H(\text{serialize}(\mathbf{s}))$$
 where $H$ is a cryptographic hash (e.g., SHA-256). This **state hash** $h$ uniquely identifies the semantic interpretation, allowing independent systems to verify and compare narrative analyses.
 
 * * *
-## 5. The 24TAG Taxonomy
+## 5. The 35TAG v6.0.0 Taxonomy
 
 To ensure universal compatibility and deterministic hashing, the Narrative Quantification protocol defines a fixed schema of **24 structured tags**. These tags are categorized into four primary layers, representing the essential dimensions of human narrative cognition.
 
-### Table 1: The 24TAG Framework Definitions
+### Table 1: The 35TAG v6.0.0 Framework Definitions
 
 |**Layer**|**Tag ID**|**Tag Name**|**Description**|
 |---|---|---|---|
@@ -257,7 +257,7 @@ The choice of exactly 24 structural tags is driven by two primary considerations
 
 ### 5.1 Data Structure and Compilation
 
-We define the 24TAG representation as a structured vector:
+We define the 35TAG v6.0.0 representation as a structured vector:
 
 $$\mathbf{T} = (T_1, T_2, \dots, T_{24}) \in \mathcal{T}$$
 
@@ -292,15 +292,15 @@ Because the hash is deterministic, any receiver can verify the integrity of a na
 
 ### 5.3 Formal Type Definitions and Constraints
 
-To bridge the gap between theoretical narrative structure and a machine-executable API, we define the **Type Domains** $\mathcal{D}_i$ for the 24TAG vector $\mathbf{T}$.
+To bridge the gap between theoretical narrative structure and a machine-executable API, we define the **Type Domains** $\mathcal{D}_i$ for the 35TAG v6.0.0 vector $\mathbf{T}$.
 
-The **24TAG Space** is formally defined as the Cartesian product of these individual tag domains:
+The **35TAG v6.0.0 Space** is formally defined as the Cartesian product of these individual tag domains:
 
 $$
 \mathcal{T} = \mathcal{D}_1 \times \mathcal{D}_2 \times \cdots \times \mathcal{D}_{24}
 $$
 
-### Table 2: 24TAG Domain and Constraint Specification
+### Table 2: 35TAG v6.0.0 Domain and Constraint Specification
 
 |**Tag ID**|**Data Type**|**Domain (Di​)**|**Description**|
 |---|---|---|---|
@@ -567,7 +567,7 @@ For efficiency, human cognition appears to prioritize a limited set of semantic 
 - **Outcome**: Encoding the final state or resolution of an interaction.
     
 
-These primitives closely resemble the structural components used in the **24TAG framework**.
+These primitives closely resemble the structural components used in the **35TAG v6.0.0 framework**.
 
 ### 9.3 Biomimetic Interpretation
 
@@ -625,9 +625,9 @@ We hypothesize that the principle of minimizing prediction error can lead to **c
 
 ## 11. Conclusion and Future Work
 
-We formalize **Narrative Quantification** as a computational framework for representing, transforming, and verifying interpretations as structured states. By elevating the fundamental unit of information from tokens to events, and encoding interactions into **crystallized narrative states** via the **24TAG structural hash**, the framework enables the objective verification and prediction of interpretations.
+We formalize **Narrative Quantification** as a computational framework for representing, transforming, and verifying interpretations as structured states. By elevating the fundamental unit of information from tokens to events, and encoding interactions into **crystallized narrative states** via the **35TAG v6.0.0 structural hash**, the framework enables the objective verification and prediction of interpretations.
 
-The embedding of narrative graphs into a geometric state space allows interpretations to be analyzed within a measurable metric framework. The framework unifies structure (24TAG), geometry ($\Phi$ mapping), and dynamics (distribution and transition) into a single mathematical representation of interpretation.
+The embedding of narrative graphs into a geometric state space allows interpretations to be analyzed within a measurable metric framework. The framework unifies structure (35TAG v6.0.0), geometry ($\Phi$ mapping), and dynamics (distribution and transition) into a single mathematical representation of interpretation.
 
 This shift marks a transition from AI systems that merely generate language to systems that model the structural dynamics of interpretation. By ensuring the **invariance** of narrative states under representational transformations, the framework establishes a deterministic foundation for cognitive reasoning.
 

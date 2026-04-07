@@ -10,14 +10,14 @@
 -- Each table maps directly to a layer of the Narrative Crystallization Pipeline:
 --
 --   geopolitics_articles   → Layer 0: Raw OSINT ingestion
---   narrative_states        → Layer 1: Phase A crystallization (24TAG + state_hash)
+--   narrative_states        → Layer 1: Phase A crystallization (35TAG v6.0.0 + state_hash)
 --   long_content_queue      → Layer 2: Phase A → B job bridge
 --   narrative_content       → Layer 3: Phase B long-form content
 --   narrative_variants      → Layer 3: Phase B perspective variants (N.O.)
 --   pulse_readings          → Layer 4: OSINT pulse monitoring
 --   v_structural_vectors    → View:    6-dimensional SIV manifold projection
 --
--- state_hash = SHA-256( JCS( T01..T24 ) ) per RFC 8785
+-- state_hash = SHA-256( JCS( TAG 01..34 excl. state_hash ) ) per RFC 8785 / 35TAG v6.0.0
 -- ============================================================
 
 -- ────────────────────────────────────────────────────────────
@@ -39,11 +39,11 @@ CREATE TABLE `geopolitics_articles` (
 
 -- ────────────────────────────────────────────────────────────
 -- Layer 1: Narrative Crystals (Phase A output)
--- The 24TAG structure. Each row is a deterministic narrative state.
+-- The 35TAG v6.0.0 narrative state. Each row is a deterministic narrative state.
 -- ────────────────────────────────────────────────────────────
 
 CREATE TABLE `narrative_states` (
-  `state_hash`              BINARY(32) PRIMARY KEY COMMENT 'SHA-256( JCS( T01..T24 ) ) per RFC 8785',
+  `state_hash`              BINARY(32) PRIMARY KEY COMMENT 'SHA-256( JCS(35TAG anchor payload) ) per RFC 8785',
   `event_id`                VARCHAR(64) NOT NULL,
 
   -- Category I: Identification & Base Context

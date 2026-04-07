@@ -8,7 +8,7 @@
 
 ## 1. Objective
 
-Within the AIIE Protocol, the reliability of information is anchored by mathematical immutability. This SDK provides the normalization logic required to transition 24TAG JSON data into an "absolute-zero crystal" — enabling the generation of a `state_hash` with zero-bit variance across all compliant systems.
+Within the AIIE Protocol, the reliability of information is anchored by mathematical immutability. This SDK provides the normalization logic required to transition 35TAG v6.0.0 JSON data into an "absolute-zero crystal" — enabling the generation of a `state_hash` with zero-bit variance across all compliant systems.
 
 ---
 
@@ -128,7 +128,7 @@ state_hash = SHA256(JCS({TAG_01 ... TAG_24}))
              in the input to its own calculation
 ```
 
-A receiver can verify any 24TAG object by:
+A receiver can verify any 35TAG v6.0.0 object by:
 
 1. Temporarily removing the `state_hash` field from the received data.
 2. Re-running the JCS serialization and SHA-256 process on the remaining 24 tags.

@@ -24,7 +24,7 @@ export function NarrativeQuantification() {
         status="Verified"
         version="WP-1 v1.2"
         author="Tomohiko Nakamura — Independent Researcher, Japan"
-        compliance="AIIE Protocol · 24TAG Schema · RFC 8785"
+        compliance="AIIE Protocol · 35TAG v6.0.0 · RFC 8785"
         docId="AIIE-WP-001"
       />
       <ReactMarkdown
