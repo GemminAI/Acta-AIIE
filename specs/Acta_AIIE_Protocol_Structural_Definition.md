@@ -1,3 +1,6 @@
+> **DEPRECATED**: Superseded by `Acta_AIIE_Protocol_Definition_v1.0.0.md` (2026-04-07).
+> This file is archived for historical reference only.
+
 # Acta AIIE Protocol — Structural Definition (v0.1.0 Draft)
 
 **Status:** Draft  

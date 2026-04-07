@@ -24,11 +24,12 @@ This repository contains:
 Acta-AIIE/
 │
 ├── specs/                          # Protocol specifications (English)
-│   ├── 24TAG_Standards_v4.1.0.md          ← Core data schema
-│   ├── Acta_AIIE_Protocol_Structural_Definition.md  ← Cognitive layer model
-│   ├── Acta_AIIE_JCS_SDK_Crystallization_Engine.md  ← Integrity / hashing rules
-│   ├── GemminAI_Narrative_Observation_Device.md     ← Meteorological model
-│   └── Whitepapers.md                     ← Whitepaper index
+│   ├── Acta_AIIE_Protocol_Definition_v1.0.0.md  ← RATIFIED CONSTITUTION (v1.0.0)
+│   ├── 24TAG_Standards_v4.1.0.md                ← superseded by 35TAG v6.0 in v1.0.0
+│   ├── Acta_AIIE_Protocol_Structural_Definition.md  ← ARCHIVED (v0.1.0 draft)
+│   ├── Acta_AIIE_JCS_SDK_Crystallization_Engine.md
+│   ├── GemminAI_Narrative_Observation_Device.md
+│   └── Whitepapers.md
 │
 ├── sdk/                            # Reference implementation
 │   ├── verify_integrity.py                ← JCS Engine (RFC 8785 / 49/49 PASS)
