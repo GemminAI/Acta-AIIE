@@ -14,6 +14,12 @@
   - `paper/narrative_quantification.pdf` の最新版差し替え
   - `paper/figures/` に図版一式を追加
   - 図参照付きの論文版を GitHub に push 済み
+- 追加対応として、`/whitepapers/narrative-quantification` で出ていた `Encoding error` の原因調査を実施
+  - `NarrativeQuantification.tsx` の Markdown 描画経路と図版参照先を切り分け
+  - `paper/figures/fig2_pipeline.svg` の文字化けを確認
+  - `Downloads/NQ20260330/narrative_compilation_pipeline_en.svg` を正本として再適用
+  - `paper/figures/` と `public/figures/` の図版を UTF-8 / 公開アセット前提で再整備
+  - `npm run build` を再実行し、警告なしで通過確認
 
 ## Acta-AIIE 側の作業メモ
 
@@ -26,12 +32,16 @@
   - `fig3_geometry`
   - `fig4_inference`
 - `svg` だけでなく、Markdown 参照用に `png` も用意済み
+- `public/figures/` に公開用 `png` を配置し、Markdown 側の `figures/*.png` 参照を成立させた
+- `paper/figures/fig2_pipeline.svg` をクリーンな UTF-8 ヘッダ付き SVG に再書き出しし、`public/figures/fig2_pipeline.svg` にも同一内容を配置した
 - 最新版論文の export 反映は GitHub に push 済み
 
 ### Acta-AIIE 側の残作業
 
 - `paper/narrative_quantification.md` と実際の図版参照整合を再確認したい
   - 現在は最新版 export に合わせて `png` 参照を成立させている
+- `fig1` / `fig2` 系の SVG 原本も文字コード観点で再点検したい
+  - 今回は `fig2_pipeline.svg` を重点修正
 - 論文 PDF の生成手順をローカルで再現可能にする整備が残っている
   - `xelatex`
   - SVG 変換ツール
@@ -94,6 +104,7 @@
 - UI 上で未確認のため、実際の見え方と遷移挙動に未検証部分がある
 - 一時ファイルが残っているため、そのままコミットするとノイズが入る可能性がある
 - `Acta-AIIE` の論文更新は反映済みだが、ローカル PDF 生成環境はまだ不安定
+- 論文ページの主要ビルド警告は解消したが、ブラウザ表示側は実機で最終確認をもう一度取りたい
 - `paper` 更新と HextAI 仕様更新が並走しているため、次回は作業単位ごとの整理が必要
 
 ## 次アクション案
@@ -104,3 +115,4 @@
 4. 一時ファイルを整理
 5. HextAI の実装ステータス表記をプロダクト実態に合わせて確定
 6. `Acta-AIIE` 論文更新フローの再生成手順を固定
+7. `fig1` / `fig2` を含む論文図版の公開パスとブラウザ表示を最終確認

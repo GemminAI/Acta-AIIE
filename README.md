@@ -2,19 +2,22 @@
 
 **Artificial Intelligence Intent Encapsulation — Open Protocol Standard**
 
+| Attribute | Value |
+|-----------|--------|
+| **Status** | **RATIFIED — v1.0.0** |
+| **Governance** | Acta AIIE Standardization Committee |
+| **Normative corpus** | *Acta AIIE Protocol Definition v1.0.0*; **NQ 2.0** (*Narrative Quantification 2.0*) |
+| **Canonical schema** | **35TAG v6.0** |
+
 > *"Words are woven by AI. Truth is guarded by mathematics."*
 
 ---
 
-## What is this?
+## Abstract
 
-The **Acta AIIE Protocol** is an open standard for transforming narrative information into structured, mathematically verifiable data. It defines how AI systems should decompose events, quantify bias, and produce cryptographically sealed outputs — ensuring that the intent behind every generated narrative is immutable and auditable.
+The **Acta AIIE Protocol** treats narrative not as mere text but as a **physical field**: a measurable object whose internal stresses, flows, and geometric distortions can be represented in structured state spaces and verified under explicit mathematical law. It is an open standard for **geometric quantification of interpretation**—decomposing events into a **35TAG v6.0** narrative state, sealing the invariant core with a cryptographic **T25** identity, and analysing dynamics through a **Field Tensor** model (interaction, velocity, and divergence) aligned with **Narrative Quantification 2.0 (NQ 2.0)**.
 
-This repository contains:
-
-- **The specification** — the protocol rules that any compliant system must follow
-- **The reference implementation** — the GemminAI pipeline that implements those rules
-- **The academic paper** — the theoretical foundation for the approach
+Implementations may differ in deployment; the **protocol** remains the public contract. **GemminAI** (Gemmina Intelligence LLC.) is a **reference implementation**—a demonstrator pipeline that exercises these rules in production-like settings. Conformance is defined solely against the specifications and RFCs in this repository, not against any single vendor product.
 
 ---
 
@@ -23,30 +26,30 @@ This repository contains:
 ```
 Acta-AIIE/
 │
-├── specs/                          # Protocol specifications (English)
-│   ├── Acta_AIIE_Protocol_Definition_v1.0.0.md  ← RATIFIED CONSTITUTION (v1.0.0)
-│   ├── 24TAG_Standards_v4.1.0.md                ← superseded by 35TAG v6.0 in v1.0.0
-│   ├── Acta_AIIE_Protocol_Structural_Definition.md  ← ARCHIVED (v0.1.0 draft)
+├── specs/                                    # Authoritative specifications (English)
+│   ├── Acta_AIIE_Protocol_Definition_v1.0.0.md   # RATIFIED constitution (v1.0.0)
 │   ├── Acta_AIIE_JCS_SDK_Crystallization_Engine.md
 │   ├── GemminAI_Narrative_Observation_Device.md
-│   └── Whitepapers.md
+│   ├── Whitepapers.md
+│   └── rfc/                                  # Standard-track RFC series
+│       ├── README.md                         # RFC index & dependency graph
+│       ├── RFC-0001-AIIE-Delta-Variance-Standard.md
+│       ├── RFC-0002-AIIE-PCE-Detection-Protocol.md
+│       ├── RFC-0003-AIIE-Narrative-Graph-Interaction-Model.md
+│       └── RFC-0004-AIIE-Narrative-Relaxation-Dynamics.md
 │
-├── sdk/                            # Reference implementation
-│   ├── verify_integrity.py                ← JCS Engine (RFC 8785 / 49/49 PASS)
-│   ├── gem0_semantic_scholar.py           ← Academic source collection
-│   └── narrative_generator/               ← Full generation pipeline
-│       ├── step1_structural_vectors.sql
-│       ├── step2_narrative_state_vectors.sql
-│       ├── step3_NarrativeGeneratorBridge.php
-│       ├── step4_narrative_generator.py
-│       └── step5_deploy_and_scheduler.sh
+├── sdk/                                      # Reference tooling & physics engine
+│   ├── narrative_dynamics_engine.py          # Field Tensor dynamics (ΔV, PCE, relaxation)
+│   ├── verify_integrity.py                 # JCS crystallization engine (RFC 8785)
+│   ├── gem0_semantic_scholar.py
+│   └── narrative_generator/                # End-to-end narrative pipeline (SQL / PHP / Python)
 │
-├── paper/                          # Academic paper
-│   ├── narrative_quantification.md        ← Canonical paper source
-│   ├── FIGURES.md                         ← Figure integration notes
-│   └── figures/                           ← SVG / PNG figure assets
+├── paper/                                    # Academic foundation (NQ 2.0 lineage)
+│   ├── narrative_quantification.md         # Canonical manuscript source
+│   ├── FIGURES.md
+│   └── figures/
 │
-└── src/                            # Documentation portal (acta-aiie.org)
+└── src/                                      # Documentation portal (acta-aiie.org)
     └── ...
 ```
 
@@ -54,51 +57,73 @@ Acta-AIIE/
 
 ## Core Concepts
 
-### The 24TAG Schema
+### T25 Hashing (Cryptographic Invariant)
 
-Every event processed by the AIIE Protocol is encoded as a JSON object with 24 structured fields. These 24 tags form the canonical narrative state representation. The `state_hash` is a separate cryptographic seal computed from the JCS-normalized 24 tags and excluded from its own input.
+The **25th structural anchor** is a deterministic seal over the **canonical core** of the narrative state. Serialization follows **[RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785)**; the hash field itself is excluded from its own input. The resulting **T25** value is the one-way cognitive identity of the sealed core—environment-independent, auditable, and tamper-evident.
 
-```
-state_hash = SHA256(JCS(T01 ... T24))
-```
+### Field Tensor (**F**)
 
-### The Narrative Compiler
+NQ 2.0 and the reference SDK model narrative dynamics as a **Field Tensor** unifying three layers on the coupling manifold:
 
-A search-and-optimization engine that transforms raw text into a probability distribution over narrative states: `P(N | text)`. It uses beam search, causal constraints, and graph pruning to collapse prose into a deterministic, verifiable structure.
+| Layer | Role |
+|--------|------|
+| **Interaction** | Current complex coupling amplitudes ℐ(*t*) between narrative modes. |
+| **Velocity** | Rate of change of interaction—information flow (discrete analog of §11.5 trajectory velocity). |
+| **Divergence** | Pairwise **ΔV**—geometric distortion in **35TAG v6.0** space (Protocol §9). |
 
-### Crystallization
+Together these describe the **field** as a physical object: where energy concentrates, where it moves, and where interpretive geometry warps.
 
-Compliance with [RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785) ensures that identical narrative data produces an identical `state_hash` regardless of runtime environment, language, or locale. The reference implementation passes all 49 official RFC 8785 test vectors.
+### T25 Hesitation Protocol (Honest Incompleteness)
 
-```
-Official Implementation Hash:
-3a5a3a9d1b13367621b5b34cc25a0d886a7da39ef91015a3f757ae37908602b8
-```
+When **ΔV** exceeds the critical band (**≥ 0.7** per Protocol §9.4), compliant systems **must not** fabricate false consensus. They surface divergence, lower epistemic confidence where required, and treat **hesitation** as a valid output—**honest incompleteness** (Protocol §13), not a failure mode.
 
 ---
 
-## Spec / Implementation Separation
+## RFC Index (Standard Track)
 
-The **Acta AIIE Protocol** is the specification. **Gemmina Intelligence** is the reference implementation.
+| RFC | Title | Role |
+|-----|--------|------|
+| **RFC-0001** | Delta Variance (ΔV) Standard | Normative weighted L₂ divergence between **35TAG** states; tiered response table; Hesitation linkage. |
+| **RFC-0002** | PCE Detection Protocol | Variance-based **Post-Collapse Expansion** ignition and confirmation (Protocol §11). |
+| **RFC-0003** | Narrative Graph Interaction Model | Complex interaction field over the narrative graph; structural pathology vocabulary. |
+| **RFC-0004** | Narrative Relaxation Dynamics | Post-transition quiescence, variance decay, and order-rebuilding signatures. |
 
-This mirrors the IETF model: the RFC defines the rules; implementations demonstrate compliance. Any system that correctly implements the four-layer cognitive model and the JCS crystallization rules may claim conformance with the Acta AIIE Protocol.
+Full titles and dependency notes: [`specs/rfc/README.md`](specs/rfc/README.md).
+
+---
+
+## Specification vs. Implementation
+
+| Layer | Responsibility |
+|--------|----------------|
+| **Acta AIIE Protocol** | The open standard—definitions, schemas, RFCs, and conformance criteria. |
+| **GemminAI** (reference implementation) | An exemplar stack that implements the standard for verification and education; it does not replace the normative documents. |
+
+This follows the familiar IETF pattern: the standard is what matters; implementations prove feasibility.
 
 ---
 
 ## Documentation Portal
 
-Full protocol documentation is available at **[acta-aiie.org](https://acta-aiie.org)**
+Human-readable documentation and diagrams: **[acta-aiie.org](https://acta-aiie.org)**
 
 ---
 
-## Academic Paper
+## Academic Corpus
 
-**Narrative Quantification: Compiling Narrative Structures into Geometric State Representations**  
-Tomohiko Nakamura — Independent Researcher, Japan (2026)
-
-The paper introduces the theoretical foundation: Narrative Quantification, the 24TAG taxonomy, the Narrative Compiler architecture, Large Cognitive Models (LCM), and the geometric state representation framework.
+**Narrative Quantification** — geometric and thermodynamic foundations for narrative state spaces, compilers, and large cognitive models — is developed in the **`paper/`** tree and cross-referenced by **NQ 2.0** in the ratified **v1.0.0** definition.
 
 → [`paper/narrative_quantification.md`](paper/narrative_quantification.md)
+
+---
+
+## Crystallization Reference
+
+The reference JCS engine passes the official **RFC 8785** test vectors. Published implementation fingerprint (illustrative):
+
+```
+3a5a3a9d1b13367621b5b34cc25a0d886a7da39ef91015a3f757ae37908602b8
+```
 
 ---
 
@@ -106,8 +131,8 @@ The paper introduces the theoretical foundation: Narrative Quantification, the 2
 
 MIT License — © 2026 Gemmina Intelligence LLC.
 
-The protocol specification is open. Implementations may be proprietary, but any system claiming "Acta AIIE Protocol compliance" must correctly implement the crystallization rules defined in `specs/`.
+The **specification** is open. **Implementations** may be proprietary; any product claiming **Acta AIIE Protocol compliance** must implement the crystallization and narrative-state rules defined under `specs/`.
 
 ---
 
-*Est. 2026 — Gemmina Intelligence LLC., Tokyo, Japan*
+*Acta AIIE Standardization Committee · Est. 2026 — Gemmina Intelligence LLC., Tokyo, Japan*

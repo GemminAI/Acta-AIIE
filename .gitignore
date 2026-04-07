@@ -137,3 +137,6 @@ dist
 node_modules/
 dist/
 .DS_Store
+
+# Gemmina Intelligence 2.0 proprietary layer — never track in this public standard repo
+Sovereign/
