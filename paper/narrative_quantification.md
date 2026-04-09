@@ -7,7 +7,7 @@ header-includes:
   - \usepackage{amsmath}
 ---
 
-<!-- 図版は PNG を参照（`paper/figures/*.png` を `npm run copy:figures` で `public/figures/` に同期）。SVG を .png にリネームしただけのファイルはブラウザでデコードエラーになるため避ける。 -->
+<!-- Fig1/Fig2 は UTF-8 正規化済み SVG。`npm run copy:figures` で `public/figures/` に同期。Fig3/Fig4 は PNG またはページ内 React 図。 -->
 
 ## Abstract
 
@@ -42,7 +42,7 @@ Human cognition, however, rarely processes information as isolated tokens. Inste
 
 We propose and formalize **Narrative Quantification** as a computational framework for representing, transforming, and verifying narrative interpretations as structured states. By decomposing narratives into structured components—such as actors, events, causal relationships, conflicts, and outcomes—it becomes possible to construct databases of collective narrative patterns. This enables narrative interpretations to be treated as measurable, comparable, and computationally tractable objects.
 
-![Figure 1: Processing pipeline comparison between LLM (token-based) and LCM (narrative-state-based).](figures/fig1_llm_vs_lcm.png)
+![Figure 1: Processing pipeline comparison between LLM (token-based) and LCM (narrative-state-based).](figures/fig1_llm_vs_lcm.svg)
 
 * * *
 ## 2. Narrative Cognition
@@ -64,7 +64,7 @@ Narrative cognition therefore represents a fundamental cognitive process rather 
 
 **Narrative Quantification** is the formal process of converting unstructured narrative text into analyzable, high-density cognitive data. This transformation is achieved through a multi-stage pipeline: **Decomposition**, **Event Formation**, and **Narrative Compression**.
 
-![Figure 2: Narrative compilation pipeline from raw text to crystallized state hash.](figures/fig2_pipeline.png)
+![Figure 2: Narrative compilation pipeline from raw text to crystallized state hash.](figures/fig2_pipeline.svg)
 
 ### 3.1 Decomposition
 

@@ -140,3 +140,4 @@ dist/
 
 # Gemmina Intelligence 2.0 proprietary layer — never track in this public standard repo
 Sovereign/
+.vercel
