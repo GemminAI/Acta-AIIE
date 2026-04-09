@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { DocHeader } from "../components/DocHeader";
 import { DocPage } from "../components/DocPage";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { LCMInferenceFigure } from "../components/figures/LCMInferenceFigure";
 import { NarrativeGeometryFigure } from "../components/figures/NarrativeGeometryFigure";
 // @ts-ignore Vite resolves this raw import from the workspace root.
@@ -10,9 +11,17 @@ import paperContent from "../../../paper/narrative_quantification.md?raw";
 
 const MONO = "'JetBrains Mono', monospace";
 
+/** Markdown `figures/foo.png` → サイトルートの `/figures/foo.png`（`public/figures` 経由） */
 const renderedPaperContent = paperContent
   .replace(/^---\n[\s\S]*?\n---\n+/, "")
   .replace(/\]\((figures\/[^)]+)\)/g, "](/$1)");
+
+function resolvePublicFigureSrc(src: string | undefined): string {
+  if (!src || typeof src !== "string") return "";
+  if (src.startsWith("/")) return src;
+  if (src.startsWith("figures/")) return `/${src}`;
+  return src;
+}
 
 export function NarrativeQuantification() {
   return (
@@ -37,6 +46,7 @@ export function NarrativeQuantification() {
               React.isValidElement(childArray[0]) &&
               (childArray[0].type === NarrativeGeometryFigure ||
                 childArray[0].type === LCMInferenceFigure ||
+                childArray[0].type === ImageWithFallback ||
                 childArray[0].type === "img");
 
             if (hasOnlyFigure) {
@@ -223,10 +233,30 @@ export function NarrativeQuantification() {
             if (typeof src === "string" && src.includes("fig4")) {
               return <LCMInferenceFigure />;
             }
+            const resolved = resolvePublicFigureSrc(typeof src === "string" ? src : undefined);
+            if (!resolved) {
+              return (
+                <ImageWithFallback
+                  variant="docDark"
+                  src="/figures/__missing__.png"
+                  alt={typeof alt === "string" ? alt : ""}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    margin: "24px 0",
+                    border: "1px solid #1a2530",
+                    background: "#080c10",
+                  }}
+                />
+              );
+            }
             return (
-              <img
-                src={typeof src === "string" && src.startsWith("figures/") ? `/${src}` : src}
-                alt={alt ?? ""}
+              <ImageWithFallback
+                variant="docDark"
+                src={resolved}
+                alt={typeof alt === "string" ? alt : ""}
+                loading="lazy"
+                decoding="async"
                 style={{
                   display: "block",
                   width: "100%",

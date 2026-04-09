@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "copy:figures": "node scripts/copy-figures.mjs",
+    "prebuild": "npm run copy:figures",
+    "predev": "npm run copy:figures",
     "build": "vite build",
     "dev": "vite"
   },

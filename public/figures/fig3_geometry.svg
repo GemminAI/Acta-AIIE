@@ -1,0 +1,98 @@
+<svg width="100%" viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .title { fill: #222; font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .sub { fill: #666; font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .label { fill: #666; font: 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .formula { fill: #7a7a7a; font: 11px Menlo, Consolas, monospace; }
+      .panel { fill: none; stroke: rgba(120,120,120,0.25); stroke-width: 0.8; rx: 10; }
+    </style>
+  </defs>
+
+  <rect x="12" y="12" width="656" height="376" rx="12" fill="white" stroke="rgba(120,120,120,0.18)" stroke-width="1"/>
+
+  <text class="title" x="32" y="36">Narrative divergence  -  CDC = ||v_i - v_bar||_2</text>
+  <text class="sub" x="32" y="54">Each point is a narrative state projected onto the plane. Distance to the centroid indicates semantic disagreement.</text>
+
+  <text class="title" x="372" y="36">Narrative trajectory  -  v(t) = dP(t) / dt</text>
+  <text class="sub" x="372" y="54">A single observer evolves through state space over time. Large jumps indicate phase transitions (PCE).</text>
+
+  <rect class="panel" x="24" y="68" width="300" height="250"/>
+  <rect class="panel" x="356" y="68" width="300" height="250"/>
+
+  <!-- Left panel -->
+  <line x1="64" y1="284" x2="284" y2="284" stroke="rgba(120,120,120,0.6)" stroke-width="0.8" marker-end="url(#arr-d)"/>
+  <line x1="64" y1="284" x2="64" y2="88" stroke="rgba(120,120,120,0.6)" stroke-width="0.8" marker-end="url(#arr-d)"/>
+  <text class="label" x="288" y="288">x (T10)</text>
+  <text class="label" x="68" y="84">y (SIV)</text>
+
+  <circle cx="184" cy="174" r="4" fill="#1D9E75" opacity="0.75"/>
+  <text class="label" x="192" y="171" fill="#0F6E56">v_bar (consensus)</text>
+
+  <line x1="144" y1="144" x2="184" y2="174" stroke="#378ADD" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.55"/>
+  <line x1="224" y1="199" x2="184" y2="174" stroke="#D85A30" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.55"/>
+  <line x1="169" y1="214" x2="184" y2="174" stroke="#534AB7" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.55"/>
+  <line x1="199" y1="139" x2="184" y2="174" stroke="#639922" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.55"/>
+
+  <circle cx="144" cy="144" r="7" fill="#378ADD" opacity="0.85"/>
+  <text class="label" x="154" y="142" fill="#0C447C">US</text>
+  <circle cx="224" cy="199" r="7" fill="#D85A30" opacity="0.85"/>
+  <text class="label" x="234" y="197" fill="#712B13">CN</text>
+  <circle cx="169" cy="214" r="7" fill="#534AB7" opacity="0.85"/>
+  <text class="label" x="179" y="212" fill="#3C3489">JP</text>
+  <circle cx="199" cy="139" r="7" fill="#639922" opacity="0.85"/>
+  <text class="label" x="209" y="137" fill="#3B6D11">EU</text>
+
+  <text class="label" x="74" y="302" fill="#0C447C">US: 0.50</text>
+  <text class="label" x="144" y="302" fill="#712B13">CN: 0.47</text>
+  <text class="label" x="214" y="302" fill="#3C3489">JP: 0.43</text>
+  <text class="label" x="74" y="314" fill="#3B6D11">EU: 0.38</text>
+  <text class="formula" x="174" y="336" text-anchor="middle">static view of the original interactive CDC diagram</text>
+
+  <!-- Right panel -->
+  <line x1="396" y1="284" x2="616" y2="284" stroke="rgba(120,120,120,0.6)" stroke-width="0.8" marker-end="url(#arr-t)"/>
+  <line x1="396" y1="284" x2="396" y2="88" stroke="rgba(120,120,120,0.6)" stroke-width="0.8" marker-end="url(#arr-t)"/>
+  <text class="label" x="620" y="288">x (T10)</text>
+  <text class="label" x="400" y="84">y (SIV)</text>
+
+  <polyline points="426,244 451,229 474,214 494,202 511,192" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
+  <line x1="511" y1="192" x2="566" y2="134" stroke="#D85A30" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arr-t)"/>
+  <polyline points="566,134 584,128 601,124" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
+
+  <text class="label" x="414" y="254" fill="#0F6E56">t1</text>
+  <text class="label" x="504" y="189" fill="#0F6E56">t4</text>
+  <text class="label" x="604" y="122" fill="#0F6E56">t6</text>
+
+  <line x1="511" y1="192" x2="511" y2="154" stroke="rgba(120,120,120,0.6)" stroke-width="0.8" stroke-dasharray="2 2"/>
+  <text class="label" x="514" y="152" fill="#993C1D">PCE</text>
+  <text class="label" x="514" y="164" fill="#993C1D">phase transition</text>
+
+  <line x1="451" y1="229" x2="474" y2="214" stroke="#BA7517" stroke-width="1" marker-end="url(#arr-t)" opacity="0.75"/>
+  <text class="label" x="456" y="216" fill="#854F0B">v(t)</text>
+
+  <circle cx="426" cy="244" r="4" fill="#1D9E75" opacity="0.75"/>
+  <circle cx="451" cy="229" r="4" fill="#1D9E75" opacity="0.75"/>
+  <circle cx="474" cy="214" r="4" fill="#1D9E75" opacity="0.75"/>
+  <circle cx="494" cy="202" r="4" fill="#1D9E75" opacity="0.75"/>
+  <circle cx="511" cy="192" r="5" fill="#D85A30" opacity="0.9"/>
+  <circle cx="566" cy="134" r="4" fill="#1D9E75" opacity="0.75"/>
+  <circle cx="584" cy="128" r="4" fill="#1D9E75" opacity="0.75"/>
+  <circle cx="601" cy="124" r="4" fill="#1D9E75" opacity="0.75"/>
+
+  <text class="label" x="506" y="302" fill="#993C1D" text-anchor="middle">||P(t5)-P(t4)||_2  >>  epsilon  ->  rift detected</text>
+  <text class="formula" x="506" y="336" text-anchor="middle">green = stable drift  |  red dashed = anomalous jump</text>
+
+  <!-- Legend -->
+  <line x1="32" y1="364" x2="52" y2="364" stroke="#1D9E75" stroke-width="1.5"/>
+  <text class="label" x="58" y="368">stable trajectory</text>
+  <line x1="186" y1="364" x2="206" y2="364" stroke="#D85A30" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text class="label" x="212" y="368">phase transition (PCE)</text>
+  <line x1="394" y1="364" x2="414" y2="364" stroke="rgba(120,120,120,0.7)" stroke-width="0.8" stroke-dasharray="2 2"/>
+  <text class="label" x="420" y="368">CDC distance to consensus</text>
+</svg>

@@ -7,6 +7,7 @@ header-includes:
   - \usepackage{amsmath}
 ---
 
+<!-- 図版は PNG を参照（`paper/figures/*.png` を `npm run copy:figures` で `public/figures/` に同期）。SVG を .png にリネームしただけのファイルはブラウザでデコードエラーになるため避ける。 -->
 
 ## Abstract
 
