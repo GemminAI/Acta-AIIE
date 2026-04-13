@@ -54,7 +54,16 @@ export function MathStandardization() {
         <BulletList
           items={[
             { label: "09. strategic_interest_vector", content: "Represents impact across six dimensions (Security, Economy, Technology, Resource, Ideology, Environment) on a scale of -1.0 to 1.0. This 6D vector constitutes the \"Physics of Information\" — a quantitative mapping of events in multi-dimensional geopolitical space." },
-            { label: "22. epistemic_diffusion_state", content: "Crystallized | Diffused | Polarized — visual state derived from entropy and CFI (Category V)." },
+          ]}
+        />
+
+        <SubsectionTitle>Category V: Content & Presentation</SubsectionTitle>
+        <Body>
+          Thermodynamic and narrative depth fields; TAG 22 carries the normative entropy scalar (RFC-0005).
+        </Body>
+        <BulletList
+          items={[
+            { label: "22. informational_entropy", content: "H₀ ∈ [0, 1] — information-theoretic entropy at TAG 22. Legacy enum epistemic_diffusion_state is deprecated; UI states are derived from H₀ and conflict_factuality_index." },
           ]}
         />
 

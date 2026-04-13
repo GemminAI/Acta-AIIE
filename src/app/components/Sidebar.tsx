@@ -6,7 +6,7 @@ const NAV = [
     section: "01. Protocol Standard",
     items: [
       { label: "Acta AIIE Protocol Definition", sub: "v1.0.0 — RATIFIED", path: "/protocol/definition" },
-      { label: "35TAG Schema Specification", sub: "v6.0", path: "/protocol/35tag-schema" },
+      { label: "35TAG Schema Specification", sub: "v6.0.1", path: "/protocol/35tag-schema" },
       { label: "Mathematical Standardization of Narrative Intent", sub: "v4.1.1", path: "/protocol/mathematical-standardization" },
       { label: ".hxt Format", sub: "", path: "/protocol/hxt-format" },
     ],
@@ -14,11 +14,21 @@ const NAV = [
   {
     section: "02. RFC Series",
     items: [
-      { label: "RFC Index", sub: "All RFCs", path: "/rfc" },
+      { label: "RFC Index", sub: "All RFCs · RFC-0001–0014", path: "/rfc" },
       { label: "RFC-0001: Delta Variance (ΔV)", sub: "RATIFIED", path: "/rfc/0001" },
       { label: "RFC-0002: PCE Detection", sub: "RATIFIED", path: "/rfc/0002" },
       { label: "RFC-0003: Graph Interaction Model", sub: "DRAFT", path: "/rfc/0003" },
       { label: "RFC-0004: Relaxation Dynamics", sub: "DRAFT", path: "/rfc/0004" },
+      { label: "RFC-0005: T22 Entropy-Shift", sub: "RATIFIED", path: "/rfc/0005" },
+      { label: "RFC-0006: QFOM", sub: "RATIFIED", path: "/rfc/0006" },
+      { label: "RFC-0007: MIFT", sub: "STABLE", path: "/rfc/0007" },
+      { label: "RFC-0008: PNLA", sub: "STABLE", path: "/rfc/0008" },
+      { label: "RFC-0009: Narrative Curvature", sub: "STABLE", path: "/rfc/0009" },
+      { label: "RFC-0010: QNE", sub: "HYPOTHESIS", path: "/rfc/0010" },
+      { label: "RFC-0011: Narrative Field Control", sub: "DRAFT", path: "/rfc/0011" },
+      { label: "RFC-0012: Control Governance Layer", sub: "DRAFT", path: "/rfc/0012" },
+      { label: "RFC-0013: Narrative Identity", sub: "DRAFT", path: "/rfc/0013" },
+      { label: "RFC-0014: Reality Selection", sub: "DRAFT", path: "/rfc/0014" },
     ],
   },
   {
@@ -27,6 +37,7 @@ const NAV = [
       { label: "Whitepapers Index", sub: "Overview", path: "/whitepapers" },
       { label: "Narrative Quantification as Cognitive Infrastructure", sub: "WP-1 v1.1", path: "/whitepapers/narrative-quantification" },
       { label: "Narrative Observation", sub: "WP-3 v1.3", path: "/whitepapers/narrative-observation" },
+      { label: "QMNSO v3.1 — Narrative Quantum Mechanics", sub: "NarrativeQM3 · peer-review", path: "/whitepapers/narrative-qm3" },
     ],
   },
   {
@@ -57,7 +68,7 @@ export function Sidebar() {
         overflow: "hidden",
         zIndex: 50,
       }}
-      >
+    >
       {/* Logo Header */}
       <NavLink
         to="/"
@@ -80,67 +91,18 @@ export function Sidebar() {
             background: "#080c10",
           }}
         >
-          <svg
-            viewBox="0 0 28 28"
-            fill="none"
-            style={{ width: "100%", height: "100%" }}
-          >
-            <rect
-              x="1"
-              y="1"
-              width="26"
-              height="26"
-              stroke="#2d4455"
-              strokeWidth="1"
-            />
-            <line
-              x1="1"
-              y1="14"
-              x2="27"
-              y2="14"
-              stroke="#2d4455"
-              strokeWidth="1"
-            />
-            <line
-              x1="14"
-              y1="1"
-              x2="14"
-              y2="27"
-              stroke="#2d4455"
-              strokeWidth="1"
-            />
-            <circle
-              cx="14"
-              cy="14"
-              r="4"
-              stroke="#38bdf8"
-              strokeWidth="1"
-              fill="none"
-            />
+          <svg viewBox="0 0 28 28" fill="none" style={{ width: "100%", height: "100%" }}>
+            <rect x="1" y="1" width="26" height="26" stroke="#2d4455" strokeWidth="1" />
+            <line x1="1" y1="14" x2="27" y2="14" stroke="#2d4455" strokeWidth="1" />
+            <line x1="14" y1="1" x2="14" y2="27" stroke="#2d4455" strokeWidth="1" />
+            <circle cx="14" cy="14" r="4" stroke="#38bdf8" strokeWidth="1" fill="none" />
           </svg>
         </div>
         <div>
-          <div
-            style={{
-              fontFamily: MONO,
-              fontSize: "12px",
-              fontWeight: 600,
-              color: "#ffffff",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
+          <div style={{ fontFamily: MONO, fontSize: "12px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.1em", textTransform: "uppercase" }}>
             Acta AIIE
           </div>
-          <div
-            style={{
-              fontFamily: MONO,
-              fontSize: "9px",
-              color: "#2d4455",
-              letterSpacing: "0.05em",
-              marginTop: "2px",
-            }}
-          >
+          <div style={{ fontFamily: MONO, fontSize: "9px", color: "#2d4455", letterSpacing: "0.05em", marginTop: "2px" }}>
             Documentation Portal
           </div>
         </div>
@@ -158,22 +120,9 @@ export function Sidebar() {
       >
         {NAV.map((group) => (
           <div key={group.section} style={{ marginBottom: "4px" }}>
-            {/* Section Header */}
-            <div
-              style={{
-                fontFamily: MONO,
-                fontSize: "8px",
-                fontWeight: 600,
-                color: "#2d4455",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                padding: "12px 24px 6px",
-              }}
-            >
+            <div style={{ fontFamily: MONO, fontSize: "8px", fontWeight: 600, color: "#2d4455", letterSpacing: "0.14em", textTransform: "uppercase", padding: "12px 24px 6px" }}>
               {group.section}
             </div>
-
-            {/* Items */}
             {group.items.map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -188,32 +137,11 @@ export function Sidebar() {
                     transition: "all 0.1s ease",
                   }}
                 >
-                  <div
-                    style={{
-                      padding: "8px 24px 8px 22px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontFamily: MONO,
-                        fontSize: "11px",
-                        fontWeight: isActive ? 500 : 400,
-                        color: isActive ? "#38bdf8" : "#6b8090",
-                        lineHeight: 1.5,
-                        letterSpacing: "0.01em",
-                      }}
-                    >
+                  <div style={{ padding: "8px 24px 8px 22px" }}>
+                    <div style={{ fontFamily: MONO, fontSize: "11px", fontWeight: isActive ? 500 : 400, color: isActive ? "#38bdf8" : "#6b8090", lineHeight: 1.5, letterSpacing: "0.01em" }}>
                       {item.label}
                     </div>
-                    <div
-                      style={{
-                        fontFamily: MONO,
-                        fontSize: "9px",
-                        color: isActive ? "#1e7baf" : "#2d4455",
-                        marginTop: "2px",
-                        letterSpacing: "0.04em",
-                      }}
-                    >
+                    <div style={{ fontFamily: MONO, fontSize: "9px", color: isActive ? "#1e7baf" : "#2d4455", marginTop: "2px", letterSpacing: "0.04em" }}>
                       {item.sub}
                     </div>
                   </div>
@@ -225,31 +153,11 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div
-        style={{
-          padding: "14px 24px",
-          borderTop: "1px solid #1a2530",
-        }}
-      >
-        <div
-          style={{
-            fontFamily: MONO,
-            fontSize: "8px",
-            color: "#2d4455",
-            letterSpacing: "0.06em",
-          }}
-        >
+      <div style={{ padding: "14px 24px", borderTop: "1px solid #1a2530" }}>
+        <div style={{ fontFamily: MONO, fontSize: "8px", color: "#2d4455", letterSpacing: "0.06em" }}>
           AIIE Protocol v1.0.0 · RFC 8785 Compliant
         </div>
-        <div
-          style={{
-            fontFamily: MONO,
-            fontSize: "8px",
-            color: "#1a2f40",
-            marginTop: "3px",
-            letterSpacing: "0.04em",
-          }}
-        >
+        <div style={{ fontFamily: MONO, fontSize: "8px", color: "#1a2f40", marginTop: "3px", letterSpacing: "0.04em" }}>
           © Acta AIIE Standardization Committee
         </div>
       </div>

@@ -55,6 +55,24 @@ const PAPERS = [
     ],
     hash: "c4d8f2a6e1b9c3f7a2d5e8b4c0f6a3d9e2b7c1f4a8d3e6b0c5f2a7d4e9b3c8",
   },
+  {
+    num: "WP-4",
+    path: "/whitepapers/narrative-qm3",
+    title: "Narrative Quantum Mechanics 3.1 (QMNSO v3.1)",
+    version: "v3.1 peer-review",
+    status: "Peer Review",
+    author: "Tomohiko Nakamura — Gemmina Intelligence LLC. / Pure Information Laboratory",
+    thesis: "Empirical causal inference in geopolitical information fields using quantum formalism as mathematical language.",
+    abstract:
+      "Proposes QMNSO v3.1 — a unified framework refining narrative analysis from stochastic generation to empirical causal inference. Based on 4,729 narratives across 854 geopolitical events. Establishes Non-Markovian memory (Weibull ΔAIC=28,953; β=0.78), Structured interference (p=0.0002), and Objective core extraction (τ*=0.02). All experiments fully reproducible via publicly released datasets.",
+    keyTopics: [
+      { label: "Non-Markovian Memory (V3)", content: "Weibull hazard function fit confirms β=0.78<1 after explicit removal of platform-induced propagation delays. Intrinsic narrative dynamics confirmed." },
+      { label: "Excited State Interference (F4)", content: "H_pair > H_noise (p=0.0002, Cliff's δ=0.12) — classical models predict the opposite, necessitating quantum interference term 2Re(Ψ₁*Ψ₂)." },
+      { label: "Objective τ* Derivation (§2.8)", content: "Core extraction threshold τ*=0.02 derived from mutual information maximization — eliminates subjective threshold setting entirely." },
+      { label: "Computable Lagrangian (§2.6)", content: "PNLA expressed as discrete sum over 35TAG variables. Least-action path Φ* selects physically admissible trajectory crystallization." },
+    ],
+    hash: null,
+  },
 ];
 
 export function WhitepapersIndex() {
@@ -73,7 +91,7 @@ export function WhitepapersIndex() {
       <Section num="0.0">
         <SectionTitle>Overview</SectionTitle>
         <Body>
-          The Acta AIIE research corpus comprises three foundational whitepapers that together define the theoretical, technical, and methodological framework of the AIIE Protocol. Each paper builds upon the others, forming a coherent intellectual architecture from cognitive theory to cryptographic implementation.
+          The Acta AIIE research corpus comprises four foundational whitepapers that together define the theoretical, technical, methodological, and empirical framework of the AIIE Protocol. Each paper builds upon the others, forming a coherent intellectual architecture from cognitive theory to cryptographic implementation and empirical quantum-formalism validation.
         </Body>
       </Section>
 
@@ -81,74 +99,20 @@ export function WhitepapersIndex() {
 
       {PAPERS.map((paper, i) => (
         <div key={paper.num} style={{ marginBottom: "40px" }}>
-          {/* Paper Card */}
-          <div
-            style={{
-              border: "1px solid #1a2530",
-              background: "#080c10",
-            }}
-          >
+          <div style={{ border: "1px solid #1a2530", background: "#080c10" }}>
             {/* Card Header */}
-            <div
-              style={{
-                padding: "12px 18px",
-                borderBottom: "1px solid #1a2530",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-              }}
-            >
+            <div style={{ padding: "12px 18px", borderBottom: "1px solid #1a2530", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <div
-                  style={{
-                    fontFamily: MONO,
-                    fontSize: "9px",
-                    color: "#3d5a72",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    padding: "3px 8px",
-                    border: "1px solid #1a2530",
-                  }}
-                >
+                <div style={{ fontFamily: MONO, fontSize: "9px", color: "#3d5a72", letterSpacing: "0.1em", textTransform: "uppercase", padding: "3px 8px", border: "1px solid #1a2530" }}>
                   {paper.num}
                 </div>
-                <div
-                  style={{
-                    fontFamily: MONO,
-                    fontSize: "9px",
-                    color: "#2d4455",
-                    letterSpacing: "0.03em",
-                  }}
-                >
+                <div style={{ fontFamily: MONO, fontSize: "9px", color: "#2d4455", letterSpacing: "0.03em" }}>
                   {paper.version}
                 </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  padding: "3px 8px",
-                  border: "1px solid rgba(56,189,248,0.3)",
-                }}
-              >
-                <div
-                  style={{
-                    width: "4px",
-                    height: "4px",
-                    background: "#38bdf8",
-                    borderRadius: "50%",
-                  }}
-                />
-                <span
-                  style={{
-                    fontFamily: MONO,
-                    fontSize: "8px",
-                    color: "#38bdf8",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                  }}
-                >
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", padding: "3px 8px", border: "1px solid rgba(56,189,248,0.3)" }}>
+                <div style={{ width: "4px", height: "4px", background: "#38bdf8", borderRadius: "50%" }} />
+                <span style={{ fontFamily: MONO, fontSize: "8px", color: "#38bdf8", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                   {paper.status}
                 </span>
               </div>
@@ -158,165 +122,48 @@ export function WhitepapersIndex() {
             <div style={{ padding: "20px" }}>
               <NavLink
                 to={paper.path}
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  color: "#ffffff",
-                  textDecoration: "none",
-                  lineHeight: 1.45,
-                  display: "block",
-                  marginBottom: "8px",
-                  letterSpacing: "0.0em",
-                }}
+                style={{ fontFamily: MONO, fontSize: "14px", fontWeight: 600, color: "#ffffff", textDecoration: "none", lineHeight: 1.45, display: "block", marginBottom: "8px", letterSpacing: "0.0em" }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#38bdf8"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#ffffff"; }}
               >
                 {paper.title}
               </NavLink>
 
-              <div
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "10px",
-                  color: "#3d5a72",
-                  letterSpacing: "0.02em",
-                  marginBottom: "14px",
-                }}
-              >
+              <div style={{ fontFamily: MONO, fontSize: "10px", color: "#3d5a72", letterSpacing: "0.02em", marginBottom: "14px" }}>
                 Core Thesis: {paper.thesis}
               </div>
 
-              <p
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "12px",
-                  color: "#5a7a8e",
-                  lineHeight: 1.85,
-                  marginBottom: "16px",
-                  letterSpacing: "0.01em",
-                }}
-              >
+              <p style={{ fontFamily: MONO, fontSize: "12px", color: "#5a7a8e", lineHeight: 1.85, marginBottom: "16px", letterSpacing: "0.01em" }}>
                 {paper.abstract}
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "1px", marginBottom: "16px", background: "#1a2530" }}>
                 {paper.keyTopics.map((topic) => (
-                  <div
-                    key={topic.label}
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      alignItems: "flex-start",
-                      padding: "8px 12px",
-                      background: "#070a0d",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: MONO,
-                        fontSize: "9px",
-                        color: "#38bdf8",
-                        flexShrink: 0,
-                        marginTop: "3px",
-                      }}
-                    >
-                      →
-                    </span>
+                  <div key={topic.label} style={{ display: "flex", gap: "10px", alignItems: "flex-start", padding: "8px 12px", background: "#070a0d" }}>
+                    <span style={{ fontFamily: MONO, fontSize: "9px", color: "#38bdf8", flexShrink: 0, marginTop: "3px" }}>→</span>
                     <div>
-                      <span
-                        style={{
-                          fontFamily: MONO,
-                          fontSize: "11px",
-                          fontWeight: 600,
-                          color: "#5a9ab8",
-                          marginRight: "6px",
-                          letterSpacing: "0.01em",
-                        }}
-                      >
-                        {topic.label}:
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: MONO,
-                          fontSize: "11px",
-                          color: "#4a6070",
-                          letterSpacing: "0.01em",
-                        }}
-                      >
-                        {topic.content}
-                      </span>
+                      <span style={{ fontFamily: MONO, fontSize: "11px", fontWeight: 600, color: "#5a9ab8", marginRight: "6px", letterSpacing: "0.01em" }}>{topic.label}:</span>
+                      <span style={{ fontFamily: MONO, fontSize: "11px", color: "#4a6070", letterSpacing: "0.01em" }}>{topic.content}</span>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Hash + Author */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-end",
-                  paddingTop: "12px",
-                  borderTop: "1px solid #1a2530",
-                  flexWrap: "wrap",
-                  gap: "8px",
-                }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", paddingTop: "12px", borderTop: "1px solid #1a2530", flexWrap: "wrap", gap: "8px" }}>
                 <div>
-                  <div
-                    style={{
-                      fontFamily: MONO,
-                      fontSize: "8px",
-                      color: "#2d4455",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      marginBottom: "3px",
-                    }}
-                  >
-                    Author
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: MONO,
-                      fontSize: "11px",
-                      color: "#5a7a8e",
-                      letterSpacing: "0.01em",
-                    }}
-                  >
-                    {paper.author}
-                  </div>
+                  <div style={{ fontFamily: MONO, fontSize: "8px", color: "#2d4455", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "3px" }}>Author</div>
+                  <div style={{ fontFamily: MONO, fontSize: "11px", color: "#5a7a8e", letterSpacing: "0.01em" }}>{paper.author}</div>
                 </div>
                 {paper.hash && (
                   <div style={{ textAlign: "right" }}>
-                    <div
-                      style={{
-                        fontFamily: MONO,
-                        fontSize: "8px",
-                        color: "#2d4455",
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        marginBottom: "3px",
-                      }}
-                    >
-                      Canonical Hash
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: MONO,
-                        fontSize: "9px",
-                        color: "#2d5a72",
-                        letterSpacing: "0.03em",
-                      }}
-                    >
-                      {paper.hash.slice(0, 32)}…
-                    </div>
+                    <div style={{ fontFamily: MONO, fontSize: "8px", color: "#2d4455", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "3px" }}>Canonical Hash</div>
+                    <div style={{ fontFamily: MONO, fontSize: "9px", color: "#2d5a72", letterSpacing: "0.03em" }}>{paper.hash.slice(0, 32)}…</div>
                   </div>
                 )}
               </div>
             </div>
           </div>
-
           {i < PAPERS.length - 1 && <Divider />}
         </div>
       ))}

@@ -5,9 +5,10 @@
 | Attribute | Value |
 |-----------|--------|
 | **Status** | **RATIFIED — v1.0.0** |
+| **Latest Release** | **v1.1.0 — 2026-04-13** |
 | **Governance** | Acta AIIE Standardization Committee |
-| **Normative corpus** | *Acta AIIE Protocol Definition v1.0.0*; **NQ 2.0** (*Narrative Quantification 2.0*) |
-| **Canonical schema** | **35TAG v6.0** |
+| **Normative corpus** | *Acta AIIE Protocol Definition v1.0.0*; **NQ 2.0** (*Narrative Quantification 2.0*); **QMNSO v3.1** |
+| **Canonical schema** | **35TAG v6.0.1** |
 
 > *"Words are woven by AI. Truth is guarded by mathematics."*
 
@@ -15,7 +16,7 @@
 
 ## Abstract
 
-The **Acta AIIE Protocol** treats narrative not as mere text but as a **physical field**: a measurable object whose internal stresses, flows, and geometric distortions can be represented in structured state spaces and verified under explicit mathematical law. It is an open standard for **geometric quantification of interpretation**—decomposing events into a **35TAG v6.0** narrative state, sealing the invariant core with a cryptographic **T25** identity, and analysing dynamics through a **Field Tensor** model (interaction, velocity, and divergence) aligned with **Narrative Quantification 2.0 (NQ 2.0)**.
+The **Acta AIIE Protocol** treats narrative not as mere text but as a **physical field**: a measurable object whose internal stresses, flows, and geometric distortions can be represented in structured state spaces and verified under explicit mathematical law. It is an open standard for **geometric quantification of interpretation**—decomposing events into a **35TAG v6.0.1** narrative state, sealing the invariant core with a cryptographic **T25** identity, and analysing dynamics through a **Field Tensor** model (interaction, velocity, and divergence) aligned with **Narrative Quantification 2.0 (NQ 2.0)**.
 
 Implementations may differ in deployment; the **protocol** remains the public contract. **GemminAI** (Gemmina Intelligence LLC.) is a **reference implementation**—a demonstrator pipeline that exercises these rules in production-like settings. Conformance is defined solely against the specifications and RFCs in this repository, not against any single vendor product.
 
@@ -28,27 +29,24 @@ Acta-AIIE/
 │
 ├── specs/                                    # Authoritative specifications (English)
 │   ├── Acta_AIIE_Protocol_Definition_v1.0.0.md   # RATIFIED constitution (v1.0.0)
-│   ├── 35TAG_Standard_v6.0.0.md                # Canonical 35TAG field registry & T25 preimage
+│   ├── 35TAG_Standard_v6.0.1.md                # Canonical 35TAG field registry & T25 preimage
 │   ├── Narrative_Quantification_as_Cognitive_Infrastructure.md
 │   ├── Acta_AIIE_JCS_SDK_Crystallization_Engine.md
 │   ├── GemminAI_Narrative_Observation_Device.md
-│   ├── Whitepapers.md                          # Index; wiki links resolve to filenames above
-│   └── rfc/                                  # Standard-track RFC series
+│   ├── Whitepapers.md
+│   └── rfc/                                  # Standard-track RFC series (RFC-0001–0014)
 │       ├── README.md                         # RFC index & dependency graph
-│       ├── RFC-0001-AIIE-Delta-Variance-Standard.md
-│       ├── RFC-0002-AIIE-PCE-Detection-Protocol.md
-│       ├── RFC-0003-AIIE-Narrative-Graph-Interaction-Model.md
-│       └── RFC-0004-AIIE-Narrative-Relaxation-Dynamics.md
+│       ├── RFC-0001 … RFC-0014
 │
 ├── sdk/                                      # Reference tooling & physics engine
-│   ├── narrative_dynamics_engine.py          # Field Tensor dynamics (ΔV, PCE, relaxation)
-│   ├── verify_integrity.py                 # JCS crystallization engine (RFC 8785)
-│   ├── gem0_semantic_scholar.py
-│   └── narrative_generator/                # End-to-end narrative pipeline (SQL / PHP / Python)
+│   ├── narrative_dynamics_engine.py
+│   ├── verify_integrity.py
+│   ├── tag_v6.py
+│   └── narrative_generator/
 │
-├── paper/                                    # Academic foundation (NQ 2.0 lineage)
-│   ├── narrative_quantification.md         # Canonical manuscript source
-│   ├── FIGURES.md
+├── paper/                                    # Academic foundation
+│   ├── narrative_quantification_2_0_1.md     # NQ 2.0 — canonical manuscript
+│   ├── NarrativeQM3_v31_final.pdf            # QMNSO v3.1 — peer-review revision
 │   └── figures/
 │
 └── src/                                      # Documentation portal (acta-aiie.org)
@@ -63,6 +61,10 @@ Acta-AIIE/
 
 The **25th structural anchor** is a deterministic seal over the **canonical core** of the narrative state. Serialization follows **[RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785)**; the hash field itself is excluded from its own input. The resulting **T25** value is the one-way cognitive identity of the sealed core—environment-independent, auditable, and tamper-evident.
 
+```
+T25 = SHA-256( JCS( TAG 01…34 ∖ { state_hash } ) )
+```
+
 ### Field Tensor (**F**)
 
 NQ 2.0 and the reference SDK model narrative dynamics as a **Field Tensor** unifying three layers on the coupling manifold:
@@ -70,27 +72,66 @@ NQ 2.0 and the reference SDK model narrative dynamics as a **Field Tensor** unif
 | Layer | Role |
 |--------|------|
 | **Interaction** | Current complex coupling amplitudes ℐ(*t*) between narrative modes. |
-| **Velocity** | Rate of change of interaction—information flow (discrete analog of §11.5 trajectory velocity). |
-| **Divergence** | Pairwise **ΔV**—geometric distortion in **35TAG v6.0** space (Protocol §9). |
+| **Velocity** | Rate of change of interaction—information flow. |
+| **Divergence** | Pairwise **ΔV**—geometric distortion in **35TAG v6.0.1** space. |
 
-Together these describe the **field** as a physical object: where energy concentrates, where it moves, and where interpretive geometry warps.
+### T22 — Informational Entropy H₀
+
+As of **RFC-0005** (RATIFIED), T22 is `informational_entropy` (float [0,1]), replacing the legacy `epistemic_diffusion_state` enum. Required by the Thermodynamic Decision Engine:
+
+```
+T(H) = 0.1 + 0.9 · H₀
+```
 
 ### T25 Hesitation Protocol (Honest Incompleteness)
 
-When **ΔV** exceeds the critical band (**≥ 0.7** per Protocol §9.4), compliant systems **must not** fabricate false consensus. They surface divergence, lower epistemic confidence where required, and treat **hesitation** as a valid output—**honest incompleteness** (Protocol §13), not a failure mode.
+When **ΔV ≥ 0.7**, compliant systems must not fabricate false consensus. They surface divergence and treat hesitation as a valid output—honest incompleteness, not a failure mode.
 
 ---
 
 ## RFC Index (Standard Track)
 
-| RFC | Title | Role |
-|-----|--------|------|
-| **RFC-0001** | Delta Variance (ΔV) Standard | Normative weighted L₂ divergence between **35TAG** states; tiered response table; Hesitation linkage. |
-| **RFC-0002** | PCE Detection Protocol | Variance-based **Post-Collapse Expansion** ignition and confirmation (Protocol §11). |
-| **RFC-0003** | Narrative Graph Interaction Model | Complex interaction field over the narrative graph; structural pathology vocabulary. |
-| **RFC-0004** | Narrative Relaxation Dynamics | Post-transition quiescence, variance decay, and order-rebuilding signatures. |
+| RFC | Title | Status |
+|-----|--------|--------|
+| **RFC-0001** | Delta Variance (ΔV) Standard | **RATIFIED** |
+| **RFC-0002** | PCE Detection Protocol | **RATIFIED** |
+| **RFC-0003** | Narrative Graph Interaction Model | DRAFT |
+| **RFC-0004** | Narrative Relaxation Dynamics | DRAFT |
+| **RFC-0005** | T22 Entropy-Shift (H₀) | **RATIFIED** |
+| **RFC-0006** | Quantum-Formalism Observation Model (QFOM) | **RATIFIED** |
+| **RFC-0007** | MIFT — Magnetic Information Field Theory | STABLE |
+| **RFC-0008** | PNLA — Principle of Narrative Least Action | STABLE |
+| **RFC-0009** | Narrative Curvature and Information Statistical Mechanics | STABLE |
+| **RFC-0010** | Quantum Narrative Entanglement (QNE) | HYPOTHESIS |
+| **RFC-0011** | Narrative Field Control | DRAFT |
+| **RFC-0012** | Control Governance Layer | DRAFT |
+| **RFC-0013** | Narrative Identity and Persistence | DRAFT |
+| **RFC-0014** | Narrative Reality Selection | DRAFT |
 
-Full titles and dependency notes: [`specs/rfc/README.md`](specs/rfc/README.md).
+**Status definitions:**
+
+| Status | Meaning |
+|--------|---------|
+| **RATIFIED** | Normative. Changes require a new RFC. |
+| **STABLE** | Complete and implementation-ready. Ratification pending empirical validation. |
+| **DRAFT** | Proposal. Not a compliance requirement until ratified. |
+| **HYPOTHESIS** | Theoretical. Requires empirical Bell-test validation before implementation. |
+
+Full dependency graph and reading order: [`specs/rfc/README.md`](specs/rfc/README.md).
+
+---
+
+## Empirical Validation (QMNSO v3.1)
+
+The QMNSO v3.1 paper provides empirical grounding for the theoretical framework, based on **4,729 narratives across 854 geopolitical events**:
+
+| Result | Finding |
+|--------|---------|
+| **Non-Markovian Memory** | Weibull ΔAIC=28,953 vs Exponential; β=0.78<1 (post-deconfounding) |
+| **Structured Interference** | H_pair > H_noise (p=0.0002); classical models falsified |
+| **Objective Core Extraction** | τ*=0.02 from mutual information maximization |
+
+→ [`paper/NarrativeQM3_v31_final.pdf`](paper/NarrativeQM3_v31_final.pdf) · [acta-aiie.org/whitepapers/narrative-qm3](https://acta-aiie.org/whitepapers/narrative-qm3)
 
 ---
 
@@ -99,33 +140,13 @@ Full titles and dependency notes: [`specs/rfc/README.md`](specs/rfc/README.md).
 | Layer | Responsibility |
 |--------|----------------|
 | **Acta AIIE Protocol** | The open standard—definitions, schemas, RFCs, and conformance criteria. |
-| **GemminAI** (reference implementation) | An exemplar stack that implements the standard for verification and education; it does not replace the normative documents. |
-
-This follows the familiar IETF pattern: the standard is what matters; implementations prove feasibility.
+| **GemminAI** (reference implementation) | An exemplar stack that implements the standard for verification and education. |
 
 ---
 
 ## Documentation Portal
 
-Human-readable documentation and diagrams: **[acta-aiie.org](https://acta-aiie.org)**
-
----
-
-## Academic Corpus
-
-**Narrative Quantification** — geometric and thermodynamic foundations for narrative state spaces, compilers, and large cognitive models — is developed in the **`paper/`** tree and cross-referenced by **NQ 2.0** in the ratified **v1.0.0** definition.
-
-→ [`paper/narrative_quantification.md`](paper/narrative_quantification.md)
-
----
-
-## Crystallization Reference
-
-The reference JCS engine passes the official **RFC 8785** test vectors. Published implementation fingerprint (illustrative):
-
-```
-3a5a3a9d1b13367621b5b34cc25a0d886a7da39ef91015a3f757ae37908602b8
-```
+Human-readable documentation: **[acta-aiie.org](https://acta-aiie.org)**
 
 ---
 

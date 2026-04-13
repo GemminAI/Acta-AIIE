@@ -77,7 +77,9 @@ Maps thermodynamic outputs to geometric rendering standards.
 |---|---|---|---|
 |**20**|`backbone_history`|`string`|Max 1000 chars. Description of continuous historical causality.|
 |**21**|`deep_dive`|`string`|Max 1400 chars. Structural deep analysis governed by external intent variable ($\lambda_4$).|
-|**22**|`epistemic_diffusion_state`|`enum`|`Crystallized`, `Diffused`, `Polarized`. Visual state definition derived from entropy ($H$) and CFI.|
+|**22**|`informational_entropy`|`float`|Information-theoretic entropy $H_0 \in [0,1]$ (normative physical quantity at TAG 22). Presentation-layer aura or legacy enum labels MUST be derived from $H_0$ and `conflict_factuality_index` (TAG 19), not stored as alternate T22 keys.|
+
+**Deprecation (RFC-0005).** The former field name `epistemic_diffusion_state` (enum: `Crystallized`, `Diffused`, `Polarized`) is **obsolete**. Implementations MUST emit `informational_entropy`; consumers MAY accept legacy enum payloads only during migration.
 
 ---
 
