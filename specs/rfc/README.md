@@ -99,4 +99,10 @@ flowchart TB
 
 ---
 
+## Static site deployment (acta-aiie.org)
+
+The public RFC mirror at [acta-aiie.org](https://acta-aiie.org) is **not** deployed from this Git repository (no `git pull` on the host). Maintainer-only deployment procedures are kept **out of this public repo**; use your organization’s internal runbook.
+
+---
+
 *Acta AIIE Standardization Committee — Gemmina Intelligence LLC.*

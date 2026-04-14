@@ -141,3 +141,6 @@ dist/
 # Gemmina Intelligence 2.0 proprietary layer — never track in this public standard repo
 Sovereign/
 .vercel
+
+# Hostinger / static deploy — contains SSH host, port, user, paths (not for public git)
+specs/rfc/STATIC_SITE_DEPLOY.md
