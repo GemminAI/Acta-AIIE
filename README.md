@@ -4,11 +4,11 @@
 
 | Attribute | Value |
 |-----------|--------|
-| **Status** | **RATIFIED — v1.0.0** |
-| **Latest Release** | **v1.1.0 — 2026-04-13** |
+| **Status** | RATIFIED — v1.0.0 |
+| **Latest Release** | **v1.2.0 — 2026-04-15** |
 | **Governance** | Acta AIIE Standardization Committee |
-| **Normative corpus** | *Acta AIIE Protocol Definition v1.0.0*; **NQ 2.0** (*Narrative Quantification 2.0*); **QMNSO v3.1** |
-| **Canonical schema** | **35TAG v6.0.1** |
+| **Normative corpus** | *Acta AIIE Protocol Definition v1.0.0*; **NQ 2.0** (*Narrative Quantification 2.0*); **QMNSO v3.1**; **RFC-0015** (*JCS Canonical Hashing*) |
+| **Canonical schema** | **35TAG v6.1.1** |
 
 > *"Words are woven by AI. Truth is guarded by mathematics."*
 
