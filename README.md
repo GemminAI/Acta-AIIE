@@ -36,7 +36,7 @@ Acta-AIIE/
 │   ├── Whitepapers.md
 │   └── rfc/                                  # Standard-track RFC series (RFC-0001–0015)
 │       ├── README.md                         # RFC index & dependency graph
-│       ├── RFC-0001 … RFC-0014
+│       ├── RFC-0001 … RFC-0015
 │
 ├── sdk/                                      # Reference tooling & physics engine
 │   ├── narrative_dynamics_engine.py
@@ -62,8 +62,10 @@ Acta-AIIE/
 The **25th structural anchor** is a deterministic seal over the **canonical core** of the narrative state. Serialization follows **[RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785)**; the hash field itself is excluded from its own input. The resulting **T25** value is the one-way cognitive identity of the sealed core—environment-independent, auditable, and tamper-evident.
 
 ```
-T25 = SHA-256( JCS( TAG 01…34 ∖ { state_hash } ) )
+T25 = SHA-256( JCS( TAG 01…34 ∖ { state_hash, jcs_hash } ) )
 ```
+
+The companion **`jcs_hash`** (RFC-0015) seals the physical coordinate columns only (T01–T09, T22, T29, T30), enabling tamper detection independent of observation context.
 
 ### Field Tensor (**F**)
 
