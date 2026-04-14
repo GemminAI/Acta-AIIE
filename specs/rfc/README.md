@@ -22,6 +22,7 @@
 | [RFC-0012](./RFC-0012-AIIE-Control-Governance-Layer.md) | Control Governance Layer | **DRAFT** | EN |
 | [RFC-0013](./RFC-0013-AIIE-Narrative-Identity-Persistence.md) | Narrative Identity and Persistence | **DRAFT** | EN |
 | [RFC-0014](./RFC-0014-AIIE-Narrative-Reality-Selection.md) | Narrative Reality Selection | **DRAFT** | EN |
+| [RFC-0015](./RFC-0015-AIIE-JCS-Canonical-Hashing.md) | JCS Canonical Hashing | **RATIFIED** | EN |
 
 ---
 
@@ -44,18 +45,21 @@ flowchart TB
   R12["RFC-0012\nGovernance\n(DRAFT)"]
   R13["RFC-0013\nIdentity\n(DRAFT)"]
   R14["RFC-0014\nReality Selection\n(DRAFT)"]
+  R15["RFC-0015\nJCS Hashing\n(RATIFIED)"]
   BASE --> R1
   BASE --> R2
   BASE --> R3
   BASE --> R4
   BASE --> R5
   BASE --> R6
+  BASE --> R15
   R1 --> R3
   R1 --> R4
   R1 --> R6
   R1 --> R7
   R1 --> R9
   R1 --> R13
+  R1 --> R15
   R2 --> R4
   R2 --> R11
   R3 --> R4
@@ -65,9 +69,11 @@ flowchart TB
   R4 --> R14
   R5 --> R6
   R5 --> R8
+  R5 --> R15
   R6 --> R7
   R6 --> R8
   R6 --> R10
+  R6 --> R15
   R7 --> R8
   R7 --> R9
   R8 --> R9

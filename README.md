@@ -34,7 +34,7 @@ Acta-AIIE/
 │   ├── Acta_AIIE_JCS_SDK_Crystallization_Engine.md
 │   ├── GemminAI_Narrative_Observation_Device.md
 │   ├── Whitepapers.md
-│   └── rfc/                                  # Standard-track RFC series (RFC-0001–0014)
+│   └── rfc/                                  # Standard-track RFC series (RFC-0001–0015)
 │       ├── README.md                         # RFC index & dependency graph
 │       ├── RFC-0001 … RFC-0014
 │
@@ -107,6 +107,7 @@ When **ΔV ≥ 0.7**, compliant systems must not fabricate false consensus. They
 | **RFC-0012** | Control Governance Layer | DRAFT |
 | **RFC-0013** | Narrative Identity and Persistence | DRAFT |
 | **RFC-0014** | Narrative Reality Selection | DRAFT |
+| **RFC-0015** | JCS Canonical Hashing | **RATIFIED** |
 
 **Status definitions:**
 
