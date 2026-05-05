@@ -144,4 +144,3 @@ Sovereign/
 
 # Hostinger / static deploy — contains SSH host, port, user, paths (not for public git)
 specs/rfc/STATIC_SITE_DEPLOY.md
-public/.htaccess
