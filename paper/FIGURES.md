@@ -1,6 +1,6 @@
 # Narrative Crystallization: A Deterministic Framework for Measuring Global Narrative States
 
-**Author**: Tomohiko Nakamura — Independent Researcher, Japan · tomohiko@gemminai.com  
+**Author**: Tomohiko Nakamura — Independent Researcher, Japan · tomona@gemminai.com  
 **Date**: March 2026  
 **Protocol**: AIIE Protocol v5.0 · Gemmina Intelligence LLC.  
 **Repository**: [GemminAI/Acta-AIIE](https://github.com/GemminAI/Acta-AIIE)

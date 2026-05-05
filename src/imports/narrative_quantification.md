@@ -4,7 +4,7 @@
 **Tomohiko Nakamura**\
 Independent Researcher, Japan\
 Gemmina Intelligence LLC. · Tokyo, Japan\
-tomohiko@gemminai.com
+tomona@gemminai.com
 
 **SSRN Abstract ID:** [6419019](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6419019)\
 **GitHub:** [GemminAI/Acta-AIIE](https://github.com/GemminAI/Acta-AIIE/tree/main/paper)\
