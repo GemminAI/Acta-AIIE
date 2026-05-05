@@ -73,6 +73,40 @@ const PAPERS = [
     ],
     hash: null,
   },
+  {
+    num: "WP-5",
+    path: "/whitepapers/nomos-physical-reasoning",
+    title: "From Probabilistic Generation to Physical Reasoning",
+    version: "2026-05",
+    status: "Working Paper",
+    author: "Gemmina Intelligence LLC. — Pure Information Laboratory",
+    thesis: "Geometric stability via energy-based consistency repair.",
+    abstract:
+      "Introduces the NOMOS transition from probabilistic generation to physical reasoning. The paper frames semantic inference as a geometric stability problem governed by energy minimization, CFI curvature, and consistency repair.",
+    keyTopics: [
+      { label: "Physical Reasoning", content: "Replaces token-likelihood plausibility with structural validity and minimum-energy trajectory selection." },
+      { label: "Consistency Repair", content: "Positions CDR as the mechanism that repairs semantic curvature without regenerating the entire structure." },
+      { label: "NOMOS Architecture", content: "Connects Evidence, EGEM, Π projection, and LoRA Lens into a unified reasoning stack." },
+    ],
+    hash: null,
+  },
+  {
+    num: "EXP-001",
+    path: "/whitepapers/scmt-validation-exp001",
+    title: "Structure-Constrained Machine Translation (SCMT): Inter-Rater Validation",
+    version: "2026-05-05",
+    status: "Empirical Report",
+    author: "Gemmina Intelligence LLC. — Pure Information Laboratory",
+    thesis: "EXP-001 Final Report — Cohen's κ = 1.000.",
+    abstract:
+      "Documents a human evaluation of Structure-Constrained Machine Translation using independent raters. Reports perfect inter-rater agreement, establishing empirical support for the SCMT structural validation protocol.",
+    keyTopics: [
+      { label: "Human Evaluation", content: "Uses independent rater judgments to validate whether SCMT preserves structural constraints." },
+      { label: "Cohen's Kappa", content: "Reports κ = 1.000, indicating perfect agreement across the validation sample." },
+      { label: "Protocol Evidence", content: "Provides empirical support for the RFC-0020 through RFC-0025 reasoning and diagnostic stack." },
+    ],
+    hash: null,
+  },
 ];
 
 export function WhitepapersIndex() {

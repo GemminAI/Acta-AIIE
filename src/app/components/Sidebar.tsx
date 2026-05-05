@@ -3,9 +3,15 @@ const MONO = "'JetBrains Mono', monospace";
 
 const NAV = [
   {
+    section: "00. About",
+    items: [
+      { label: "About — Acta AIIE Protocol", sub: "Theoretical Foundation · SSRN 6419019", path: "/about" },
+    ],
+  },
+  {
     section: "01. Protocol Standard",
     items: [
-      { label: "Acta AIIE Protocol Definition", sub: "v1.0.0 — RATIFIED", path: "/protocol/definition" },
+      { label: "Acta AIIE Protocol Definition", sub: "v1.0.0 — RATIFIED · Protocol Lineage", path: "/protocol/definition" },
       { label: "35TAG Schema Specification", sub: "v6.0.1", path: "/protocol/35tag-schema" },
       { label: "Mathematical Standardization of Narrative Intent", sub: "v4.1.1", path: "/protocol/mathematical-standardization" },
       { label: ".hxt Format", sub: "", path: "/protocol/hxt-format" },
@@ -14,7 +20,7 @@ const NAV = [
   {
     section: "02. RFC Series",
     items: [
-      { label: "RFC Index", sub: "All RFCs · RFC-0001–0014", path: "/rfc" },
+      { label: "RFC Index", sub: "All RFCs · RFC-0001–0031", path: "/rfc" },
       { label: "RFC-0001: Delta Variance (ΔV)", sub: "RATIFIED", path: "/rfc/0001" },
       { label: "RFC-0002: PCE Detection", sub: "RATIFIED", path: "/rfc/0002" },
       { label: "RFC-0003: Graph Interaction Model", sub: "DRAFT", path: "/rfc/0003" },
@@ -29,6 +35,23 @@ const NAV = [
       { label: "RFC-0012: Control Governance Layer", sub: "DRAFT", path: "/rfc/0012" },
       { label: "RFC-0013: Narrative Identity", sub: "DRAFT", path: "/rfc/0013" },
       { label: "RFC-0014: Reality Selection", sub: "DRAFT", path: "/rfc/0014" },
+      { label: "RFC-0015: JCS Canonical Hashing", sub: "RATIFIED", path: "/rfc/0015" },
+      { label: "RFC-0016: Continuous Dynamics", sub: "RATIFIED", path: "/rfc/0016" },
+      { label: "RFC-0017: LINK+ Relational Laws", sub: "RATIFIED", path: "/rfc/0017" },
+      { label: "RFC-0018: CFI Semantic Distance", sub: "RATIFIED", path: "/rfc/0018" },
+      { label: "RFC-0019: TAG↔NL Compiler", sub: "RATIFIED", path: "/rfc/0019" },
+      { label: "RFC-0020: Evidence Field", sub: "RATIFIED", path: "/rfc/0020" },
+      { label: "RFC-0021: EGEM", sub: "RATIFIED", path: "/rfc/0021" },
+      { label: "RFC-0022: CDR Repair", sub: "RATIFIED", path: "/rfc/0022" },
+      { label: "RFC-0023: Π Projection", sub: "RATIFIED", path: "/rfc/0023" },
+      { label: "RFC-0024: Valency", sub: "RATIFIED", path: "/rfc/0024" },
+      { label: "RFC-0025: Diagnostics", sub: "RATIFIED", path: "/rfc/0025" },
+      { label: "RFC-0026: Projection Operator Π", sub: "STABLE", path: "/rfc/0026" },
+      { label: "RFC-0027: Proto-Structure Learning", sub: "DRAFT", path: "/rfc/0027" },
+      { label: "RFC-0028: LoRA Lens", sub: "STABLE", path: "/rfc/0028" },
+      { label: "RFC-0029: Movement Algebra", sub: "STABLE", path: "/rfc/0029" },
+      { label: "RFC-0030: Semantic Groupoid", sub: "STABLE", path: "/rfc/0030" },
+      { label: "RFC-0031: Information Geometry", sub: "DRAFT", path: "/rfc/0031" },
     ],
   },
   {
@@ -38,6 +61,8 @@ const NAV = [
       { label: "Narrative Quantification as Cognitive Infrastructure", sub: "WP-1 v1.1", path: "/whitepapers/narrative-quantification" },
       { label: "Narrative Observation", sub: "WP-3 v1.3", path: "/whitepapers/narrative-observation" },
       { label: "QMNSO v3.1 — Narrative Quantum Mechanics", sub: "NarrativeQM3 · peer-review", path: "/whitepapers/narrative-qm3" },
+      { label: "From Probabilistic Generation to Physical Reasoning", sub: "Working Paper · NOMOS", path: "/whitepapers/nomos-physical-reasoning" },
+      { label: "SCMT Inter-Rater Validation", sub: "EXP-001 · κ = 1.000", path: "/whitepapers/scmt-validation-exp001" },
     ],
   },
   {

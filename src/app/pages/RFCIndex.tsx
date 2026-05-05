@@ -156,6 +156,193 @@ const RFCS = [
     summary: "Defines reality selection as Boltzmann minimization of Free Energy ℱ(s) = 𝒯(s) + λH(s). Dual characterization: Dynamic (δS=0, PNLA) ≡ Statistical (argmin ℱ, Boltzmann). Reality lock-in as T→0 approaches delta function. Security mechanisms against ℱ distortion (reality hijacking) via RFC-0006 namespace auditing and RFC-0012 governance.",
     path: "/rfc/0014",
   },
+  {
+    id: "RFC-0015",
+    title: "JSON Canonicalization for Physical State Hashing",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Canonicalization",
+    date: "2026-04-15",
+    ref: "RFC-0001 · RFC-0006 · RFC 8785",
+    summary: "Defines canonical JSON serialization for AIIE hash computation, including jcs_hash and state_hash in v31_states_core. Establishes RFC 8785 compliance so the same physical state always produces the same hash across languages and runtimes.",
+    path: "/rfc/0015",
+  },
+  {
+    id: "RFC-0016",
+    title: "Continuous Narrative Dynamics and Worldline Optimization",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Continuous Dynamics",
+    date: "2026-04-22",
+    ref: "RFC-0001 · RFC-0008 · RFC-0009 · RFC-0013",
+    summary: "Elevates the discrete 35TAG state machine into a continuous-time ODE evolution system. Introduces the Worldline Axiom and a measure-theoretic Narrative Action integral for universe/state separation.",
+    path: "/rfc/0016",
+  },
+  {
+    id: "RFC-0017",
+    title: "LINK+ — Relational Laws and Causal Constraints",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Relational Laws",
+    date: "2026-04-22",
+    ref: "RFC-0016 · RFC-0024",
+    summary: "Defines LINK+ as the relational connector layer binding TAG28 nodes into valid graph structures. Specifies directionality, bond strength, constraint force, and Universal Grammar constraints for causal and structural links.",
+    path: "/rfc/0017",
+  },
+  {
+    id: "RFC-0018",
+    title: "CFI — Semantic Distance and Topological Curvature",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Semantic Metric",
+    date: "2026-04-22",
+    ref: "RFC-0016 · RFC-0017 · RFC-0022 · RFC-0024",
+    summary: "Defines CFI as the semantic distance and curvature metric for comparing structures against each other or against the Evidence Field. Models logical inconsistency as topological deformation in semantic space.",
+    path: "/rfc/0018",
+  },
+  {
+    id: "RFC-0019",
+    title: "TAG↔NL Compiler — Semantic Reconstruction Engine",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Compiler Architecture",
+    date: "2026-04-22",
+    ref: "RFC-0016 · RFC-0017 · RFC-0018",
+    summary: "Defines the five-layer bidirectional architecture between natural language and TAG28 graphs. Replaces statistical plausibility with invariant structure extraction and energy-minimized reconstruction under UG constraints.",
+    path: "/rfc/0019",
+  },
+  {
+    id: "RFC-0020",
+    title: "Evidence — Autonomous Knowledge Field",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Evidence Field",
+    date: "2026-05-04",
+    ref: "RFC-0018 · RFC-0022 · RFC-0024",
+    summary: "Transitions Evidence from human-assigned weighting to autonomous semantic mass emergence. Defines mass through orthogonality, predictive survival, and topological centrality within the knowledge field.",
+    path: "/rfc/0020",
+  },
+  {
+    id: "RFC-0021",
+    title: "EGEM — Evidence-Guided Energy Minimization",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Energy Minimization",
+    date: "2026-05-04",
+    ref: "RFC-0018 · RFC-0020 · RFC-0024",
+    summary: "Defines the core inference Hamiltonian for NOMOS using UG, Valency, and Evidence Field energy. Introduces two-stage Evidence Field normalization so human-scale thresholds remain stable across database sizes.",
+    path: "/rfc/0021",
+  },
+  {
+    id: "RFC-0022",
+    title: "CDR — Consistency Detection & Repair Dynamics",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Repair Dynamics",
+    date: "2026-05-04",
+    ref: "RFC-0018 · RFC-0020 · RFC-0021 · RFC-0023 · RFC-0024",
+    summary: "Defines consistency detection and surgical repair over TAG28 graphs. Replaces statistical regeneration with discrete operations selected by energy contribution and re-projected through Π.",
+    path: "/rfc/0022",
+  },
+  {
+    id: "RFC-0023",
+    title: "Π — Deterministic Projection from Proto-Structure to TAG Graph",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Projection Operator",
+    date: "2026-05-04",
+    ref: "RFC-0016 · RFC-0017 · RFC-0024",
+    summary: "Defines Π as the deterministic projection from continuous Proto-Structure into valid TAG graph form. Formalizes node resolution, edge resolution, constraint repair, and projection collapse handling.",
+    path: "/rfc/0023",
+  },
+  {
+    id: "RFC-0024",
+    title: "Valency — Probabilistic Slot Constraints from Evidence",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Constraint Model",
+    date: "2026-05-04",
+    ref: "RFC-0016 · RFC-0017 · RFC-0023",
+    summary: "Defines Valency as a two-layer constraint system: hard UG vessel constraints plus soft Evidence-derived probability distributions. Provides semantic naturalness and expected slot contents as energy potentials.",
+    path: "/rfc/0024",
+  },
+  {
+    id: "RFC-0025",
+    title: "Error Handling & Meta-Diagnostics",
+    status: "RATIFIED",
+    statusColor: "#38bdf8",
+    category: "Diagnostics",
+    date: "2026-05-04",
+    ref: "RFC-0019 · RFC-0020 · RFC-0021 · RFC-0022 · RFC-0023",
+    summary: "Specifies NOMOS error states, threshold registry, and meta-diagnostic protocols. Anchors threshold interpretation to normalized Evidence Field scale and Experiment-001 empirical values.",
+    path: "/rfc/0025",
+  },
+  {
+    id: "RFC-0026",
+    title: "Projection Operator Π — Discrete Realization of Continuous Semantic Dynamics",
+    status: "STABLE",
+    statusColor: "#a78bfa",
+    category: "Projection Operator",
+    date: "2026-05-05",
+    ref: "RFC-0016 · RFC-0017 · RFC-0018 · RFC-0022 · RFC-0024 · RFC-0025",
+    summary: "Revises Π for hybrid inference and learning modes. Maintains deterministic stability in production while allowing stochastic exploration and Valency placeholder insertion during learning.",
+    path: "/rfc/0026",
+  },
+  {
+    id: "RFC-0027",
+    title: "Proto-Structure Learning — End-to-End Optimization",
+    status: "DRAFT",
+    statusColor: "#f59e0b",
+    category: "Learning Framework",
+    date: "2026-05-05",
+    ref: "RFC-0016 · RFC-0018 · RFC-0020 · RFC-0021 · RFC-0022 · RFC-0024 · RFC-0025",
+    summary: "Defines the learning framework for optimizing natural language to Proto-Structure mapping. Introduces sparse TAG attention, entropy regularization, and CDR loop learning toward anticipatory intelligence.",
+    path: "/rfc/0027",
+  },
+  {
+    id: "RFC-0028",
+    title: "LoRA Lens — Adaptive Structural Calibration",
+    status: "STABLE",
+    statusColor: "#a78bfa",
+    category: "Adaptive Calibration",
+    date: "2026-05-05",
+    ref: "RFC-0016 · RFC-0018 · RFC-0020 · RFC-0029 · RFC-0030",
+    summary: "Specifies LoRA as geometric calibration rather than statistical fine-tuning. Defines Hessian-based low-rank updates, null-space preservation, and snap sealing for adaptive semantic learning.",
+    path: "/rfc/0028",
+  },
+  {
+    id: "RFC-0029",
+    title: "Movement Algebra — Vectorized Structural Dynamics",
+    status: "STABLE",
+    statusColor: "#a78bfa",
+    category: "Movement Algebra",
+    date: "2026-05-05",
+    ref: "RFC-0016 · RFC-0017 · RFC-0028 · RFC-0030",
+    summary: "Formalizes Universal Grammar movement as displacement vectors in 35TAG geometric space. Connects traces, semantic friction, and context-driven focus shifts to energy minimization.",
+    path: "/rfc/0029",
+  },
+  {
+    id: "RFC-0030",
+    title: "Semantic Groupoid Theory — Algebraic Learning of Structural Invariants",
+    status: "STABLE",
+    statusColor: "#a78bfa",
+    category: "Algebraic Learning",
+    date: "2026-05-05",
+    ref: "RFC-0016 · RFC-0018 · RFC-0022 · RFC-0028 · RFC-0029",
+    summary: "Models semantic transformations as groupoid morphisms over valid TAG graph states. Establishes CFI equivalence classes, algebraic learning, and CDR as recovery of broken symmetry.",
+    path: "/rfc/0030",
+  },
+  {
+    id: "RFC-0031",
+    title: "Information Geometry of CFI Space",
+    status: "DRAFT",
+    statusColor: "#f59e0b",
+    category: "Information Geometry",
+    date: "2026-05-05",
+    ref: "RFC-0018 · RFC-0020 · RFC-0021 · RFC-0028 · RFC-0030",
+    summary: "Extends CFI from scalar distance into a Riemannian information-geometric manifold. Defines metric tensors, geodesics, natural gradients, and CDR as geodesic projection.",
+    path: "/rfc/0031",
+  },
 ];
 
 const STATUS_ORDER: Record<string, number> = { RATIFIED: 0, STABLE: 1, DRAFT: 2, HYPOTHESIS: 3 };
@@ -175,7 +362,7 @@ export function RFCIndex() {
           </span>
         </div>
         <span style={{ fontFamily: MONO, fontSize: "8px", color: "#3d5a72", letterSpacing: "0.1em" }}>
-          Base: Acta AIIE Protocol v1.0.0 · 14 RFCs
+          Base: Acta AIIE Protocol v1.0.0 · 31 RFCs
         </span>
       </div>
 
@@ -267,8 +454,25 @@ export function RFCIndex() {
 ├── RFC-0011 (Control)   ──→ RFC-0012
 ├── RFC-0012 (Governance)
 ├── RFC-0013 (Identity)  ──→ RFC-0014
-└── RFC-0014 (Reality)
-Reading order: BASE → 0001 → 0002 → 0003 → 0004 → 0005 → 0006 → 0007 → 0008 → 0009 → 0010 → 0013 → 0014 → 0011 → 0012`}
+├── RFC-0014 (Reality)
+├── RFC-0015 (JCS Hashing) ──→ all state_hash consumers
+├── RFC-0016 (Continuous Dynamics) ──→ RFC-0017…0031
+├── RFC-0017 (LINK+)     ──→ RFC-0018, 0019, 0023, 0024, 0029
+├── RFC-0018 (CFI)       ──→ RFC-0020, 0021, 0022, 0026, 0027, 0028, 0030, 0031
+├── RFC-0019 (Compiler)  ──→ RFC-0025
+├── RFC-0020 (Evidence)  ──→ RFC-0021, 0022, 0025, 0027, 0028, 0031
+├── RFC-0021 (EGEM)      ──→ RFC-0022, 0025, 0027, 0031
+├── RFC-0022 (CDR)       ──→ RFC-0023, 0025, 0026, 0027, 0030
+├── RFC-0023 (Π)         ──→ RFC-0024, 0025, 0026
+├── RFC-0024 (Valency)   ──→ RFC-0025, 0026, 0027
+├── RFC-0025 (Diagnostics)
+├── RFC-0026 (Π v2)
+├── RFC-0027 (Learning)
+├── RFC-0028 (LoRA Lens) ──→ RFC-0029, 0030, 0031
+├── RFC-0029 (Movement)  ──→ RFC-0030
+├── RFC-0030 (Groupoid)  ──→ RFC-0031
+└── RFC-0031 (CFI Geometry)
+Reading order: BASE → 0001…0015 → 0016 → 0017 → 0018 → 0019 → 0020 → 0021 → 0022 → 0023 → 0024 → 0025 → 0026 → 0027 → 0028 → 0029 → 0030 → 0031`}
         </pre>
       </div>
 
